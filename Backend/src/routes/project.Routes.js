@@ -8,7 +8,7 @@ const {
   createProject,
   getProjects,
   getProjectById
-} = require("../controllers/projectcard.Controller");
+} = require("../controllers/projectcard.controller");
 
 // CREATE PROJECT
 router.post("/create", protect, createProject);
