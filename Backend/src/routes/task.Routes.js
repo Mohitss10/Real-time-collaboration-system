@@ -8,7 +8,7 @@ const {
   deleteTask,
 } = require("../controllers/task.Controller");
 
-const auth = require("../middleware/auth.middleware");
+const auth = require("../middleware/auth.Middleware");
 
 // FILE UPLOAD MIDDLEWARE
 const upload = require("../middleware/upload.middleware");
