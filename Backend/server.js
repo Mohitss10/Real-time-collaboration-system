@@ -14,7 +14,7 @@ const server = http.createServer(app);
 // SOCKET SERVER
 const io = new Server(server, {
   cors: {
-    origin: "https://real-time-collaboration-system-7.onrender.com",
+    origin: "https://nexuss-real-time-collaboration-system.onrender.com",
     methods: ["GET", "POST"],
   },
 });
