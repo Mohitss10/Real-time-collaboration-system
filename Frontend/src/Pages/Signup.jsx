@@ -69,7 +69,7 @@ const validateForm = () => {
     uppercase: /[A-Z]/.test(formData.password),
     lowercase: /[a-z]/.test(formData.password),
     number: /\d/.test(formData.password),
-    special: /[@$!%*?&]/.test(formData.password),
+    special: /[@$!%*?&#]/.test(formData.password),
   };
 
 const handleSubmit = async (e) => {
@@ -126,18 +126,18 @@ const handleSubmit = async (e) => {
   );
 
   return (
-<div className="sm:fixed inset-0 overflow-hidden bg-[var(--bg-primary)]">
+<div className="sm:fixed inset-0 bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-hidden ">
       <main className="min-h-screen flex flex-col lg:flex-row">
         <section className="relative  hidden lg:flex w-1/2 overflow-hidden p-16">
           {/* Background Image */}
           <div className="absolute inset-0">
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGEEvxYbEPpd-yMedyj0VblAtqAQhOFCLvoJTjnQNiarpAehvBEk8EIJUvZbJ3OX4f0WBNMiL1mehXbReISZFB5zJtbOXEt9o75xw8eXxDQQRNjo-MKYo62MPMiJG6ZL2USovJiGcC4AnznFm43CIKp97tkCnLWBMQtrX9oyNwhWEhTU2MMzbIWFRxPHjjVHzBu2ZB6co3S8DEvNVNDV8AHgzUAIQvssdn_z3gEV0PU0GS376DXU9fW9Dkwb5i7GdNtgr_8EKLOCw"
-              alt="Background"
-              className="w-full h-full object-cover opacity-40"
-            />
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzpV93k619XnD0hftPD1Wy8QX1PvK0_16Br51HhKvKa96IHvUqPDfoRuQ909Suanjsuo2WEKGVgw2UKkEbnk_H1Zajm1SiecRaGQk7vIpF08_sfnB-78gmojFbMvBrTvo-4OGNQa_v39VdmDjFYfNh_hqO4lwT8g28AfOgGWvibc7hG4tUZQyVsz1IqSUa19jRJTwvsTBEmpiOHWv3-h2aMmm4ajLdNf1SGfTC6ZiTR2KS4SlF3DA7Z9SSn3ndQzw-yeR_YiV1b0E"
+            alt="bg"
+            className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply"
+          />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)] via-[var(--primary)]/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-secondary)] via-transparent to-transparent" />
           </div>
           <div className="absolute bottom-16 left-16 z-10 max-w-xl">
 <h2 className="text-5xl font-bold text-white tracking-wide mb-10">
@@ -153,39 +153,11 @@ const handleSubmit = async (e) => {
   Experience seamless integration and unparalleled clarity in every project.
 </p>
 
-           <div className="mt-8 inline-flex items-center gap-3 
-bg-[var(--bg-card)]/60 backdrop-blur-xl 
-border border-[var(--border-color)] 
-px-4 py-2 rounded-full">
-              <div className="flex -space-x-2">
-                <img
-                  src="https://randomuser.me/api/portraits/women/44.jpg"
-                  alt=""
-                  className="w-7 h-7 rounded-full border border-[var(--bg-primary)]"
-                />
-
-                <img
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
-                  alt=""
-                  className="w-7 h-7 rounded-full border border-[var(--bg-primary)]"
-                />
-
-                <img
-                  src="https://randomuser.me/api/portraits/women/68.jpg"
-                  alt=""
-                  className="w-7 h-7 rounded-full border border-[var(--bg-primary)]"
-                />
-              </div>
-
-        <span className="text-xs text-[var(--text-secondary)] font-medium">
-  Trusted by 2,000+ teams
-</span>
-            </div>
           </div>
         </section>
 
         {/* RIGHT SIDE */}
-  <section className="relative flex mt-18 sm:mt-0 justify-center w-full lg:w-1/2 overflow-hidden p-6 sm:p-10 lg:p-16 bg-[var(--bg-secondary)]">
+  <section className="relative flex mt-15 sm:mt-5 justify-center w-full lg:w-1/2 overflow-hidden p-6 sm:p-10 lg:p-16 bg-[var(--bg-secondary)]">
   <div className="w-full max-w-md">
     {/* HEADER */}
     <div className="mb-4">
@@ -335,14 +307,26 @@ px-4 py-2 rounded-full">
   disabled={loading}
   className="
     w-full
-    py-4
+        flex items-center justify-center gap-2
+
+    bg-[var(--primary)]/10
+    text-[var(--primary)]
+
+    hover:bg-[var(--primary)]
+    hover:text-white
+
+    px-5 py-3
     rounded-xl
-    font-semibold
-    shadow-lg
-    
-    items-center justify-center gap-3 border border-[#d7d4e4] py-3 rounded-xl bg-[var(--text-secondary)]
-            hover:bg-gray-600 text-black
-            transition
+
+    shadow-md
+    hover:shadow-xl
+
+    transition-all
+    duration-300
+    ease-out
+
+    hover:scale-105
+    active:scale-95
   "
 >
                 {loading ? "Creating Account..." : "Sign Up"}

@@ -44,12 +44,12 @@ const ProjectDetails = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(
-        `http://localhost:5000/api/projects/${projectId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+const response = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`,
+  {
+    headers: { Authorization: `Bearer ${token}` },
+  },
+);
 
       setProject(response.data.project);
     } catch (error) {
@@ -67,11 +67,11 @@ const ProjectDetails = () => {
 
       const token = localStorage.getItem("token");
 
-      await axios.post(
-        "http://localhost:5000/api/invites/invite",
-        { projectId, email },
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/invites/invite`,
+  { projectId, email },
+  { headers: { Authorization: `Bearer ${token}` } },
+);
 
       setEmail("");
       fetchProject();

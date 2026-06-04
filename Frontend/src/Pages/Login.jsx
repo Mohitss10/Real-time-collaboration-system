@@ -58,39 +58,39 @@ const Login = () => {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  const loadingId = showLoading("Logging in...");
+    const loadingId = showLoading("Logging in...");
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const res = await loginUser({
-      email: formData.email.trim().toLowerCase(),
-      password: formData.password,
-    });
+      const res = await loginUser({
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password,
+      });
 
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-    // ✅ replace loading toast with success
-    showSuccess("Login successful 🚀", {
-      id: loadingId,
-    });
+      // ✅ replace loading toast with success
+      showSuccess("Login successful 🚀", {
+        id: loadingId,
+      });
 
-    navigate("/projects");
-  } catch (error) {
-    // ❌ replace loading toast with error
-    showError(error.response?.data?.message || "Login failed ❌", {
-      id: loadingId,
-    });
-  } finally {
-    setLoading(false);
-  }
-};
+      navigate("/projects");
+    } catch (error) {
+      // ❌ replace loading toast with error
+      showError(error.response?.data?.message || "Login failed ❌", {
+        id: loadingId,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   const validateForm = () => {
     const newErrors = {};
 
@@ -247,20 +247,27 @@ focus:border-[var(--primary)]
               <button
                 type="submit"
                 disabled={loading}
-                className="
-w-full
-bg-[var(--primary)]
-hover:bg-[var(--primary-hover)]
-text-white
-py-4
-rounded-xl
-font-semibold
-shadow-lg
-transition-all
-duration-200
-hover:scale-[0.99]
-disabled:opacity-70
-disabled:cursor-not-allowed
+                className="w-full
+    flex items-center justify-center gap-2
+
+    bg-[var(--primary)]/10
+    text-[var(--primary)]
+
+    hover:bg-[var(--primary)]
+    hover:text-white
+
+    px-5 py-3
+    rounded-xl
+
+    shadow-md
+    hover:shadow-xl
+
+    transition-all
+    duration-300
+    ease-out
+
+    hover:scale-105
+    active:scale-95
 "
               >
                 {loading ? "Signing In..." : "Sign In"}
@@ -284,9 +291,26 @@ disabled:cursor-not-allowed
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="flex items-center justify-center gap-3 border border-[#d7d4e4] py-3 rounded-xl bg-[var(--text-secondary)]
-            hover:bg-gray-600 text-black
-            transition"
+                  className="    flex items-center justify-center gap-2
+
+    bg-[var(--primary)]/10
+    text-[var(--primary)]
+
+    hover:bg-[var(--primary)]
+    hover:text-white
+
+    px-5 py-3
+    rounded-xl
+
+    shadow-md
+    hover:shadow-xl
+
+    transition-all
+    duration-300
+    ease-out
+
+    hover:scale-105
+    active:scale-95"
                 >
                   <img
                     src="https://www.svgrepo.com/show/475656/google-color.svg"

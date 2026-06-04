@@ -27,7 +27,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   };
 
   const hideSidebarButton =
-    location.pathname === "/" || location.pathname === "/projects";
+    location.pathname === "/" || location.pathname === "/projects" || location.pathname === "/signup" || location.pathname === "/login";
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -105,7 +105,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
         <div className="flex items-center justify-center">
           <ThemeToggle />
         </div>
-
+ 
         {token ? (
           <div className="relative" ref={dropdownRef}>
             {/* PROFILE */}

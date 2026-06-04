@@ -4,19 +4,17 @@ import ReactMarkdown from "react-markdown";
 import { Bot, X, Send } from "lucide-react";
 import { useParams } from "react-router-dom";
 import ThemeToggle from "../../Pages/ThemeToggle";
-import {useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const AIChatbot = () => {
   const location = useLocation();
-  const hideChatButton =
-  location.pathname.includes("/chat");
+  const hideChatButton = location.pathname.includes("/chat");
   const { projectId } = useParams();
 
   const [open, setOpen] = useState(false);
 
   const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] =
-    useState("");
+  const [projectDescription, setProjectDescription] = useState("");
 
   const [message, setMessage] = useState("");
 
@@ -29,16 +27,16 @@ const AIChatbot = () => {
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-  if (open) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  return () => {
-    document.body.style.overflow = "auto";
-  };
-}, [open]);
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [open]);
 
   // =========================
   // FETCH PROJECT DETAILS
@@ -50,30 +48,25 @@ const AIChatbot = () => {
       try {
         const token = localStorage.getItem("token");
 
-const response = await axios.get(
-  `http://localhost:5000/api/projects/${projectId}`,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
-
-
-
-console.log("API Response:", response.data);
-const project = response.data.project;
-
-console.log("Project Title:", project.title);
-console.log("Project Description:", project.description);
-
-setProjectName(project.title || "");
-setProjectDescription(project.description || "");
-      } catch (error) {
-        console.log(
-          "Project fetch error:",
-          error
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
         );
+
+        console.log("API Response:", response.data);
+        const project = response.data.project;
+
+        console.log("Project Title:", project.title);
+        console.log("Project Description:", project.description);
+
+        setProjectName(project.title || "");
+        setProjectDescription(project.description || "");
+      } catch (error) {
+        console.log("Project fetch error:", error);
       }
     };
 
@@ -81,10 +74,9 @@ setProjectDescription(project.description || "");
   }, [projectId]);
 
   useEffect(() => {
-  console.log("Current Project Name:", projectName);
-  console.log("Current Project Description:", projectDescription);
-}, [projectName, projectDescription]);
-
+    console.log("Current Project Name:", projectName);
+    console.log("Current Project Description:", projectDescription);
+  }, [projectName, projectDescription]);
 
   // =========================
   // SEND MESSAGE
@@ -97,10 +89,7 @@ setProjectDescription(project.description || "");
       text: message,
     };
 
-    setMessages((prev) => [
-      ...prev,
-      userMessage,
-    ]);
+    setMessages((prev) => [...prev, userMessage]);
 
     const currentMessage = message;
 
@@ -110,12 +99,12 @@ setProjectDescription(project.description || "");
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:5000/api/ai/chat",
+        `${import.meta.env.VITE_API_URL}/api/ai/chat`,
         {
           projectName,
           projectDescription,
           message: currentMessage,
-        }
+        },
       );
 
       setMessages((prev) => [
@@ -143,10 +132,10 @@ setProjectDescription(project.description || "");
   return (
     <>
       {/* Floating Button */}
-{!hideChatButton && (
-  <button
-    onClick={() => setOpen(true)}
-    className="
+      {!hideChatButton && (
+        <button
+          onClick={() => setOpen(true)}
+          className="
       fixed bottom-8 right-5 z-[999]
       w-14 h-14 rounded-full
       bg-[var(--bg-sidebar1)]
@@ -160,29 +149,28 @@ setProjectDescription(project.description || "");
       backdrop-blur-md
       border border-white/10
     "
-  >
-    <Bot size={26} />
-  </button>
-)}
-
+        >
+          <Bot size={26} />
+        </button>
+      )}
 
       {/* CHAT WINDOW */}
-{open && (
-  <>
-    {/* BACKDROP */}
-    <div
-      onClick={() => setOpen(false)}
-      className="
+      {open && (
+        <>
+          {/* BACKDROP */}
+          <div
+            onClick={() => setOpen(false)}
+            className="
         fixed inset-0
         z-[998]
         bg-black/20
         backdrop-blur-sm
       "
-    />
+          />
 
-    {/* CHAT WINDOW */}
-    <div
-      className="
+          {/* CHAT WINDOW */}
+          <div
+            className="
         fixed
         bottom-24
         right-3 sm:right-3
@@ -197,74 +185,69 @@ setProjectDescription(project.description || "");
         shadow-2xl
         flex flex-col
       "
-    >
-          {/* HEADER */}
-          <div
-            className="
+          >
+            {/* HEADER */}
+            <div
+              className="
               p-4
               border-b border-[var(--border-color)]
               flex items-center justify-between
               bg-[var(--bg-secondary)]
               rounded-t-3xl
             "
-          >
-            <div>
-              <h2 className="font-bold text-[var(--text-primary)]">
-                Nexus
-              </h2>
+            >
+              <div>
+                <h2 className="font-bold text-[var(--text-primary)]">Nexus</h2>
 
-              {projectName && (
-                <p className="text-xs text-[var(--text-secondary)]">
-                  {projectName}
-                </p>
-              )}
-            </div>
-<div className="flex justify-center gap-4 items-center">
-        <ThemeToggle />
+                {projectName && (
+                  <p className="text-xs text-[var(--text-secondary)]">
+                    {projectName}
+                  </p>
+                )}
+              </div>
+              <div className="flex justify-center gap-4 items-center">
+                <ThemeToggle />
 
-            <button
-              onClick={() => setOpen(false)}
-              className="
+                <button
+                  onClick={() => setOpen(false)}
+                  className="
                 text-[var(--text-secondary)]
                 hover:text-[var(--text-primary)]
               "
-            >
-              <X size={30} />
-            </button>
-          </div>  
-</div>
-      
-          
+                >
+                  <X size={30} />
+                </button>
+              </div>
+            </div>
 
-          {/* PROJECT INFO */}
-          {projectName && (
-            <div
-              className="
+            {/* PROJECT INFO */}
+            {projectName && (
+              <div
+                className="
                 px-4 py-3
                 border-b border-[var(--border-color)]
                 bg-[var(--bg-secondary)]
               "
-            >
-              <p className="text-sm font-semibold text-[var(--text-primary)]">
-                {projectName}
-              </p>
+              >
+                <p className="text-sm font-semibold text-[var(--text-primary)]">
+                  {projectName}
+                </p>
+              </div>
+            )}
 
-            </div>
-          )}
-
-          {/* CHAT AREA */}
-          <div
-            className="
+            {/* CHAT AREA */}
+            <div
+              className="
               flex-1
               overflow-y-auto
               p-4
               space-y-3
             "
-          >
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`
+            >
+              {messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`
                   p-3
                   rounded-2xl
                   border-
@@ -276,47 +259,40 @@ setProjectDescription(project.description || "");
                       : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
                   }
                 `}
-              >
-                <ReactMarkdown>
-                  {msg.text}
-                </ReactMarkdown>
-              </div>
-            ))}
+                >
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
+                </div>
+              ))}
 
-            {loading && (
-              <div
-                className="
+              {loading && (
+                <div
+                  className="
                   p-3
                   rounded-2xl
                   bg-[var(--bg-secondary)]
                   text-[var(--text-secondary)]
                   w-fit
                 "
-              >
-                Thinking...
-              </div>
-            )}
-          </div>
+                >
+                  Thinking...
+                </div>
+              )}
+            </div>
 
-          {/* INPUT */}
-          <div
-            className="
+            {/* INPUT */}
+            <div
+              className="
               p-4
               border-t border-[var(--border-color)]
             "
-          >
-            <div className="flex gap-2">
-              <input
-                value={message}
-                onChange={(e) =>
-                  setMessage(e.target.value)
-                }
-                onKeyDown={(e) =>
-                  e.key === "Enter" &&
-                  sendMessage()
-                }
-                placeholder="Ask anything about your project..."
-                className="
+            >
+              <div className="flex gap-2">
+                <input
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                  placeholder="Ask anything about your project..."
+                  className="
                   flex-1
                   p-3
                   rounded-xl
@@ -326,12 +302,12 @@ setProjectDescription(project.description || "");
                   outline-none
                   focus:border-[var(--primary)]
                 "
-              />
+                />
 
-              <button
-                onClick={sendMessage}
-                disabled={loading}
-                className="
+                <button
+                  onClick={sendMessage}
+                  disabled={loading}
+                  className="
                   w-12
                   rounded-xl
                   bg-[var(--primary)]
@@ -340,16 +316,16 @@ setProjectDescription(project.description || "");
                   flex items-center justify-center
                   transition-all
                 "
-              >
-                <Send size={18} />
-              </button>
-   </div>
-</div>
-</div>
-</>
-)}
-</>
-);
+                >
+                  <Send size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
 };
 
 export default AIChatbot;

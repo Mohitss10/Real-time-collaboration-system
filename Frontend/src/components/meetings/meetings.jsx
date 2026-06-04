@@ -4,12 +4,14 @@ import { Plus, X,Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { showSuccess, showError, showLoading } from "../../utils/toast";
 import { showToast } from "../../utils/toast";
+import Loader from "../../ui/Loader"
 
 const Meetings = () => {
   const [showModal, setShowModal] = useState(false);
   const [meetings, setMeetings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
+
 
   // FRONTEND MODEL
   const [meetingData, setMeetingData] = useState({
@@ -37,14 +39,14 @@ const Meetings = () => {
 
     const token = localStorage.getItem("token");
 
-    const res = await axios.get(
-      "http://localhost:5000/api/meeting",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+   const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/meeting`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     setMeetings(res.data.meetings || []);
   } catch (error) {
@@ -92,14 +94,14 @@ const Meetings = () => {
     };
 
     await axios.post(
-      "http://localhost:5000/api/meeting/create",
-      payload,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  `${import.meta.env.VITE_API_URL}/api/meeting/create`,
+  payload,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     showSuccess("Meeting scheduled successfully 🎥", {
       id: loadingId,
@@ -138,9 +140,22 @@ const Meetings = () => {
       {
         id: loadingId,
       }
+      
     );
   }
 };
+
+if (loading) {
+  return (
+    <div className="flex flex-col items-center justify-center h-[60vh]">
+      <Loader />
+
+      <p className="mt-4 text-[var(--text-secondary)] text-sm">
+        Loading Meetings...
+      </p>
+    </div>
+  );
+}
   return (
     <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
       {/* HEADER */}

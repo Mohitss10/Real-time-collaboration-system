@@ -28,58 +28,64 @@ const Home = () => {
       setCurrentPlan(savedPlan);
     }
   }, []);
-const handleUpgrade = async () => {
-  const loadingId = showLoading("Upgrading to Pro...");
+  const handleUpgrade = async () => {
+    const loadingId = showLoading("Upgrading to Pro...");
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/auth/activate-pro", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/activate-pro`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-    const data = await res.json();
+      const data = await res.json();
 
-    console.log("Upgrade Response:", data);
+      console.log("Upgrade Response:", data);
 
-    if (res.ok) {
-      setCurrentPlan("pro");
-      localStorage.setItem("plan", "pro");
+      if (res.ok) {
+        setCurrentPlan("pro");
+        localStorage.setItem("plan", "pro");
 
-      showSuccess("🎉 Successfully upgraded to Pro!", {
+        showSuccess("🎉 Successfully upgraded to Pro!", {
+          id: loadingId,
+        });
+      } else {
+        showError("Login First❌", {
+          id: loadingId,
+        });
+      }
+    } catch (error) {
+      console.error("Upgrade Error:", error);
+
+      showError("Something went wrong!", {
         id: loadingId,
       });
-    } else {
-      showError("Login First❌", {
-        id: loadingId,
-      });
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error("Upgrade Error:", error);
-
-    showError("Something went wrong!", {
-      id: loadingId,
-    });
-  } finally {
-    setLoading(false);
-  }
-};
+  };
   useEffect(() => {
     const fetchPlan = async () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:5000/api/auth/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+const res = await fetch(
+  `${import.meta.env.VITE_API_URL}/api/auth/me`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
         const data = await res.json();
 
@@ -96,44 +102,41 @@ const handleUpgrade = async () => {
     fetchPlan();
   }, []);
 
-const handleDowngrade = async () => {
-  const loadingId = showLoading("Switching to Free Plan...");
+  const handleDowngrade = async () => {
+    const loadingId = showLoading("Switching to Free Plan...");
 
-  try {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    const res = await fetch(
-      "http://localhost:5000/api/auth/deactivate-pro",
-      {
+      const res = await fetch("http://localhost:5000/api/auth/deactivate-pro", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
-
-    const data = await res.json();
-
-    if (res.ok) {
-      setCurrentPlan("free");
-      localStorage.setItem("plan", "free");
-
-      showSuccess("Switched to Free Plan", {
-        id: loadingId,
       });
-    } else {
-      showError("Login First ❌", {
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setCurrentPlan("free");
+        localStorage.setItem("plan", "free");
+
+        showSuccess("Switched to Free Plan", {
+          id: loadingId,
+        });
+      } else {
+        showError("Login First ❌", {
+          id: loadingId,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+
+      showError("Something went wrong!", {
         id: loadingId,
       });
     }
-  } catch (error) {
-    console.error(error);
-
-    showError("Something went wrong!", {
-      id: loadingId,
-    });
-  }
-};
+  };
 
   return (
     <div
@@ -190,8 +193,8 @@ const handleDowngrade = async () => {
         >
           Collaborate in Real-Time
           <br />
-<span
-  className="
+          <span
+            className="
     bg-gradient-to-r
     from-cyan-500
     via-sky-500
@@ -200,9 +203,9 @@ const handleDowngrade = async () => {
     text-transparent
     font-bold
   "
->
-  Chat, Write, and Work Together.
-</span>
+          >
+            Chat, Write, and Work Together.
+          </span>
         </h1>
 
         <p
@@ -228,8 +231,8 @@ const handleDowngrade = async () => {
           onClick={() => navigate("/signup")}
           className="flex flex-col sm:flex-row gap-4 justify-center mb-10 sm:mb-16 px-10 "
         >
-<button
-  className="
+          <button
+            className="
         bg-gradient-to-r
     from-cyan-500
     via-sky-500
@@ -249,9 +252,9 @@ const handleDowngrade = async () => {
     duration-300
     hover:scale-105
   "
->
-  Create Project
-</button>
+          >
+            Create Project
+          </button>
 
           <button
             className="
@@ -275,8 +278,10 @@ const handleDowngrade = async () => {
         </div>
 
         {/* HERO IMAGE / MOCK UI */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-        ">
+        <div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+        "
+        >
           <div
             className="
     backdrop-blur-lg
@@ -353,7 +358,8 @@ const handleDowngrade = async () => {
                 ></div>
 
                 {/* Chat mock */}
-                <button className="    bg-gradient-to-r
+                <button
+                  className="    bg-gradient-to-r
     from-cyan-400
     via-sky-500
     to-indigo-500
@@ -361,7 +367,8 @@ const handleDowngrade = async () => {
     text-white
     px-6 py-3
     rounded-xl
-    font-semibold">
+    font-semibold"
+                >
                   Get Started for Free
                 </button>
 
@@ -580,42 +587,42 @@ const handleDowngrade = async () => {
                   focus on structured, topic-based discussions.
                 </p>
               </div>
-<div className="flex items-end gap-2 h-32 sm:h-40 mt-8 lg:mt-10 pb-2">
-  <div
-    className="rounded-t-xl w-full h-full opacity-30"
-    style={{ backgroundColor: "var(--primary)" }}
-  ></div>
+              <div className="flex items-end gap-2 h-32 sm:h-40 mt-8 lg:mt-10 pb-2">
+                <div
+                  className="rounded-t-xl w-full h-full opacity-30"
+                  style={{ backgroundColor: "var(--primary)" }}
+                ></div>
 
-  <div
-    className="rounded-t-xl w-full h-20 sm:h-24 opacity-40"
-    style={{ backgroundColor: "var(--primary)" }}
-  ></div>
+                <div
+                  className="rounded-t-xl w-full h-20 sm:h-24 opacity-40"
+                  style={{ backgroundColor: "var(--primary)" }}
+                ></div>
 
-  <div
-    className="rounded-t-xl w-full h-24 sm:h-32 opacity-60"
-    style={{ backgroundColor: "var(--primary)" }}
-  ></div>
+                <div
+                  className="rounded-t-xl w-full h-24 sm:h-32 opacity-60"
+                  style={{ backgroundColor: "var(--primary)" }}
+                ></div>
 
-  <div
-    className="rounded-t-xl w-full h-full opacity-30"
-    style={{ backgroundColor: "var(--primary)" }}
-  ></div>
+                <div
+                  className="rounded-t-xl w-full h-full opacity-30"
+                  style={{ backgroundColor: "var(--primary)" }}
+                ></div>
 
-  <div
-    className="rounded-t-xl w-full h-20 opacity-80"
-    style={{ backgroundColor: "var(--primary)" }}
-  ></div>
+                <div
+                  className="rounded-t-xl w-full h-20 opacity-80"
+                  style={{ backgroundColor: "var(--primary)" }}
+                ></div>
 
-  <div
-    className="rounded-t-xl w-full h-24"
-    style={{ backgroundColor: "var(--primary-hover)" }}
-  ></div>
+                <div
+                  className="rounded-t-xl w-full h-24"
+                  style={{ backgroundColor: "var(--primary-hover)" }}
+                ></div>
 
-  <div
-    className="rounded-t-xl w-full h-full opacity-50"
-    style={{ backgroundColor: "var(--primary)" }}
-  ></div>
-</div>
+                <div
+                  className="rounded-t-xl w-full h-full opacity-50"
+                  style={{ backgroundColor: "var(--primary)" }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>
@@ -624,7 +631,7 @@ const handleDowngrade = async () => {
       {/* FOOTER */}
       <section
         className="relative overflow-hidden bg-indigo-50 px-4 sm:px-6 lg:px-10 py-12 lg:py-16"
- style={{
+        style={{
           background: "var(--hero-bg)",
           color: "var(--text-primary)",
         }}
@@ -812,40 +819,44 @@ const handleDowngrade = async () => {
         </div>
       </section>
       {/* ================= FOOTER ================= */}
-<footer className="relative overflow-hidden bg-[var(--bg-primary)]">
-  {/* Background Blur */}
-  <div className="absolute inset-0 bg-[var(--primary)]/10 blur-3xl pointer-events-none"></div>
+      <footer className="relative overflow-hidden bg-[var(--bg-primary)]">
+        {/* Background Blur */}
+        <div className="absolute inset-0 bg-[var(--primary)]/10 blur-3xl pointer-events-none"></div>
 
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
-    
-    {/* Bottom */}
-    <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+          {/* Bottom */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+            {/* Links */}
+            <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6 text-sm font-medium text-[var(--text-secondary)] text-center">
+              <a
+                href="#"
+                className="hover:text-[var(--primary)] transition-colors"
+              >
+                Terms & Conditions
+              </a>
 
-      {/* Links */}
-      <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6 text-sm font-medium text-[var(--text-secondary)] text-center">
-        
-        <a href="#" className="hover:text-[var(--primary)] transition-colors">
-          Terms & Conditions
-        </a>
+              <a
+                href="#"
+                className="hover:text-[var(--primary)] transition-colors"
+              >
+                Privacy Policy
+              </a>
 
-        <a href="#" className="hover:text-[var(--primary)] transition-colors">
-          Privacy Policy
-        </a>
+              <a
+                href="#"
+                className="hover:text-[var(--primary)] transition-colors"
+              >
+                Cookies
+              </a>
+            </div>
 
-        <a href="#" className="hover:text-[var(--primary)] transition-colors">
-          Cookies
-        </a>
-
-      </div>
-
-      {/* Copyright */}
-      <p className="text-sm text-[var(--text-secondary)] text-center md:text-right">
-        © 2025 Nexus. All rights reserved.
-      </p>
-
-    </div>
-  </div>
-</footer>
+            {/* Copyright */}
+            <p className="text-sm text-[var(--text-secondary)] text-center md:text-right">
+              © 2025 Nexus. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

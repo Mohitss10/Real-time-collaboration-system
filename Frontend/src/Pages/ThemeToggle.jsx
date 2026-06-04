@@ -38,7 +38,7 @@ const ThemeToggle = () => {
       top-1 left-1
       w-5 h-5 sm:w-7 sm:h-7
       rounded-full
-      bg-white dark:bg-slate-900
+      bg-yellow-300 dark:bg-slate-900
       shadow-md
       flex items-center justify-center
       transition-all duration-500
@@ -50,9 +50,9 @@ const ThemeToggle = () => {
     `}
   >
     {theme === "dark" ? (
-      <Moon size={12} className="text-indigo-400 sm:size-14" />
+      <Moon size={6} className="text-indigo-400 sm:size-4" />
     ) : (
-      <Sun size={12} className="text-yellow-500 sm:size-14" />
+      <Sun size={6} className="text-yellow-500 size-4" />
     )}
   </div>
 </button>

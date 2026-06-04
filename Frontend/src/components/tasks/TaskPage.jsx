@@ -68,12 +68,11 @@ const TaskPage = () => {
       setFetching(true);
 
       const res = await axios.get(
-        `http://localhost:5000/api/tasks/${projectId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
-
+  `${import.meta.env.VITE_API_URL}/api/tasks/${projectId}`,
+  {
+    headers: { Authorization: `Bearer ${token}` },
+  },
+);
       setTasks(res.data.tasks || []);
     } catch (err) {
   console.log(err);
@@ -103,14 +102,14 @@ const createTask = async () => {
   try {
     setLoading(true);
 
-    await axios.post(
-      "http://localhost:5000/api/tasks/create",
-      {
-        projectId,
-        fieldName: form.fieldName,
-        taskName: form.taskName,
-        taskDescription: form.taskDescription,
-      },
+await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/tasks/create`,
+  {
+    projectId,
+    fieldName: form.fieldName,
+    taskName: form.taskName,
+    taskDescription: form.taskDescription,
+  },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -161,15 +160,15 @@ const updatePhase = async (id, phase) => {
   const loadingId = showLoading("Updating task status...");
 
   try {
-    await axios.patch(
-      `http://localhost:5000/api/tasks/${id}/phase`,
-      { phase },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+await axios.patch(
+  `${import.meta.env.VITE_API_URL}/api/tasks/${id}/phase`,
+  { phase },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     setTasks((prev) =>
       prev.map((t) =>

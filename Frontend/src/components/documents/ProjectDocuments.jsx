@@ -47,13 +47,13 @@ const fetchDocuments = async () => {
     setFetching(true);
 
     const res = await axios.get(
-      `http://localhost:5000/api/documents/project/${projectId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  `${import.meta.env.VITE_API_URL}/api/documents/project/${projectId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     setDocuments(res.data.documents);
   } catch (error) {
@@ -137,17 +137,16 @@ const uploadFile = async () => {
     formData.append("projectId", projectId);
     formData.append("title", title);
 
-    await axios.post(
-      "http://localhost:5000/api/documents/upload",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
+await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/documents/upload`,
+  formData,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  }
+);
     showSuccess("Document uploaded successfully 📄", {
       id: loadingId,
     });

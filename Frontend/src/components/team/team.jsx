@@ -34,12 +34,12 @@ const ProjectDetails = () => {
   // FETCH PROJECT
   const fetchProject = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:5000/api/projects/${projectId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+     const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`,
+  {
+    headers: { Authorization: `Bearer ${token}` },
+  },
+);
 
       setProject(res.data.project);
     } catch (err) {
@@ -66,14 +66,14 @@ const handleInvite = async () => {
     setInviting(true);
 
     const res = await axios.post(
-      "http://localhost:5000/api/invites/invite",
-      { projectId, email: email.trim() },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  `${import.meta.env.VITE_API_URL}/api/invites/invite`,
+  { projectId, email: email.trim() },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     showSuccess(
       res.data.message || "Invitation sent successfully 🚀",

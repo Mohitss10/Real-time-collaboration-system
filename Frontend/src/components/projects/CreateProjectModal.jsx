@@ -43,13 +43,13 @@ const handleSubmit = async (e) => {
 
     const token = localStorage.getItem("token");
 
-    const response = await axios.post(
-      "http://localhost:5000/api/projects/create",
-      {
-        ...formData,
-        status: "planning",
-        progress: 0,
-      },
+const response = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/projects/create`,
+  {
+    ...formData,
+    status: "planning",
+    progress: 0,
+  },
       {
         headers: {
           Authorization: `Bearer ${token}`,

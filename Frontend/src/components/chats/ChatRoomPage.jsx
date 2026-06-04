@@ -47,13 +47,13 @@ const ChatRoomPage = () => {
     const loadMessages = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/chat/${projectId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+  `${import.meta.env.VITE_API_URL}/api/chat/${projectId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
 
         setMessages(res.data.messages);
       } catch (err) {
@@ -110,18 +110,18 @@ const ChatRoomPage = () => {
     if (!text.trim()) return;
 
     try {
-      const res = await axios.post(
-        `http://localhost:5000/api/chat/${projectId}/send`,
-        {
-          projectId,
-          text,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+     const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/api/chat/${projectId}/send`,
+  {
+    projectId,
+    text,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
 
       socket.emit("send_message", {
         ...res.data.message,
@@ -170,13 +170,13 @@ const ChatRoomPage = () => {
       setChatLoading(true);
 
       const res = await axios.get(
-        `http://localhost:5000/api/chat/${projectId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  `${import.meta.env.VITE_API_URL}/api/chat/${projectId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
       setMessages(res.data.messages);
     } catch (err) {

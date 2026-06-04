@@ -24,13 +24,13 @@ const Sidebar = ({ setSidebarOpen = () => {} }) => {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          `http://localhost:5000/api/projects/${projectId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
+  `${import.meta.env.VITE_API_URL}/api/projects/${projectId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  },
+);
 
         setProject(res.data.project);
       } catch (error) {
