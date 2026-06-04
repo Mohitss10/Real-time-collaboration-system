@@ -184,7 +184,7 @@ const res = await fetch(
 
         <h1
           className="
-    text-3xl pt-10
+    text-5xl pt-10
     sm:text-4xl
     md:text-5xl
     lg:text-6xl
