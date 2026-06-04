@@ -8,7 +8,7 @@ const {
   deleteMeeting,
 } = require("../controllers/meeting.Controller");
 
-const auth = require("../middleware/auth.middleware");
+const auth = require("../middleware/auth.Middleware");
 const requirePro = require("../middleware/requirePro");
 
 // =========================
