@@ -45,7 +45,7 @@ app.use(passport.initialize());
 
 
 app.use(cors({
-  origin: "https://real-time-collaboration-system-7.onrender.com", // frontend
+  origin: "https://nexuss-real-time-collaboration-system.onrender.com", // frontend
   credentials: true
 }));
 
