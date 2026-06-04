@@ -45,7 +45,7 @@ app.use(passport.initialize());
 
 
 app.use(cors({
-  origin: "http://localhost:5173", // frontend
+  origin: "https://real-time-collaboration-system-7.onrender.com", // frontend
   credentials: true
 }));
 
