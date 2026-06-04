@@ -9,7 +9,7 @@ import About from "./Pages/About";
 import LoginSuccess from "./Pages/LoginSuccess";
 import UpdateProfile from "./Pages/UpdateProfile";
 
-import Projects from "./components/projects/projects";
+import Projects from "./components/projects/Projects";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import ChatRoomPage from "./components/chats/ChatRoomPage";
 import Team from "./components/team/team";
