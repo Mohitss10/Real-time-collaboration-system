@@ -24,7 +24,7 @@ const ThemeToggle = () => {
   onClick={toggleTheme}
   className="
     relative
-    w-14 h-9
+    w-14 sm:w-16 h-9
     rounded-full
     bg-slate-200 dark:bg-slate-700
     transition-all duration-500

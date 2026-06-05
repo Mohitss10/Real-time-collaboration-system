@@ -121,7 +121,7 @@ await axios.post(
   {/* HEADER */}
   <div className=" p-3]">
 
-    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+    <div className="sm:p-4 sm:bg-[var(--bg-card)] sm:shadow-sm sm:border sm:border-[var(--border-color)] rounded-4xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
 
       {/* LEFT */}
       <div className="flex items-start gap-5">

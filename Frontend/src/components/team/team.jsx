@@ -126,7 +126,6 @@ const handleInvite = async () => {
     <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
 
   <div className="mb-10">
-
     {/* HEADER */}
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 mb-3">
 
