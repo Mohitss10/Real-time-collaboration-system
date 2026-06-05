@@ -146,15 +146,22 @@ const Meetings = () => {
 };
 
 if (loading) {
-  return (
-    <div className="flex flex-col items-center justify-center h-[60vh]">
-      <Loader />
+   return (
+      <div
+        className="
+        min-h-screen
+        flex
+        flex-col
+        items-center
+        justify-center
+        bg-[var(--bg-primary)]
+      "
+      >
+        <Loader />
 
-      <p className="mt-4 text-[var(--text-secondary)] text-sm">
-        Loading Meetings...
-      </p>
-    </div>
-  );
+        <p className="text-[var(--text-secondary)] text-sm">Loading Meetings...</p>
+      </div>
+    );
 }
   return (
     <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">

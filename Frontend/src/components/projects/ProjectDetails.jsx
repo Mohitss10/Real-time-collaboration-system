@@ -119,7 +119,7 @@ await axios.post(
     <div className="min-h-screen p-2 pt-15 sm:pt-15 sm:fixed sm:w-[79vw]">
 
   {/* HEADER */}
-  <div className=" p-3]">
+  <div className="">
 
     <div className="sm:p-4 sm:bg-[var(--bg-card)] sm:shadow-sm sm:border sm:border-[var(--border-color)] rounded-4xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
 

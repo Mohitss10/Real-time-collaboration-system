@@ -59,7 +59,7 @@ const Project = () => {
   }, [projects, sortType]);
 
   return (
-    <div className="min-h-screen pt-18 sm:pt-17 px-4 sm:px-6 lg:px-7 bg-[var(--bg-primary)]">
+    <div className="min-h-screen pt-18 sm:pt-17 px-3 sm:px-6 lg:px-7 bg-[var(--bg-primary)]">
       {/* ============================================
       HEADER
   ============================================ */}

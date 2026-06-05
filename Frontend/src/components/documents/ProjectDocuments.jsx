@@ -193,29 +193,22 @@ await axios.post(
   const currentDocs = filteredDocuments.slice(indexOfFirstDoc, indexOfLastDoc);
 
   if (fetching) {
-  return (
-    <div className="min-h-[70vh] flex items-center justify-center">
+   return (
       <div
         className="
-          max-w-sm
-          rounded-3xl
-          p-8
-          shadow-2xl
-          text-center
-        "
+        min-h-screen
+        flex
+        flex-col
+        items-center
+        justify-center
+        bg-[var(--bg-primary)]
+      "
       >
         <Loader />
 
-        <h3 className="mt-5 font-semibold text-[var(--text-primary)]">
-          Loading Documents
-        </h3>
-
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Fetching project files and reports...
-        </p>
+        <p className="text-[var(--text-secondary)] text-sm">Loading Documents...</p>
       </div>
-    </div>
-  );
+    );
 }
 
   return (

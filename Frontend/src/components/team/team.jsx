@@ -113,7 +113,7 @@ const handleInvite = async () => {
       <Loader />
 
       <p className="mt-4 text-[var(--text-secondary)] text-sm">
-        Loading project...
+        Loading Team...
       </p>
     </div>
   );

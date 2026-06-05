@@ -1,7 +1,9 @@
 import "./App.css";
 import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
+/* Pages */
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -9,6 +11,7 @@ import About from "./Pages/About";
 import LoginSuccess from "./Pages/LoginSuccess";
 import UpdateProfile from "./Pages/UpdateProfile";
 
+/* Components */
 import Projects from "./components/projects/Projects";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import ChatRoomPage from "./components/chats/ChatRoomPage";
@@ -17,31 +20,43 @@ import TaskPage from "./components/tasks/TaskPage";
 import ProjectDocuments from "./components/documents/ProjectDocuments";
 import Meeting from "./components/meetings/meetings";
 
+/* Layout + Auth */
 import DashboardLayout from "./components/layouts/dashboard";
 import ProtectedRoute from "./Pages/ProtectedRouted";
 import PublicRoute from "./Pages/PublicRoute";
 
+/* UI */
 import Navbar from "./Pages/Navbar";
 import ToastProvider from "./ui/ToastProvider";
+import PageTransition from "./ui/PageTransition";
 
-const App = () => {
-  // ✅ GLOBAL SIDEBAR STATE
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+/* =========================
+   ANIMATED ROUTES WRAPPER
+========================= */
+function AnimatedRoutes({ sidebarOpen, setSidebarOpen }) {
+  const location = useLocation();
 
   return (
-    <>
-      {/* ✅ GLOBAL NAVBAR (IMPORTANT) */}
-      <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
 
-      <Routes>
         {/* PUBLIC ROUTES */}
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Home />
+            </PageTransition>
+          }
+        />
 
         <Route
           path="/login"
           element={
             <PublicRoute>
-              <Login />
+              <PageTransition>
+                <Login />
+              </PageTransition>
             </PublicRoute>
           }
         />
@@ -50,15 +65,48 @@ const App = () => {
           path="/signup"
           element={
             <PublicRoute>
-              <Signup />
+              <PageTransition>
+                <Signup />
+              </PageTransition>
             </PublicRoute>
           }
         />
 
-        <Route path="/login-success" element={<LoginSuccess />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/update-profile" element={<UpdateProfile />} />
+        <Route
+          path="/login-success"
+          element={
+            <PageTransition>
+              <LoginSuccess />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <About />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/projects"
+          element={
+            <PageTransition>
+              <Projects />
+            </PageTransition>
+          }
+        />
+
+        <Route
+          path="/update-profile"
+          element={
+            <PageTransition>
+              <UpdateProfile />
+            </PageTransition>
+          }
+        />
 
         {/* PROTECTED ROUTES */}
         <Route
@@ -71,18 +119,88 @@ const App = () => {
             </ProtectedRoute>
           }
         >
-          <Route path="/project/:projectId" element={<ProjectDetails />} />
-          <Route path="/team/:projectId" element={<Team />} />
-          <Route path="/task/:projectId" element={<TaskPage />} />
-          <Route path="/chat/:projectId" element={<ChatRoomPage />} />
+          <Route
+            path="/project/:projectId"
+            element={
+              <PageTransition>
+                <ProjectDetails />
+              </PageTransition>
+            }
+          />
+
+          <Route
+            path="/team/:projectId"
+            element={
+              <PageTransition>
+                <Team />
+              </PageTransition>
+            }
+          />
+
+          <Route
+            path="/task/:projectId"
+            element={
+              <PageTransition>
+                <TaskPage />
+              </PageTransition>
+            }
+          />
+
+          <Route
+            path="/chat/:projectId"
+            element={
+              <PageTransition>
+                <ChatRoomPage />
+              </PageTransition>
+            }
+          />
+
           <Route
             path="/project/:projectId/documents"
-            element={<ProjectDocuments />}
+            element={
+              <PageTransition>
+                <ProjectDocuments />
+              </PageTransition>
+            }
           />
-          <Route path="/meeting/:projectId" element={<Meeting />} />
+
+          <Route
+            path="/meeting/:projectId"
+            element={
+              <PageTransition>
+                <Meeting />
+              </PageTransition>
+            }
+          />
         </Route>
+
       </Routes>
-<ToastProvider/>
+    </AnimatePresence>
+  );
+};
+
+/* =========================
+   MAIN APP
+========================= */
+const App = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <>
+      {/* GLOBAL NAVBAR */}
+      <Navbar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
+
+      {/* ROUTES */}
+      <AnimatedRoutes
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
+
+      {/* TOAST */}
+      <ToastProvider />
     </>
   );
 };

@@ -4,3 +4,17 @@
 
 @import "./styles/theme.css";
 
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marqueeLoop 10s linear infinite;
+}
+
+@keyframes marqueeLoop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

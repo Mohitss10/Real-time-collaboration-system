@@ -190,19 +190,22 @@ const ChatRoomPage = () => {
 }, [projectId, token]);
 
 if (chatLoading) {
-  return (
-    <div className="flex flex-col items-center justify-center h-[80vh]">
-      <Loader />
-
-      <h3 className="mt-4 font-semibold text-[var(--text-primary)]">
-        Loading Chats
-      </h3>
-
-      <p className="text-sm text-[var(--text-secondary)]">
-        Fetching project messages...
-      </p>
-    </div>
-  );
+   return (
+        <div
+          className="
+          min-h-screen
+          flex
+          flex-col
+          items-center
+          justify-center
+          bg-[var(--bg-primary)]
+        "
+        >
+          <Loader />
+  
+          <p className="text-[var(--text-secondary)] text-sm">Loading Chats...</p>
+        </div>
+      );
 }
 
   return (

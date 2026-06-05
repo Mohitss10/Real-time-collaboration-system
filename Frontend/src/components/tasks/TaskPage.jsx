@@ -40,7 +40,7 @@ const TaskPage = () => {
       document.body.style.overflow = "auto";
     };
   }, [showModal]);
-
+//<ScaleLoader />
   const phaseConfig = {
     "Not Started Yet": {
       color: "bg-red-100 text-red-600",

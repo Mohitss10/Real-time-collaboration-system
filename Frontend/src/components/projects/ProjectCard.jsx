@@ -141,16 +141,22 @@ const ProjectCard = ({ project }) => {
   {/* BUTTON */}
   <button
     onClick={() => navigate(`/project/${project._id}`)}
-    className="
-      px-5
-      py-2.5
-      rounded-2xl
-      text-white
-      font-medium
-      shadow-md
-      hover:scale-105
-      transition
-    "
+className="
+  px-5
+  py-2.5
+  rounded-2xl
+  text-white
+  font-medium
+  shadow-md
+
+  transform
+  transition-all
+  duration-300
+  ease-out
+
+  hover:scale-[1.08]
+  hover:shadow-xl
+"
     style={{
       backgroundColor: project.color,
     }}

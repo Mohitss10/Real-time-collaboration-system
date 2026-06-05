@@ -1,11 +1,49 @@
-import React from "react";
-
-const Loader = () => {
+export default function Loader() {
   return (
-    <div className="w-56 h-2 bg-[var(--border-color)] rounded-full overflow-hidden">
-      <div className="h-full w-full bg-gradient-to-r from-transparent via-[var(--primary)] to-transparent animate-pulse" />
+    <div className="flex items-center justify-center">
+      <div className="relative h-12 w-12">
+        {/* Outer Ring */}
+        <div
+          className="
+            absolute
+            inset-0
+            rounded-full
+            border-[3px]
+            border-[var(--border-color)]
+          "
+        />
+
+        {/* Animated Ring */}
+        <div
+          className="
+            absolute
+            inset-0
+            rounded-full
+            border-[3px]
+            border-transparent
+            border-t-[var(--primary)]
+            border-r-[var(--primary)]
+            animate-spin
+          "
+        />
+
+        {/* Center Dot */}
+        <div
+          className="
+            absolute
+            left-1/2
+            top-1/2
+            h-2.5
+            w-2.5
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+          "
+          style={{
+            background: "var(--primary)",
+          }}
+        />
+      </div>
     </div>
   );
-};
-
-export default Loader;
+}
