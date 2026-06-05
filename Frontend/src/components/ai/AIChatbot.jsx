@@ -155,189 +155,193 @@ const AIChatbot = () => {
       )}
 
       {/* CHAT WINDOW */}
-      {open && (
-        <>
-          {/* BACKDROP */}
-<div
-  onClick={() => setOpen(false)}
-  className="
-    hidden sm:block
-    fixed inset-0
-    z-[998]
-    bg-black/20
-    backdrop-blur-sm
-  "
-/>
+{open && (
+  <>
+    {/* Desktop Backdrop */}
+    <div
+      onClick={() => setOpen(false)}
+      className="
+        hidden sm:block
+        fixed inset-0
+        z-[998]
+        bg-black/30
+        backdrop-blur-sm
+      "
+    />
 
-          {/* CHAT WINDOW */}
-          <div
-  className="
-    fixed
-    inset-0
-    sm:inset-auto
-    sm:bottom-24
-    sm:right-3
+    {/* Chat Window */}
+    <div
+      className="
+        fixed z-[999]
 
-    z-[999]
+        inset-0
 
-    w-screen
-    h-screen
+        sm:inset-auto
+        sm:bottom-24
+        sm:right-5
 
-    sm:w-[400px]
-    sm:h-[650px]
+        w-full
+        h-[100dvh]
 
-    bg-[var(--bg-card)]
+        sm:w-[420px]
+        sm:h-[650px]
 
-    sm:rounded-3xl
-    sm:border
-    sm:border-[var(--border-color)]
-    sm:shadow-2xl
+        bg-[var(--bg-card)]
 
-    flex flex-col
-  "
->
-            {/* HEADER */}
-            <div
-              className="
-              p-4
-              border-b border-[var(--border-color)]
-              flex items-center justify-between
-              bg-[var(--bg-secondary)]
-              rounded-t-3xl
+        sm:rounded-3xl
+        sm:border
+        sm:border-[var(--border-color)]
+        sm:shadow-2xl
+
+        flex flex-col
+        overflow-hidden
+      "
+    >
+      {/* HEADER */}
+      <div
+        className="
+          shrink-0
+          px-4 py-3
+          border-b border-[var(--border-color)]
+          bg-[var(--bg-secondary)]
+          flex items-center justify-between
+        "
+      >
+        <div className="flex items-center gap-3">
+          {/* Mobile Back */}
+          <button
+            onClick={() => setOpen(false)}
+            className="
+              sm:hidden
+              text-[var(--text-primary)]
             "
-            >
-              <div>
-                <h2 className="font-bold text-[var(--text-primary)]">Nexus</h2>
+          >
+            <ArrowLeft size={24} />
+          </button>
 
-                {projectName && (
-                  <p className="text-xs text-[var(--text-secondary)]">
-                    {projectName}
-                  </p>
-                )}
-              </div>
-              <div className="flex justify-center gap-4 items-center">
-                <ThemeToggle />
+          <div>
+            <h2 className="font-bold text-[var(--text-primary)]">
+              Nexus AI
+            </h2>
 
-                <button
-                  onClick={() => setOpen(false)}
-                  className="
-                text-[var(--text-secondary)]
-                hover:text-[var(--text-primary)]
-              "
-                >
-                  <X size={30} />
-                </button>
-              </div>
-            </div>
-
-            {/* PROJECT INFO */}
             {projectName && (
-              <div
-                className="
-                px-4 py-3
-                border-b border-[var(--border-color)]
-                bg-[var(--bg-secondary)]
-              "
-              >
-                <p className="text-sm font-semibold text-[var(--text-primary)]">
-                  {projectName}
-                </p>
-              </div>
+              <p className="text-xs text-[var(--text-secondary)] truncate max-w-[180px]">
+                {projectName}
+              </p>
             )}
-
-            {/* CHAT AREA */}
-            <div
-              className="
-              flex-1
-              overflow-y-auto
-              p-4
-              space-y-3
-            "
-            >
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`
-                  p-3
-                  rounded-2xl
-                  border-
-                  text-sm
-                  border border-[var(--border-color)]
-                  ${
-                    msg.sender === "user"
-                      ? "ml-auto bg-[var(--primary)] text-white"
-                      : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
-                  }
-                `}
-                >
-                  <ReactMarkdown>{msg.text}</ReactMarkdown>
-                </div>
-              ))}
-
-              {loading && (
-                <div
-                  className="
-                  p-3
-                  rounded-2xl
-                  bg-[var(--bg-secondary)]
-                  text-[var(--text-secondary)]
-                  w-fit
-                "
-                >
-                  Thinking...
-                </div>
-              )}
-            </div>
-
-            {/* INPUT */}
-            <div
-
-  className="
-    p-3 sm:p-4
-    border-t border-[var(--border-color)]
-    bg-[var(--bg-card)]
-  "
->
-              <div className="flex gap-2">
-                <input
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                  placeholder="Ask anything about your project..."
-                  className="
-                  flex-1
-                  p-3
-                  rounded-xl
-                  bg-[var(--bg-secondary)]
-                  text-[var(--text-primary)]
-                  border border-[var(--border-color)]
-                  outline-none
-                  focus:border-[var(--primary)]
-                "
-                />
-
-                <button
-                  onClick={sendMessage}
-                  disabled={loading}
-                  className="
-                  w-12
-                  rounded-xl
-                  bg-[var(--primary)]
-                  hover:bg-[var(--primary-hover)]
-                  text-white
-                  flex items-center justify-center
-                  transition-all
-                "
-                >
-                  <Send size={18} />
-                </button>
-              </div>
-            </div>
           </div>
-        </>
-      )}
-    </>
-  );
-};
+        </div>
+
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+
+          {/* Desktop Close */}
+          <button
+            onClick={() => setOpen(false)}
+            className="
+              hidden sm:block
+              text-[var(--text-secondary)]
+              hover:text-[var(--text-primary)]
+            "
+          >
+            <X size={26} />
+          </button>
+        </div>
+      </div>
+
+      {/* CHAT MESSAGES */}
+      <div
+        className="
+          flex-1
+          overflow-y-auto
+          px-4 py-4
+          space-y-3
+        "
+      >
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`
+              max-w-[85%]
+              p-3
+              rounded-2xl
+              text-sm
+              break-words
+              ${
+                msg.sender === "user"
+                  ? "ml-auto bg-[var(--primary)] text-white"
+                  : "bg-[var(--bg-secondary)] text-[var(--text-primary)]"
+              }
+            `}
+          >
+            <ReactMarkdown>{msg.text}</ReactMarkdown>
+          </div>
+        ))}
+
+        {loading && (
+          <div
+            className="
+              w-fit
+              p-3
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              text-[var(--text-secondary)]
+            "
+          >
+            Thinking...
+          </div>
+        )}
+      </div>
+
+      {/* INPUT */}
+      <div
+        className="
+          shrink-0
+          border-t border-[var(--border-color)]
+          bg-[var(--bg-card)]
+          p-3
+        "
+      >
+        <div className="flex items-center gap-2">
+          <input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Ask anything about your project..."
+            className="
+              flex-1
+              h-11
+              px-4
+              rounded-xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              text-[var(--text-primary)]
+              outline-none
+              focus:border-[var(--primary)]
+            "
+          />
+
+          <button
+            onClick={sendMessage}
+            disabled={loading}
+            className="
+              w-11 h-11
+              rounded-xl
+              bg-[var(--primary)]
+              hover:bg-[var(--primary-hover)]
+              text-white
+              flex items-center justify-center
+              transition
+            "
+          >
+            <Send size={18} />
+          </button>
+        </div>
+      </div>
+    </div>
+  </>
+)}
+  </>
+)};
 
 export default AIChatbot;
