@@ -24,7 +24,7 @@ const ThemeToggle = () => {
   onClick={toggleTheme}
   className="
     relative
-    w-16 h-9
+    w-14 h-9
     rounded-full
     bg-slate-200 dark:bg-slate-700
     transition-all duration-500
@@ -36,7 +36,7 @@ const ThemeToggle = () => {
     className={`
       absolute
       top-1 left-1
-      w-5 h-5 w-7 h-7
+      w-7 h-7
       rounded-full
       bg-yellow-300 dark:bg-slate-900
       shadow-md
@@ -50,7 +50,7 @@ const ThemeToggle = () => {
     `}
   >
     {theme === "dark" ? (
-      <Moon size={6} className="text-indigo-400 sm:size-4" />
+      <Moon size={6} className="text-indigo-400 size-4" />
     ) : (
       <Sun size={6} className="text-yellow-500 size-4" />
     )}
