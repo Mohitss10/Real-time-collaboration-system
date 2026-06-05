@@ -30,16 +30,16 @@ const TaskPage = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   useEffect(() => {
-  if (showModal) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-  return () => {
-    document.body.style.overflow = "auto";
-  };
-}, [showModal]);
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showModal]);
 
   const phaseConfig = {
     "Not Started Yet": {
@@ -68,20 +68,17 @@ const TaskPage = () => {
       setFetching(true);
 
       const res = await axios.get(
-  `${import.meta.env.VITE_API_URL}/api/tasks/${projectId}`,
-  {
-    headers: { Authorization: `Bearer ${token}` },
-  },
-);
+        `${import.meta.env.VITE_API_URL}/api/tasks/${projectId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       setTasks(res.data.tasks || []);
     } catch (err) {
-  console.log(err);
+      console.log(err);
 
-  showError(
-    err.response?.data?.message ||
-      "Failed to load tasks"
-  );
-} finally {
+      showError(err.response?.data?.message || "Failed to load tasks");
+    } finally {
       setFetching(false);
     }
   };
@@ -91,59 +88,55 @@ const TaskPage = () => {
   }, [projectId]);
 
   // ================= CREATE TASK =================
-const createTask = async () => {
-  if (!form.taskName.trim()) {
-    showError("Task name is required");
-    return;
-  }
+  const createTask = async () => {
+    if (!form.taskName.trim()) {
+      showError("Task name is required");
+      return;
+    }
 
-  const loadingId = showLoading("Creating task...");
+    const loadingId = showLoading("Creating task...");
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-await axios.post(
-  `${import.meta.env.VITE_API_URL}/api/tasks/create`,
-  {
-    projectId,
-    fieldName: form.fieldName,
-    taskName: form.taskName,
-    taskDescription: form.taskDescription,
-  },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/tasks/create`,
+        {
+          projectId,
+          fieldName: form.fieldName,
+          taskName: form.taskName,
+          taskDescription: form.taskDescription,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-    showSuccess("Task created successfully ✅", {
-      id: loadingId,
-    });
-
-    setForm({
-      fieldName: "Engineering",
-      taskName: "",
-      taskDescription: "",
-    });
-
-    setShowModal(false);
-
-    fetchTasks();
-  } catch (err) {
-    console.log(err);
-
-    showError(
-      err.response?.data?.message ||
-        "Failed to create task",
-      {
+      showSuccess("Task created successfully ✅", {
         id: loadingId,
-      }
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+      });
+
+      setForm({
+        fieldName: "Engineering",
+        taskName: "",
+        taskDescription: "",
+      });
+
+      setShowModal(false);
+
+      fetchTasks();
+    } catch (err) {
+      console.log(err);
+
+      showError(err.response?.data?.message || "Failed to create task", {
+        id: loadingId,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredTasks = tasks.filter((task) => {
     const search = searchTerm.toLowerCase();
@@ -156,37 +149,33 @@ await axios.post(
   });
 
   // ================= UPDATE PHASE =================
-const updatePhase = async (id, phase) => {
-  const loadingId = showLoading("Updating task status...");
+  const updatePhase = async (id, phase) => {
+    const loadingId = showLoading("Updating task status...");
 
-  try {
-await axios.patch(
-  `${import.meta.env.VITE_API_URL}/api/tasks/${id}/phase`,
-  { phase },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/api/tasks/${id}/phase`,
+        { phase },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-    setTasks((prev) =>
-      prev.map((t) =>
-        t._id === id ? { ...t, phase } : t
-      )
-    );
+      setTasks((prev) => prev.map((t) => (t._id === id ? { ...t, phase } : t)));
 
-    showSuccess(`Task moved to "${phase}"`, {
-      id: loadingId,
-    });
-  } catch (err) {
-    console.log(err);
+      showSuccess(`Task moved to "${phase}"`, {
+        id: loadingId,
+      });
+    } catch (err) {
+      console.log(err);
 
-    showError("Failed to update task status", {
-      id: loadingId,
-    });
-  }
-};
+      showError("Failed to update task status", {
+        id: loadingId,
+      });
+    }
+  };
 
   // ================= STATS =================
   const total = tasks.length;
@@ -194,63 +183,60 @@ await axios.patch(
   const inProgress = tasks.filter((t) => t.phase === "In Process").length;
   const notStarted = tasks.filter((t) => t.phase === "Not Started Yet").length;
 
-
   // ================= PAGINATION =================
-const tasksPerPage = 3;
+  const tasksPerPage = 3;
 
-const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
+  const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
 
-const startIndex = (currentPage - 1) * tasksPerPage;
+  const startIndex = (currentPage - 1) * tasksPerPage;
 
-const currentTasks = filteredTasks.slice(
-  startIndex,
-  startIndex + tasksPerPage
-);
+  const currentTasks = filteredTasks.slice(
+    startIndex,
+    startIndex + tasksPerPage,
+  );
 
-useEffect(() => {
-  fetchTasks();
-}, [projectId]);
+  useEffect(() => {
+    fetchTasks();
+  }, [projectId]);
 
-if (fetching) {
-  return (
-    <div className="
+  if (fetching) {
+    return (
+      <div
+        className="
         min-h-screen
         flex
         flex-col
         items-center
         justify-center
         bg-[var(--bg-primary)]
-      ">
-      <Loaders />
+      "
+      >
+        <Loaders />
 
-      <p className="text-[var(--text-secondary)] text-sm">
-        Loading tasks...
-      </p>
-    </div>
-  );
-}
+        <p className="text-[var(--text-secondary)] text-sm">Loading tasks...</p>
+      </div>
+    );
+  }
 
   return (
-  <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
+    <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
+      {/* ================= HEADER ================= */}
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-4">
+        <div>
+          <h1 className="sm:text-3xl text-2xl  text-[var(--text-primary)]">
+            Product Launch Roadmap
+          </h1>
 
-  {/* ================= HEADER ================= */}
-  <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-4">
+          <p className="text-[var(--text-secondary)] mt-1 text-[15px]">
+            End-to-End Product Launch Roadmap from Idea to Deployment
+          </p>
+        </div>
 
-    <div>
-      <h1 className="sm:text-3xl text-2xl  text-[var(--text-primary)]">
-        Product Launch Roadmap
-      </h1>
-
-      <p className="text-[var(--text-secondary)] mt-1 text-[15px]">
-        End-to-End Product Launch Roadmap from Idea to Deployment
-      </p>
-    </div>
-
-    <button
-      onClick={() => setShowModal(true)}
-      className="
+        <button
+          onClick={() => setShowModal(true)}
+          className="
     w-fit
 
     flex items-center justify-center gap-2
@@ -276,94 +262,68 @@ if (fetching) {
 
     whitespace-nowrap
       "
-    >
-      <Plus size={18} />
-      Create New Task
-    </button>
-
-  </div>
-
-  {/* ================= STATS ================= */}
-  <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6 border-t border-[var(--border-color)] pt-4">
-
-    {/* TOTAL */}
-    <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
-
-      <div>
-        <p className="text-[var(--text-secondary)] text-md">
-          Total Tasks
-        </p>
-        <h3 className="text-2xl font-bold text-[var(--text-primary)]">
-          {total}
-        </h3>
+        >
+          <Plus size={18} />
+          Create New Task
+        </button>
       </div>
 
-      <ListChecks className="text-[var(--primary)] w-8 h-8" />
+      {/* ================= STATS ================= */}
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6 border-t border-[var(--border-color)] pt-4">
+        {/* TOTAL */}
+        <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
+          <div>
+            <p className="text-[var(--text-secondary)] text-md">Total Tasks</p>
+            <h3 className="text-2xl font-bold text-[var(--text-primary)]">
+              {total}
+            </h3>
+          </div>
 
-    </div>
+          <ListChecks className="text-[var(--primary)] w-8 h-8" />
+        </div>
 
-    {/* COMPLETED */}
-    <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
+        {/* COMPLETED */}
+        <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
+          <div>
+            <p className="text-[var(--text-secondary)] text-sm">Completed</p>
 
-      <div>
-        <p className="text-[var(--text-secondary)] text-sm">
-          Completed
-        </p>
+            <h3 className="text-2xl font-bold text-green-500">{completed}</h3>
+          </div>
 
-        <h3 className="text-2xl font-bold text-green-500">
-          {completed}
-        </h3>
+          <CheckCircle2 className="text-green-500 w-8 h-8" />
+        </div>
+
+        {/* IN PROGRESS */}
+        <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
+          <div>
+            <p className="text-[var(--text-secondary)] text-sm">In Progress</p>
+
+            <h3 className="text-2xl font-bold text-yellow-500">{inProgress}</h3>
+          </div>
+
+          <Loader className="text-yellow-500 w-8 h-8 animate-spin" />
+        </div>
+
+        {/* NOT STARTED */}
+        <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
+          <div>
+            <p className="text-[var(--text-secondary)] text-sm">Not Started</p>
+
+            <h3 className="text-2xl font-bold text-red-500">{notStarted}</h3>
+          </div>
+
+          <CircleX className="text-red-500 w-8 h-8" />
+        </div>
       </div>
 
-      <CheckCircle2 className="text-green-500 w-8 h-8" />
-
-    </div>
-
-    {/* IN PROGRESS */}
-    <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
-
-      <div>
-        <p className="text-[var(--text-secondary)] text-sm">
-          In Progress
-        </p>
-
-        <h3 className="text-2xl font-bold text-yellow-500">
-          {inProgress}
-        </h3>
-      </div>
-
-      <Loader className="text-yellow-500 w-8 h-8 animate-spin" />
-
-    </div>
-
-    {/* NOT STARTED */}
-    <div className="bg-[var(--primary)]/10 p-5 rounded-xl shadow flex justify-between items-center border border-[var(--border-color)]">
-
-      <div>
-        <p className="text-[var(--text-secondary)] text-sm">
-          Not Started
-        </p>
-
-        <h3 className="text-2xl font-bold text-red-500">
-          {notStarted}
-        </h3>
-      </div>
-
-      <CircleX className="text-red-500 w-8 h-8" />
-
-    </div>
-
-  </div>
-
-  {/* ================= SEARCH ================= */}
-  <div className="relative w-full md:w-[350px] mb-5">
-
-    <input
-      type="text"
-      placeholder="Search tasks by name, field or description..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="
+      {/* ================= SEARCH ================= */}
+      <div className="relative w-full md:w-[350px] mb-5">
+        <input
+          type="text"
+          placeholder="Search tasks by name, field or description..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="
         w-full
         bg-[var(--bg-card)]
         border border-[var(--border-color)]
@@ -376,26 +336,21 @@ if (fetching) {
         transition
         shadow-sm
       "
-    />
+        />
+      </div>
 
-  </div>
-
-
-
-{/* ================= TASK LIST ================= */}
-<div className="overflow-x-auto overflow-y-hidden pb-4">
-
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 min-w-max">
-
-    {fetching ? (
-      <p className="text-[var(--text-secondary)]">Loading tasks...</p>
-    ) : currentTasks.length === 0 ? (
-      <p className="text-[var(--text-secondary)]">No tasks found</p>
-    ) : (
-      currentTasks.map((task) => (
-        <div
-          key={task._id}
-          className="
+      {/* ================= TASK LIST ================= */}
+     <div className="w-full pb-4">
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {fetching ? (
+            <p className="text-[var(--text-secondary)]">Loading tasks...</p>
+          ) : currentTasks.length === 0 ? (
+            <p className="text-[var(--text-secondary)]">No tasks found</p>
+          ) : (
+            currentTasks.map((task) => (
+              <div
+                key={task._id}
+                className="
             relative group
             bg-[var(--bg-card)]
             border border-[var(--border-color)]
@@ -408,85 +363,78 @@ if (fetching) {
             overflow-hidden
             sm:w-[380px]
           "
-        >
-
-          {/* TOP BADGE */}
-          <div className="flex items-center justify-between mb-3">
-
-            <span
-              className="
+              >
+                {/* TOP BADGE */}
+                <div className="flex items-center justify-between mb-3">
+                  <span
+                    className="
                 text-xs font-bold uppercase tracking-wider
                 px-2 py-1 rounded-full
                 bg-[var(--primary)]/10 text-[var(--primary)]
               "
-            >
-              {task.fieldName}
-            </span>
+                  >
+                    {task.fieldName}
+                  </span>
 
-            <span className="text-[var(--text-secondary)] group-hover:text-[var(--primary)]">
-              ⠿
-            </span>
+                  <span className="text-[var(--text-secondary)] group-hover:text-[var(--primary)]">
+                    ⠿
+                  </span>
+                </div>
 
-          </div>
+                {/* TITLE */}
+                <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+                  {task.taskName}
+                </h3>
 
-          {/* TITLE */}
-          <h3 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
-            {task.taskName}
-          </h3>
+                {/* DESCRIPTION */}
+                <p className="text-xs text-[var(--text-secondary)] line-clamp-2 mb-4">
+                  {task.taskDescription || "No description"}
+                </p>
 
-          {/* DESCRIPTION */}
-          <p className="text-xs text-[var(--text-secondary)] line-clamp-2 mb-4">
-            {task.taskDescription || "No description"}
-          </p>
+                {/* META */}
+                <div className="flex items-center justify-between text-sm text-[var(--text-secondary)] mb-4">
+                  <span className="flex items-center gap-2 text-xs">
+                    <Calendar size={14} />
+                    {new Date(task.taskAddDate).toLocaleDateString()}
+                  </span>
 
-          {/* META */}
-          <div className="flex items-center justify-between text-sm text-[var(--text-secondary)] mb-4">
-
-            <span className="flex items-center gap-2 text-xs">
-              <Calendar size={14} />
-              {new Date(task.taskAddDate).toLocaleDateString()}
-            </span>
-
-            <span
-              className={`
+                  <span
+                    className={`
                 px-2 py-1 text-xs rounded-full font-semibold
                 ${
                   task.phase === "Completed"
                     ? "bg-green-500/10 text-green-500"
                     : task.phase === "In Process"
-                    ? "bg-blue-500/10 text-blue-500"
-                    : "bg-red-500/10 text-red-500"
+                      ? "bg-blue-500/10 text-blue-500"
+                      : "bg-red-500/10 text-red-500"
                 }
               `}
-            >
-              {task.phase}
-            </span>
+                  >
+                    {task.phase}
+                  </span>
+                </div>
 
-          </div>
-
-          {/* PROGRESS BAR */}
-          <div className="w-full h-2 bg-[var(--bg-secondary)] rounded-full mb-4 overflow-hidden">
-
-            <div
-              className={`
+                {/* PROGRESS BAR */}
+                <div className="w-full h-2 bg-[var(--bg-secondary)] rounded-full mb-4 overflow-hidden">
+                  <div
+                    className={`
                 h-full rounded-full transition-all duration-300
                 ${
                   task.phase === "Completed"
                     ? "w-full bg-green-500"
                     : task.phase === "In Process"
-                    ? "w-1/2 bg-blue-500"
-                    : "w-1/6 bg-red-400"
+                      ? "w-1/2 bg-blue-500"
+                      : "w-1/6 bg-red-400"
                 }
               `}
-            />
+                  />
+                </div>
 
-          </div>
-
-          {/* PHASE SELECT */}
-          <select
-            value={task.phase}
-            onChange={(e) => updatePhase(task._id, e.target.value)}
-            className="
+                {/* PHASE SELECT */}
+                <select
+                  value={task.phase}
+                  onChange={(e) => updatePhase(task._id, e.target.value)}
+                  className="
               w-full
               text-sm
               border border-[var(--border-color)]
@@ -498,31 +446,25 @@ if (fetching) {
               focus:ring-2 focus:ring-[var(--primary)]/30
               transition
             "
-          >
-
-            <option value="Not Started Yet">Not Started Yet</option>
-            <option value="In Process">In Process</option>
-            <option value="Completed">Completed</option>
-
-          </select>
-
+                >
+                  <option value="Not Started Yet">Not Started Yet</option>
+                  <option value="In Process">In Process</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
+            ))
+          )}
         </div>
-      ))
-    )}
+      </div>
 
-  </div>
-
-</div>
-
-{/* ================= PAGINATION ================= */}
-{totalPages > 1 && (
-  <div className="flex justify-center items-center gap-3 mt-2">
-
-    {Array.from({ length: totalPages }).map((_, index) => (
-      <button
-        key={index}
-        onClick={() => setCurrentPage(index + 1)}
-        className={`
+      {/* ================= PAGINATION ================= */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-3 mt-2">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`
           w-10 h-10
           rounded-xl
           font-semibold
@@ -534,26 +476,25 @@ if (fetching) {
               : "bg-[var(--bg-card)] border border-[var(--border-color)] text-[var(--text-primary)] hover:bg-[var(--bg-secondary)]"
           }
         `}
-      >
-        {index + 1}
-      </button>
-    ))}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
 
-  </div>
-)}
-
-{/* ================= MODAL ================= */}
-{showModal && (
-  <div
-    className="
+      {/* ================= MODAL ================= */}
+      {showModal && (
+        <div
+          className="
       fixed inset-0 z-50 sm:ml-70
       flex items-center justify-center
       bg-black/40 
       p-4
     "
-  >
-    <div
-      className="
+        >
+          <div
+            className="
         w-full max-w-lg
         bg-[var(--bg-card)]
         rounded-3xl
@@ -561,53 +502,47 @@ if (fetching) {
         overflow-hidden
         border border-[var(--border-color)]
       "
-    >
+          >
+            {/* ================= HEADER ================= */}
+            <div className="flex items-center justify-between p-6 border-b border-[var(--border-color)]">
+              <div>
+                <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
+                  Create New Task
+                </h2>
 
-      {/* ================= HEADER ================= */}
-      <div className="flex items-center justify-between p-6 border-b border-[var(--border-color)]">
+                <p className="text-sm text-[var(--text-secondary)] mt-1">
+                  Add task details to manage your project workflow
+                </p>
+              </div>
 
-        <div>
-          <h2 className="text-2xl font-bold text-[var(--text-primary)]">
-            Create New Task
-          </h2>
-
-          <p className="text-sm text-[var(--text-secondary)] mt-1">
-            Add task details to manage your project workflow
-          </p>
-
-        </div>
-
-        <button
-          onClick={() => setShowModal(false)}
-          className="
+              <button
+                onClick={() => setShowModal(false)}
+                className="
             w-10 h-10
             rounded-full
             hover:bg-[var(--bg-secondary)]
             flex items-center justify-center
             transition
           "
-        >
-          <X size={20} className="text-[var(--text-secondary)]" />
-        </button>
+              >
+                <X size={20} className="text-[var(--text-secondary)]" />
+              </button>
+            </div>
 
-      </div>
+            {/* ================= BODY ================= */}
+            <div className="p-6 space-y-5">
+              {/* FIELD TYPE */}
+              <div>
+                <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
+                  Field Type
+                </label>
 
-      {/* ================= BODY ================= */}
-      <div className="p-6 space-y-5">
-
-        {/* FIELD TYPE */}
-        <div>
-
-          <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
-            Field Type
-          </label>
-
-          <select
-            value={form.fieldName}
-            onChange={(e) =>
-              setForm({ ...form, fieldName: e.target.value })
-            }
-            className="
+                <select
+                  value={form.fieldName}
+                  onChange={(e) =>
+                    setForm({ ...form, fieldName: e.target.value })
+                  }
+                  className="
               w-full
               px-4 py-3
               rounded-2xl
@@ -618,29 +553,27 @@ if (fetching) {
               focus:ring-2 focus:ring-[var(--primary)]/30
               transition
             "
-          >
-            <option value="Research">Research</option>
-            <option value="Engineering">Engineering</option>
-            <option value="QA">QA</option>
-            <option value="Design">Design</option>
-          </select>
+                >
+                  <option value="Research">Research</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="QA">QA</option>
+                  <option value="Design">Design</option>
+                </select>
+              </div>
 
-        </div>
+              {/* TASK NAME */}
+              <div>
+                <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
+                  Task Name
+                </label>
 
-        {/* TASK NAME */}
-        <div>
-
-          <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
-            Task Name
-          </label>
-
-          <input
-            value={form.taskName}
-            onChange={(e) =>
-              setForm({ ...form, taskName: e.target.value })
-            }
-            placeholder="Enter task name"
-            className="
+                <input
+                  value={form.taskName}
+                  onChange={(e) =>
+                    setForm({ ...form, taskName: e.target.value })
+                  }
+                  placeholder="Enter task name"
+                  className="
               w-full
               px-4 py-4
               rounded-2xl
@@ -651,24 +584,22 @@ if (fetching) {
               focus:ring-2 focus:ring-[var(--primary)]/30
               transition
             "
-          />
+                />
+              </div>
 
-        </div>
+              {/* DESCRIPTION */}
+              <div>
+                <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
+                  Task Description
+                </label>
 
-        {/* DESCRIPTION */}
-        <div>
-
-          <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
-            Task Description
-          </label>
-
-          <textarea
-            value={form.taskDescription}
-            onChange={(e) =>
-              setForm({ ...form, taskDescription: e.target.value })
-            }
-            placeholder="Enter task description"
-            className="
+                <textarea
+                  value={form.taskDescription}
+                  onChange={(e) =>
+                    setForm({ ...form, taskDescription: e.target.value })
+                  }
+                  placeholder="Enter task description"
+                  className="
               w-full
               px-4 py-4
               rounded-2xl
@@ -680,16 +611,14 @@ if (fetching) {
               transition
               min-h-[120px]
             "
-          />
+                />
+              </div>
 
-        </div>
-
-        {/* ================= BUTTONS ================= */}
-        <div className="flex justify-end gap-3 pt-2">
-
-          <button
-            onClick={() => setShowModal(false)}
-            className="
+              {/* ================= BUTTONS ================= */}
+              <div className="flex justify-end gap-3 pt-2">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="
               px-5 py-3
               rounded-2xl
               border border-[var(--border-color)]
@@ -697,14 +626,14 @@ if (fetching) {
               hover:bg-[var(--bg-secondary)]
               transition
             "
-          >
-            Cancel
-          </button>
+                >
+                  Cancel
+                </button>
 
-          <button
-            onClick={createTask}
-            disabled={loading}
-            className="
+                <button
+                  onClick={createTask}
+                  disabled={loading}
+                  className="
               px-6 py-3
               rounded-2xl
               bg-[var(--primary)]
@@ -712,18 +641,15 @@ if (fetching) {
               hover:opacity-90
               transition
             "
-          >
-            {loading ? "Creating..." : "Create Task"}
-          </button>
-
+                >
+                  {loading ? "Creating..." : "Create Task"}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-
-      </div>
-
+      )}
     </div>
-  </div>
-)}
-</div>
   );
 };
 

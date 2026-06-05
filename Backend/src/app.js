@@ -44,11 +44,23 @@ app.use(passport.initialize());
 
 
 
-app.use(cors({
-  origin: "https://nexuss-real-time-collaboration-system.onrender.com", // frontend
-  credentials: true
-}));
+const allowedOrigins = [
+  process.env.CLIENT_URL_DEV,
+  process.env.CLIENT_URL_PROD,
+];
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 // ============================================
 // STATIC FILES (UPLOADS)

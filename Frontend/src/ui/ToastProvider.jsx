@@ -4,47 +4,26 @@ import { Toaster } from "react-hot-toast";
 const ToastProvider = () => {
   return (
     <Toaster
-      position="top-center mt-10 sm:mt-0"
+      position="top-center"
       toastOptions={{
-style: {
-  borderRadius: "12px",
-  padding: "12px 16px",
-  marginTop: "40px",
-  background: "var(--bg-secondary)",
-  color: "var(--text-primary)",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-  fontSize: "14px",
-},
+        style: {
+          background: "var(--bg-secondary)",
+          color: "var(--text-primary)",
+          borderRadius: "12px",
+          padding: "12px 16px",
+          fontSize: "14px",
+        },
 
         success: {
-          style: {
-            background: "var(--bg-secondary)",
-            color: "var(--text-primary)",
-            
-          },
-          iconTheme: {
-            primary: "var(--primary)",
-            secondary: "white",
-          },
+          icon: null,
         },
 
         error: {
-          style: {
-            background: "var(--bg-secondary)",
-            color: "var(--text-primary)",
-
-          },
-          iconTheme: {
-            primary: "#ef4444",
-            secondary: "white",
-          },
+          icon: null,
         },
 
         loading: {
-          style: {
-            background: "var(--bg-secondary)",
-            color: "var(--text-primary)",
-          },
+          icon: null,
         },
       }}
     />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import { Bot, X, Send } from "lucide-react";
+import { Bot, X, Send, ArrowLeft} from "lucide-react";
 import { useParams } from "react-router-dom";
 import ThemeToggle from "../../Pages/ThemeToggle";
 import { useLocation } from "react-router-dom";
@@ -158,34 +158,44 @@ const AIChatbot = () => {
       {open && (
         <>
           {/* BACKDROP */}
-          <div
-            onClick={() => setOpen(false)}
-            className="
-        fixed inset-0
-        z-[998]
-        bg-black/20
-        backdrop-blur-sm
-      "
-          />
+<div
+  onClick={() => setOpen(false)}
+  className="
+    hidden sm:block
+    fixed inset-0
+    z-[998]
+    bg-black/20
+    backdrop-blur-sm
+  "
+/>
 
           {/* CHAT WINDOW */}
           <div
-            className="
-        fixed
-        bottom-24
-        right-3 sm:right-3
-        z-[999]
-        w-[95vw]
-        sm:w-[400px]
-        h-[80vh]
-        sm:h-[650px]
-        rounded-3xl
-        bg-[var(--bg-card)]
-        border border-[var(--border-color)]
-        shadow-2xl
-        flex flex-col
-      "
-          >
+  className="
+    fixed
+    inset-0
+    sm:inset-auto
+    sm:bottom-24
+    sm:right-3
+
+    z-[999]
+
+    w-screen
+    h-screen
+
+    sm:w-[400px]
+    sm:h-[650px]
+
+    bg-[var(--bg-card)]
+
+    sm:rounded-3xl
+    sm:border
+    sm:border-[var(--border-color)]
+    sm:shadow-2xl
+
+    flex flex-col
+  "
+>
             {/* HEADER */}
             <div
               className="
@@ -281,11 +291,13 @@ const AIChatbot = () => {
 
             {/* INPUT */}
             <div
-              className="
-              p-4
-              border-t border-[var(--border-color)]
-            "
-            >
+
+  className="
+    p-3 sm:p-4
+    border-t border-[var(--border-color)]
+    bg-[var(--bg-card)]
+  "
+>
               <div className="flex gap-2">
                 <input
                   value={message}

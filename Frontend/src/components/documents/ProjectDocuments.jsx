@@ -400,12 +400,12 @@ await axios.post(
                 {/* ===== SAME CARD UI (UNCHANGED) ===== */}
                 {getFileIcon(doc.originalName)}
 
-                <div className="mt-4  flex justify-between items-center">
+                <div className="mt-4  flex flex-col gap-3">
                   <h2 className="text-xl font-bold text-[var(--text-primary)] break-words">
                     {doc.title}
                   </h2>
 
-                  <span className="px-3 py-1 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] text-sm font-semibold uppercase">
+                  <span className="px-3 py-1 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] text-sm font-semibold uppercase w-fit">
                     .{ext}
                   </span>
                 </div>
@@ -444,20 +444,20 @@ await axios.post(
                   </div>
 
                   {/* DOWNLOAD BUTTON */}
-                  <a
-                    href={`http://localhost:5000/api/documents/download/${encodeURIComponent(
-                      doc.fileName,
-                    )}`}
-                    className="
-      w-11 h-11 rounded-2xl
-      bg-[var(--primary)]/10
-      hover:bg-[var(--primary)]
-      text-[var(--primary)]
-      hover:text-white
-      flex items-center justify-center
-      transition
-    "
-                  >
+<a
+  href={`${import.meta.VITE_API_URL}/api/documents/download/${encodeURIComponent(
+    doc.fileName
+  )}`}
+  className="
+    w-11 h-11 rounded-2xl
+    bg-[var(--primary)]/10
+    hover:bg-[var(--primary)]
+    text-[var(--primary)]
+    hover:text-white
+    flex items-center justify-center
+    transition
+  "
+>
                     <Download size={18} />
                   </a>
                 </div>
@@ -522,7 +522,7 @@ await axios.post(
         "
       >
         <div>
-          <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
             Upload Document
           </h2>
 
@@ -597,16 +597,15 @@ await axios.post(
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="
-              w-full
-              border border-[var(--border-color)]
+ w-full
+              px-4 py-4
               rounded-2xl
-              px-5 py-4
               bg-[var(--bg-secondary)]
-              text-[var(--text-primary)]
+              border border-[var(--border-color)]
               outline-none
-              focus:ring-2
-              focus:ring-[var(--primary)]/30
-              focus:border-[var(--primary)]
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
             "
           />
         </div>

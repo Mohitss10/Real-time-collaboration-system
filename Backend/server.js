@@ -10,12 +10,25 @@ const { Server } = require("socket.io");
 // CREATE HTTP SERVER
 const server = http.createServer(app);
 
-
+console.log("CLIENT_URL_DEV =", process.env.CLIENT_URL_DEV);
+console.log("CLIENT_URL_PROD =", process.env.CLIENT_URL_PROD);
 // SOCKET SERVER
+const allowedOrigins = [
+  process.env.CLIENT_URL_DEV,
+  process.env.CLIENT_URL_PROD,
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "https://nexuss-real-time-collaboration-system.onrender.com",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS Not Allowed"));
+      }
+    },
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 

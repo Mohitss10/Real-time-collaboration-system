@@ -55,7 +55,7 @@ const Home = () => {
         setCurrentPlan("pro");
         localStorage.setItem("plan", "pro");
 
-        showSuccess("🎉 Successfully upgraded to Pro!", {
+        showSuccess("Successfully upgraded to Pro!", {
           id: loadingId,
         });
       } else {
@@ -258,25 +258,7 @@ const res = await fetch(
             Create Project
           </button>
 
-          <button
-            className="
-    border
-    text-md
-    px-6 py-3
-    rounded-2xl
-    font-semibold
-    flex items-center justify-center gap-2
-    transition
-  "
-            style={{
-              background: "var(--bg-card)",
-              color: "var(--text-primary)",
-              borderColor: "var(--border-color)",
-            }}
-          >
-            <Play size={22} />
-            Watch Demo
-          </button>
+         
         </div>
 
         {/* HERO IMAGE / MOCK UI */}
@@ -424,9 +406,9 @@ const res = await fetch(
           </div>
 
           {/* Main Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5 auto-rows-auto md:auto-rows-[420px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-3  auto-rows-auto md:auto-rows-[420px]">
             {/* Large Left Card */}
-            <div className="md:col-span-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl lg:rounded-4xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden">
+            <div className="md:col-span-2 bg-[var(--bg-card)] rounded-3xl lg:rounded-4xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden shadow-xl">
               <div className="w-12 h-12 rounded-xl bg-[var(--primary)] flex items-center justify-center text-white">
                 <MessageCircle size={22} />
               </div>
@@ -443,7 +425,7 @@ const res = await fetch(
                 </p>
               </div>
               <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 sm:p-5 mt-8">
-                <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-xl px-4 py-3 text-sm text-[var(--text-secondary)] mb-4">
+                <div className="bg-[var(--bg-card)] shadow-xl rounded-xl px-4 py-3 text-sm text-[var(--text-secondary)] mb-4">
                   Organize conversations logically. Move past noisy channels and
                   focus on structured discussions.
                 </div>
@@ -465,7 +447,7 @@ const res = await fetch(
             </div>
 
             {/* Top Right Card */}
-            <div className=" bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl lg:rounded-4xl p-5 sm:p-6 flex flex-col justify-between overflow-hidden">
+            <div className=" bg-[var(--bg-card)] shadow-xl rounded-3xl lg:rounded-4xl p-5 sm:p-6 flex flex-col justify-between overflow-hidden">
               <div>
                 <div className="w-12 h-12 rounded-xl bg-violet-500 flex items-center justify-center text-white">
                   <FileText size={22} />
@@ -542,7 +524,7 @@ const res = await fetch(
             </div>
 
             {/* Bottom Left Card */}
-            <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl lg:rounded-4xl p-5 sm:p-7 flex flex-col justify-between overflow-hidden">
+            <div className="bg-[var(--bg-card)] shadow-xl rounded-3xl lg:rounded-4xl p-5 sm:p-7 flex flex-col justify-between overflow-hidden">
               <div>
                 <div className="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center text-white">
                   <Video size={22} />
@@ -558,7 +540,7 @@ const res = await fetch(
                 </p>
               </div>
 
-              <div className="bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-2xl p-4 sm:p-6 mt-6 flex items-center gap-3 sm:gap-4">
+              <div className="bg-[var(--bg-secondary)] shadow-xl rounded-2xl p-4 sm:p-6 mt-6 flex items-center gap-3 sm:gap-4">
                 <div className="w-12 h-12 rounded-full border-4 border-[var(--primary)] flex items-center justify-center bg-[var(--bg-card)]">
                   <User size={22} className="text-[var(--primary)]" />
                 </div>
@@ -574,7 +556,7 @@ const res = await fetch(
             </div>
 
             {/* Bottom Large Card */}
-            <div className="md:col-span-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-3xl lg:rounded-4xl p-5 sm:p-7 flex flex-col justify-between overflow-hidden">
+            <div className="md:col-span-2 bg-[var(--bg-card)] shadow-xl rounded-3xl lg:rounded-4xl p-5 sm:p-7 flex flex-col justify-between overflow-hidden">
               <div>
                 <div className="w-12 h-12 rounded-xl bg-indigo-200 flex items-center justify-center text-white">
                   <BarChart3 size={22} />
@@ -744,8 +726,8 @@ const res = await fetch(
                 <div
                   className={`rounded-[32px] p-5 sm:p-6 lg:p-8 bg-[var(--bg-card)] transition-all duration-300 flex flex-col justify-between ${
                     currentPlan === "free"
-                      ? "border border-[var(--primary)]"
-                      : "border border-[var(--border-color)]"
+                      ? "border border-[var(--border-color)]"
+                      : "border border-[var(--primary)]"
                   }`}
                 >
                   <div className="bg-[var(--bg-card)] rounded-[22px]  h-full relative">
@@ -821,15 +803,18 @@ const res = await fetch(
         </div>
       </section>
       {/* ================= FOOTER ================= */}
-      <footer className="relative overflow-hidden bg-[var(--bg-primary)]">
+      <footer className="relative overflow-hidden " style={{
+        background: "var(--bg-primary)",
+        color: "var(--text-primary)",
+      }}>
         {/* Background Blur */}
-        <div className="absolute inset-0 bg-[var(--primary)]/10 blur-3xl pointer-events-none"></div>
+        <div className="absolute inset-0  blur-3xl pointer-events-none"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
           {/* Bottom */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-5">
             {/* Links */}
-            <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6 text-sm font-medium text-[var(--text-secondary)] text-center">
+            <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 sm:gap-6 text-sm font-medium  text-center">
               <a
                 href="#"
                 className="hover:text-[var(--primary)] transition-colors"

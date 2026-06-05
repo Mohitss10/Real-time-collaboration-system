@@ -363,7 +363,7 @@ if (loading) {
         "
       >
         <div>
-          <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
             Schedule Meeting
           </h2>
 
@@ -403,15 +403,14 @@ if (loading) {
             onChange={handleChange}
             required
             className="
-              w-full
-              border border-[var(--border-color)]
+ w-full
+              px-4 py-4
               rounded-2xl
-              px-5 py-4
               bg-[var(--bg-secondary)]
-              text-[var(--text-primary)]
+              border border-[var(--border-color)]
               outline-none
+              text-[var(--text-primary)]
               focus:ring-2 focus:ring-[var(--primary)]/30
-              focus:border-[var(--primary)]
               transition
             "
           />
@@ -433,16 +432,15 @@ if (loading) {
               onChange={handleChange}
               required
               className="
-                w-full
-                border border-[var(--border-color)]
-                rounded-2xl
-                px-4 py-3
-                bg-[var(--bg-secondary)]
-                text-[var(--text-primary)]
-                outline-none
-                focus:ring-2 focus:ring-[var(--primary)]/30
-                focus:border-[var(--primary)]
-                transition
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
               "
             />
           </div>
@@ -459,16 +457,15 @@ if (loading) {
     onChange={handleChange}
     required
     className="
-      w-full
-      border border-[var(--border-color)]
-      rounded-2xl
-      px-4 py-3
-      bg-[var(--bg-secondary)]
-      text-[var(--text-primary)]
-      outline-none
-      focus:ring-2 focus:ring-[var(--primary)]/30
-      focus:border-[var(--primary)]
-      transition
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
     "
   />
 </div>
@@ -487,16 +484,15 @@ if (loading) {
     value={meetingData.duration}
     onChange={handleChange}
     className="
-      w-full
-      border border-[var(--border-color)]
-      rounded-2xl
-      px-5 py-4
-      bg-[var(--bg-secondary)]
-      text-[var(--text-primary)]
-      outline-none
-      focus:ring-2 focus:ring-[var(--primary)]/30
-      focus:border-[var(--primary)]
-      transition
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
     "
   />
 </div>
@@ -514,16 +510,15 @@ if (loading) {
     value={meetingData.meetingLink}
     onChange={handleChange}
     className="
-      w-full
-      border border-[var(--border-color)]
-      rounded-2xl
-      px-5 py-4
-      bg-[var(--bg-secondary)]
-      text-[var(--text-primary)]
-      outline-none
-      focus:ring-2 focus:ring-[var(--primary)]/30
-      focus:border-[var(--primary)]
-      transition
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
     "
   />
 </div>

@@ -132,9 +132,9 @@ const response = await axios.post(
         <div className="space-y-6">
 
           {/* TITLE */}
-          <div className="bg-[var(--bg-secondary)] p-4 rounded-xl border border-[var(--border-color)]">
+          <div className="px-4">
 
-            <label className="text-sm font-semibold text-[var(--primary)]">
+            <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
               Project Title
             </label>
 
@@ -146,25 +146,23 @@ const response = await axios.post(
               placeholder="Enter project title"
               required
               className="
-                w-full
-                mt-2
-                p-3
-                bg-[var(--bg-card)]
-                border border-[var(--border-color)]
-                rounded-xl
-                outline-none
-                text-[var(--text-primary)]
-                focus:ring-2 focus:ring-[var(--primary)]/30
-                focus:border-[var(--primary)]
-                transition
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
               "
             />
           </div>
 
           {/* DESCRIPTION */}
-          <div className="bg-[var(--bg-secondary)] p-4 rounded-xl border border-[var(--border-color)]">
+          <div className="px-4">
 
-            <label className="text-sm font-semibold text-[var(--primary)]">
+            <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
               Description
             </label>
 
@@ -175,18 +173,17 @@ const response = await axios.post(
               placeholder="Write project description..."
               className="
                 w-full
-                mt-2
+                mt-1
                 p-3
                 min-h-[180px]
-                md:min-h-[260px]
-                bg-[var(--bg-card)]
-                border border-[var(--border-color)]
-                rounded-xl
-                outline-none
-                text-[var(--text-primary)]
-                focus:ring-2 focus:ring-[var(--primary)]/30
-                focus:border-[var(--primary)]
-                transition
+                md:min-h-[260px]              
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
               "
             />
           </div>
@@ -197,9 +194,9 @@ const response = await axios.post(
         <div className="space-y-6">
 
           {/* PROJECT TYPE */}
-          <div className="bg-[var(--bg-secondary)] p-4 rounded-xl border border-[var(--border-color)]">
+          <div className="px-4">
 
-            <label className="text-sm font-semibold text-[var(--primary)]">
+            <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block">
               Project Type
             </label>
 
@@ -258,9 +255,9 @@ const response = await axios.post(
           </div>
 
           {/* VISIBILITY */}
-<div className="bg-[var(--bg-secondary)] p-4 rounded-xl border border-[var(--border-color)]">
+<div className="px-4">
 
-  <label className="text-sm font-semibold text-[var(--primary)]">
+  <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block mx-2">
     Visibility
   </label>
 
@@ -269,16 +266,15 @@ const response = await axios.post(
     value={formData.visibility}
     onChange={handleChange}
     className="
-      w-full
-      mt-3
-      p-3
-      bg-[var(--bg-card)]
-      border border-[var(--border-color)]
-      rounded-xl
-      outline-none
-      text-[var(--text-primary)]
-      focus:ring-2 focus:ring-[var(--primary)]/30
-      focus:border-[var(--primary)]
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
     "
   >
     <option value="private">Private</option>
@@ -288,13 +284,13 @@ const response = await axios.post(
 </div>
 
 {/* THEME COLOR */}
-<div className="bg-[var(--bg-secondary)] p-4 rounded-xl border border-[var(--border-color)]">
+<div className="px-4">
 
-  <label className="text-sm font-semibold text-[var(--primary)]">
+  <label className="text-sm font-medium text-[var(--text-secondary)] mb-2 block mx-2">
     Theme Color
   </label>
 
-  <div className="flex flex-wrap gap-2 sm:gap-3 mt-3">
+  <div className="flex flex-wrap gap-2 sm:gap-3 mt-3 px-5">
 
     {[
       "#6366f1",
@@ -311,7 +307,7 @@ const response = await axios.post(
           setFormData({ ...formData, color })
         }
         className={`
-          w-8 h-8 sm:w-9 sm:h-9 rounded-full transition-all
+          w-8 h-8 sm:w-9 sm:h-9 rounded-full transition-all 
           ${
             formData.color === color
               ? "ring-2 ring-[var(--primary)] ring-offset-2 scale-110"
@@ -324,14 +320,14 @@ const response = await axios.post(
 
   </div>
 
-  <div className="mt-4 flex items-center gap-3">
+  <div className="mt-4 flex items-center gap-3 px-4">
 
     <div
       className="w-10 h-10 rounded-full border border-[var(--border-color)]"
       style={{ backgroundColor: formData.color }}
     />
 
-    <span className="text-sm text-[var(--text-secondary)] break-all">
+    <span className="text-sm text-[var(--text-secondary)] break-all ">
       Selected: {formData.color}
     </span>
 
@@ -343,7 +339,7 @@ const response = await axios.post(
       </div>
 
       {/* ACTIONS */}
-<div className="flex flex-col-reverse sm:flex-row justify-end gap-3 mt-3 border-t border-[var(--border-color)] pt-5">
+<div className="flex flex-col-reverse sm:flex-row justify-end gap-3 mt-3 border-t border-[var(--border-color)] pt-5 px-4">
 
   <button
     type="button"

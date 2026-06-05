@@ -330,7 +330,7 @@ const handleInvite = async () => {
       <div className="flex items-center justify-between p-6 border-b border-[var(--border-color)]">
 
         <div>
-          <h2 className="text-2xl font-bold text-[var(--text-primary)]">
+          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
             Invite Team Member
           </h2>
 
@@ -380,16 +380,15 @@ const handleInvite = async () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email address"
               className="
-                w-full
-                pl-12 pr-4 py-4
-                rounded-2xl
-                bg-[var(--bg-secondary)]
-                border border-[var(--border-color)]
-                outline-none
-                text-[var(--text-primary)]
-                focus:ring-2 focus:ring-[var(--primary)]/30
-                focus:border-[var(--primary)]
-                transition
+ w-full
+              px-4 py-4
+              rounded-2xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
               "
             />
 

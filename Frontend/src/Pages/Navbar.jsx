@@ -16,6 +16,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const dropdownRef = useRef(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
 
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
@@ -43,31 +44,54 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     };
   }, []);
 
+  useEffect(() => {
+  let lastScrollY = window.scrollY;
+
+  const handleScroll = () => {
+    if (window.scrollY > lastScrollY && window.scrollY > 80) {
+      setShowNavbar(false); // hide when scrolling down
+    } else {
+      setShowNavbar(true); // show when scrolling up
+    }
+
+    lastScrollY = window.scrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
   return (
-    <nav
-      className="
-  fixed top-0 w-full py-3 z-50 flex items-center justify-between bg-[var(--bg-card)] 
-  px-4 sm:px-10
-  
-"
-    >
+<nav
+  className={`
+    fixed top-0 w-full py-3 z-50
+    flex items-center justify-between
+    bg-[var(--bg-card)]
+    px-4 sm:px-10
+    transition-transform duration-300
+    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+  `}
+>
       {/* LEFT */}
-      <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+      <div className="flex items-end-safe gap-3 sm:gap-4 flex-shrink-0">
         {!hideSidebarButton && (
           <button
             onClick={() => setSidebarOpen((prev) => !prev)}
             className="
     lg:hidden
-    p-2
+  pt-1
     rounded-xl
     transition
     hover:bg-[var(--bg-secondary)]
   "
           >
             {sidebarOpen ? (
-              <X size={22} className="text-[var(--text-primary)]" />
+              <X size={28} strokeWidth={3}  className=" text-[var(--text-primary)]" />
             ) : (
-              <Menu size={22} className="text-[var(--text-primary)]" />
+              <Menu size={28} strokeWidth={3} className="text-[var(--text-primary)]" />
             )}
           </button>
         )}
@@ -144,18 +168,20 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
             {showDropdown && (
               <div
                 className="
-              absolute
-              top-14
-              right-0
-              w-72
-              rounded-3xl
-              overflow-hidden
-              shadow-2xl
-              border
-              border-[var(--border-color)]
-              bg-[var(--bg-card)]
-              animate-fadeIn
-            "
+  absolute
+  top-14
+  -right-2
+  w-[220px]
+  sm:right-0
+  sm:w-72
+  rounded-3xl
+  overflow-hidden
+  shadow-2xl
+  border
+  border-[var(--border-color)]
+  bg-[var(--bg-card)]
+  animate-fadeIn
+"
               >
                 {/* HEADER */}
                 <div
@@ -204,27 +230,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
 
                 {/* MENU */}
                 <div className="p-2">
-                  {/* <button
-                    onClick={() => {
-                      navigate("/update-profile");
-                      setShowDropdown(false);
-                    }}
-                    className="
-                  w-full
-                  flex
-                  items-center
-                  gap-3
-                  px-4
-                  py-3
-                  rounded-2xl
-                  text-[var(--text-primary)]
-                  hover:bg-[var(--bg-secondary)]
-                  transition
-                "
-                  >
-                    <User size={18} />
-                    <span className="font-medium">Update Profile</span>
-                  </button> */}
+                  
 
                   <button
                     onClick={() => {
@@ -309,7 +315,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
             sm:px-5
             sm:py-2
             px-2
-            py-1
+            py-2
             rounded-xl
             font-semibold
             text-white
