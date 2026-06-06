@@ -253,13 +253,15 @@ const Hero = () => {
       </div>
 
       {/* ✅ GRADUAL BLUR OVERLAY */}
-      <GradualBlur
-  animated="scroll"
-  position="bottom"
-  strength={1}
-  divCount={7}
-  opacity={5}
-/>
+<div className="hidden sm:block">
+  <GradualBlur
+    animated="scroll"
+    position="bottom"
+    strength={1}
+    divCount={7}
+    opacity={5}
+  />
+</div>
     </section>
     </section>
   );
