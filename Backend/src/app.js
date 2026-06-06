@@ -41,7 +41,7 @@ app.use(passport.initialize());
 // CORS
 // ============================================
 app.use(cors({
-  origin: "https://nexuss-real-time-collaboration-system.onrender.com",
+  origin: "https://nexusrealtimeteamcollaboration.vercel.app",
   credentials: true
 }));
 
