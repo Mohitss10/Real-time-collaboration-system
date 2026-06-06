@@ -496,7 +496,7 @@ const TaskPage = () => {
   >
     <div
       className="
-        w-full max-w-lg mt-40
+        w-full max-w-lg mt-13 sm:mt-40
         bg-[var(--bg-card)]
         rounded-[32px]
         shadow-2xl

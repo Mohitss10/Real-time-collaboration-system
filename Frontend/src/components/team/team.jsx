@@ -144,10 +144,7 @@ const handleInvite = async () => {
       {/* INVITE BUTTON */}
      {isLeader && (
   <button
-    onClick={() => {
-      showToast("Enter an email to invite a team member 👥");
-      setShowInviteModal(true);
-    }}
+    
     className="
     w-fit
 
@@ -317,7 +314,7 @@ const handleInvite = async () => {
   >
     <div
       className="
-        w-full max-w-lg mt-40
+        w-full max-w-lg sm:mt-40 mt-13
         bg-[var(--bg-card)]
         rounded-[32px]
         shadow-2xl

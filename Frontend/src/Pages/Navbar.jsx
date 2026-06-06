@@ -91,7 +91,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   `}
     >
       {/* LEFT */}
-<div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+<div className="flex items-center gap-1 sm:gap-4 flex-shrink-0">
   {!hideSidebarButton && (
    <button
   onClick={() => setSidebarOpen((prev) => !prev)}

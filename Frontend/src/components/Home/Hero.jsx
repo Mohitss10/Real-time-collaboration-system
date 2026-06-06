@@ -106,26 +106,7 @@ const Hero = () => {
   "
 />
         <br />
-<TextType
-  text="Chat, Write, and Work Together."
-  typingSpeed={50}
-  deletingSpeed={30}
-  pauseDuration={2000}
-  loop={false}
-  showCursor={true}
-  cursorCharacter="|"
-  startOnVisible={true}
-  className="
-    bg-gradient-to-r
-    from-cyan-500
-    via-sky-500
-    to-blue-600
-    bg-clip-text
-    text-transparent
-    font-bold
-    text-3xl sm:text-6xl md:text-5xl p-2
-  "
-/>
+<h4 className="text-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500">Chat, Write, and Work Together.</h4>
       </div>
 
       <p
