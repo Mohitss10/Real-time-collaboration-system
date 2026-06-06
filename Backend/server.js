@@ -10,27 +10,29 @@ const { Server } = require("socket.io");
 // CREATE HTTP SERVER
 const server = http.createServer(app);
 
-console.log("CLIENT_URL_DEV =", process.env.CLIENT_URL_DEV);
-console.log("CLIENT_URL_PROD =", process.env.CLIENT_URL_PROD);
-// SOCKET SERVER
-const allowedOrigins = [
-  process.env.CLIENT_URL_DEV,
-  process.env.CLIENT_URL_PROD,
-];
+
+//SOCKET SERVER
+// const io = new Server(server, {
+//   cors: {
+//     origin: "https://nexuss-real-time-collaboration-system.onrender.com",
+//     methods: ["GET", "POST"],
+//   },
+// });
+
+
+const isProduction = process.env.NODE_ENV === "production";
 
 const io = new Server(server, {
   cors: {
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS Not Allowed"));
-      }
-    },
+    origin: isProduction
+      ? "https://nexuss-real-time-collaboration-system.onrender.com"
+      : "http://localhost:5173", // Vite dev server
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
+
 
 
 // ONLINE USERS STORE
