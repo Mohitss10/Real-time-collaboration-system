@@ -6,10 +6,12 @@ import { Funnel, ChevronDown } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 import CreateProjectModal from "./CreateProjectModal";
 import Notification from "../../Pages/Notification";
+import Loader from "../../ui/Loader";
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // SORT FILTER
   const [sortType, setSortType] = useState("all");
@@ -17,24 +19,28 @@ const Project = () => {
   // ============================================
   // FETCH PROJECTS
   // ============================================
-  const fetchProjects = async () => {
-    try {
-      const token = localStorage.getItem("token");
+const fetchProjects = async () => {
+  try {
+    setLoading(true);
 
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/projects`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/projects`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      }
+    );
 
-      setProjects(response.data.projects);
-    } catch (error) {
-      console.log(error.response?.data || error.message);
-    }
-  };
+    setProjects(response.data.projects);
+  } catch (error) {
+    console.log(error.response?.data || error.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchProjects();
@@ -58,8 +64,31 @@ const Project = () => {
     return projects.filter((project) => project.projectType === sortType);
   }, [projects, sortType]);
 
+  if (filteredProjects.length === 0)
+    if (loading) {
   return (
-    <div className="min-h-screen pt-18 sm:pt-17 px-3 sm:px-6 lg:px-7 bg-[var(--bg-primary)]">
+    <div
+      className="
+        min-h-screen
+        flex
+        flex-col
+        items-center
+        justify-center
+        bg-[var(--bg-primary)]
+      "
+    >
+      <Loader />
+
+      <p className="mt-4 text-[var(--text-secondary)] text-sm">
+        Loading Projects...
+      </p>
+    </div>
+  );
+}
+    
+
+  return (
+    <div className="min-h-screen pt-16 sm:pt-17 px-3 sm:px-6 lg:px-7 bg-[var(--bg-primary)]">
       {/* ============================================
       HEADER
   ============================================ */}
@@ -68,7 +97,7 @@ const Project = () => {
           {/* LEFT */}
           <div className="flex-1">
             <div className="flex items-center gap-4 flex-wrap">
-              <h1 className="text-2xl font-semibold sm:text-3xl text-[var(--text-primary)]">
+              <h1 className="text-3xl sm:text-3xl text-[var(--text-primary)]">
                 Active Projects
               </h1>
             </div>

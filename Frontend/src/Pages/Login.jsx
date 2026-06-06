@@ -117,7 +117,7 @@ const Login = () => {
         {/* LEFT SIDE */}
         {/* LEFT SIDE */}
         {/* LEFT SIDE (NEW SaaS STYLE LIKE YOUR HTML) */}
-        <section className="hidden md:flex md:w-1/2 relative flex-col justify-between p-16 bg-[var(--bg-secondary)] overflow-hidden">
+        <section className="hidden md:flex md:w-1/2 relative flex-col justify-between p-16  overflow-hidden">
           {/* Logo */}
           <div className="z-10">
             <span className="text-3xl font-bold bg-gradient-to-r from-[#4648d4] to-[#6b38d4] bg-clip-text text-transparent"></span>
@@ -148,7 +148,7 @@ const Login = () => {
         </section>
 
         {/* RIGHT SIDE */}
-        <section className="w-full lg:w-1/2 flex   mt-14 sm:mt-0 justify-center px-6 pt-10 sm:pt-20 lg:px-20 bg-[var(--bg-secondary)]">
+        <section className="w-full lg:w-1/2 flex   mt-14 sm:mt-0 justify-center px-6 pt-10 sm:pt-20 lg:px-20">
           <div className="w-full max-w-md">
             {/* Header */}
             <div className="mb-10">
@@ -274,7 +274,7 @@ focus:border-[var(--primary)]
               </button>
 
               {/* DIVIDER */}
-              <div className="relative">
+              {/* <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-[var(--border-color)]" />
                 </div>
@@ -284,10 +284,10 @@ focus:border-[var(--primary)]
                     Or continue with
                   </span>
                 </div>
-              </div>
+              </div> */}
 
               {/* SOCIAL BUTTONS */}
-              <div className="grid grid-cols-1 gap-4">
+              {/* <div className="grid grid-cols-1 gap-4">
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
@@ -319,7 +319,7 @@ focus:border-[var(--primary)]
                   />
                   <span className="font-medium">Continue with Google</span>
                 </button>
-              </div>
+              </div> */}
             </form>
 
             {/* FOOTER */}

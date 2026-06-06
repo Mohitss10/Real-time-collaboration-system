@@ -17,7 +17,7 @@ const DashboardLayout = ({ sidebarOpen, setSidebarOpen }) => {
       {/* SIDEBAR OVERLAY */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+          className="fixed inset-0 bg-red z-30 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

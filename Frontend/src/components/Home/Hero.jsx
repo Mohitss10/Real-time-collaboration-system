@@ -100,7 +100,7 @@ const Hero = () => {
   "
         />
         <br />
-        <motion.h4
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -108,7 +108,8 @@ const Hero = () => {
             duration: 0.8,
           }}
           className="
-    text-3xl
+          px-5
+    text-4xl
     sm:text-4xl
     lg:text-5xl
     font-bold
@@ -137,7 +138,7 @@ const Hero = () => {
           >
             Chat, Write, and Work Together.
           </motion.span>
-        </motion.h4>
+        </motion.h2>
       </div>
 
       <p

@@ -157,7 +157,7 @@ const handleSubmit = async (e) => {
         </section>
 
         {/* RIGHT SIDE */}
-  <section className="relative flex mt-15 sm:mt-5 justify-center w-full lg:w-1/2 overflow-hidden p-6 sm:p-10 lg:p-16 bg-[var(--bg-secondary)]">
+  <section className="relative flex mt-15 sm:mt-5 justify-center w-full lg:w-1/2 overflow-hidden p-6 sm:p-10 lg:p-16 ">
   <div className="w-full max-w-md">
     {/* HEADER */}
     <div className="mb-4">

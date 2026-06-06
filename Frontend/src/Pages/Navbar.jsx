@@ -98,8 +98,8 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   className="
     lg:hidden
     relative
-    w-11
-    h-11
+    w-9
+    h-9
     flex
     items-center
     justify-center

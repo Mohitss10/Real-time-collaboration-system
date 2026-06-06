@@ -263,7 +263,6 @@ await axios.post(
           {/* BUTTON */}
 <button
   onClick={() => {
-    showToast("Upload project files, reports, PDFs, and presentations 📄");
     setOpenUploadModal(true);
   }}
   className="
@@ -626,7 +625,7 @@ await axios.post(
         )}
       </div>
 
-      {/* FOOTER */}
+      {/* FOOTER */}F
       <div
         className="
           px-7 py-5

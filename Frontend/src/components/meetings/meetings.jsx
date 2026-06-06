@@ -357,93 +357,73 @@ if (loading) {
 
      
 {showModal && (
-  <div
-    className="
-      fixed inset-0
-      bg-black/40
-      sm:ml-70
-      z-50
-      p-4
-    "
-  >
+  <div className="fixed inset-0 bg-black/40  z-50 p-4 flex items-start justify-center">
+    
     <div
       className="
-        w-full max-w-lg  mt-13 sm:mt-40
+        w-full max-w-md mt-13 sm:mt-40
         bg-[var(--bg-card)]
-        rounded-[32px]
+        rounded-2xl
         shadow-2xl
         border border-[var(--border-color)]
         overflow-hidden
       "
     >
       {/* HEADER */}
-      <div
-        className="
-          px-7 py-5
-          border-b border-[var(--border-color)]
-          flex items-center justify-between
-        "
-      >
+      <div className="px-5 py-4 border-b border-[var(--border-color)] flex items-center justify-between">
+        
         <div>
-          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
+          <h2 className="text-xl font-semibold text-[var(--text-primary)]">
             Schedule Meeting
           </h2>
-
-          <p className="text-sm text-[var(--text-secondary)] mt-1">
-            Create and schedule a new team meeting
+          <p className="text-xs text-[var(--text-secondary)] mt-1">
+            Create a new team meeting
           </p>
         </div>
 
         <button
           onClick={() => setShowModal(false)}
-          className="
-            w-10 h-10
-            rounded-xl
-            hover:bg-[var(--bg-secondary)]
-            flex items-center justify-center
-            transition
-          "
+          className="w-8 h-8 rounded-lg hover:bg-[var(--bg-secondary)] flex items-center justify-center transition"
         >
-          <X size={20} className="text-[var(--text-primary)]" />
+          <X size={18} className="text-[var(--text-primary)]" />
         </button>
       </div>
 
       {/* BODY */}
-      <form onSubmit={handleSubmit} className="p-7 space-y-5">
+      <form onSubmit={handleSubmit} className="p-5 space-y-4">
 
         {/* TITLE */}
         <div>
-          <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
+          <label className="block text-xs font-semibold text-[var(--text-primary)] mb-1.5">
             Meeting Title
           </label>
 
           <input
             type="text"
             name="title"
-            placeholder="Enter meeting title"
+            placeholder="Enter title"
             value={meetingData.title}
             onChange={handleChange}
             required
             className="
- w-full
-              px-4 py-4
-              rounded-2xl
+              w-full px-3 py-2.5
+              rounded-xl
               bg-[var(--bg-secondary)]
               border border-[var(--border-color)]
               outline-none
-              text-[var(--text-primary)]
+              text-sm text-[var(--text-primary)]
               focus:ring-2 focus:ring-[var(--primary)]/30
               transition
             "
           />
         </div>
 
-        {/* DATE + TIME GRID */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* DATE + TIME */}
+        <div className="grid grid-cols-2 gap-3">
 
           {/* DATE */}
           <div>
-            <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
+            <label className="block text-xs font-semibold text-[var(--text-primary)] mb-1.5">
               Date
             </label>
 
@@ -454,162 +434,155 @@ if (loading) {
               onChange={handleChange}
               required
               className="
- w-full
-              px-4 py-4
-              rounded-2xl
-              bg-[var(--bg-secondary)]
-              border border-[var(--border-color)]
-              outline-none
-              text-[var(--text-primary)]
-              focus:ring-2 focus:ring-[var(--primary)]/30
-              transition
+                w-full px-3 py-2.5
+                rounded-xl
+                bg-[var(--bg-secondary)]
+                border border-[var(--border-color)]
+                outline-none
+                text-sm text-[var(--text-primary)]
+                focus:ring-2 focus:ring-[var(--primary)]/30
+                transition
               "
             />
           </div>
-               {/* TIME */}
-<div>
-  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-    Time
-  </label>
 
-  <input
-    type="time"
-    name="startTime"
-    value={meetingData.startTime}
-    onChange={handleChange}
-    required
-    className="
- w-full
-              px-4 py-4
-              rounded-2xl
-              bg-[var(--bg-secondary)]
-              border border-[var(--border-color)]
-              outline-none
-              text-[var(--text-primary)]
-              focus:ring-2 focus:ring-[var(--primary)]/30
-              transition
-    "
-  />
-</div>
-</div>
+          {/* TIME */}
+          <div>
+            <label className="block text-xs font-semibold text-[var(--text-primary)] mb-1.5">
+              Time
+            </label>
 
-{/* DURATION */}
-<div>
-  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-    Duration (minutes)
-  </label>
-
-  <input
-    type="number"
-    name="duration"
-    placeholder="e.g. 30"
-    value={meetingData.duration}
-    onChange={handleChange}
-    className="
- w-full
-              px-4 py-4
-              rounded-2xl
-              bg-[var(--bg-secondary)]
-              border border-[var(--border-color)]
-              outline-none
-              text-[var(--text-primary)]
-              focus:ring-2 focus:ring-[var(--primary)]/30
-              transition
-    "
-  />
-</div>
-
-{/* LINK */}
-<div>
-  <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-    Meeting Link
-  </label>
-
-  <input
-    type="text"
-    name="meetingLink"
-    placeholder="Google Meet / Zoom link"
-    value={meetingData.meetingLink}
-    onChange={handleChange}
-    className="
- w-full
-              px-4 py-4
-              rounded-2xl
-              bg-[var(--bg-secondary)]
-              border border-[var(--border-color)]
-              outline-none
-              text-[var(--text-primary)]
-              focus:ring-2 focus:ring-[var(--primary)]/30
-              transition
-    "
-  />
-</div>
-
-              {/* FOOTER BUTTON */}
-{/* FOOTER BUTTON */}
-<div className="pt-2 flex justify-end gap-3">
-
-  <button
-    type="button"
-    onClick={() => setShowModal(false)}
-    className="
-      px-6 py-3
-      rounded-2xl
-      border border-[var(--border-color)]
-      text-[var(--text-primary)]
-      hover:bg-[var(--bg-secondary)]
-      transition
-      font-medium
-    "
-  >
-    Cancel
-  </button>
-
-  <button
-    type="submit"
-    className="
-      px-7 py-3
-      rounded-2xl
-      bg-[var(--primary)]
-      text-white
-      font-semibold
-      hover:bg-[var(--primary-hover)]
-      transition
-      shadow-sm
-    "
-  >
-    Create Meeting
-  </button>
-
-</div>
-            </form>
+            <input
+              type="time"
+              name="startTime"
+              value={meetingData.startTime}
+              onChange={handleChange}
+              required
+              className="
+                w-full px-3 py-2.5
+                rounded-xl
+                bg-[var(--bg-secondary)]
+                border border-[var(--border-color)]
+                outline-none
+                text-sm text-[var(--text-primary)]
+                focus:ring-2 focus:ring-[var(--primary)]/30
+                transition
+              "
+            />
           </div>
         </div>
-      )}
+
+        {/* DURATION */}
+        <div>
+          <label className="block text-xs font-semibold text-[var(--text-primary)] mb-1.5">
+            Duration (min)
+          </label>
+
+          <input
+            type="number"
+            name="duration"
+            placeholder="30"
+            value={meetingData.duration}
+            onChange={handleChange}
+            className="
+              w-full px-3 py-2.5
+              rounded-xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-sm text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
+            "
+          />
+        </div>
+
+        {/* LINK */}
+        <div>
+          <label className="block text-xs font-semibold text-[var(--text-primary)] mb-1.5">
+            Meeting Link
+          </label>
+
+          <input
+            type="text"
+            name="meetingLink"
+            placeholder="Meet / Zoom link"
+            value={meetingData.meetingLink}
+            onChange={handleChange}
+            className="
+              w-full px-3 py-2.5
+              rounded-xl
+              bg-[var(--bg-secondary)]
+              border border-[var(--border-color)]
+              outline-none
+              text-sm text-[var(--text-primary)]
+              focus:ring-2 focus:ring-[var(--primary)]/30
+              transition
+            "
+          />
+        </div>
+
+        {/* FOOTER */}
+        <div className="pt-2 flex justify-end gap-2">
+
+          <button
+            type="button"
+            onClick={() => setShowModal(false)}
+            className="
+              px-4 py-2
+              rounded-xl
+              border border-[var(--border-color)]
+              text-sm text-[var(--text-primary)]
+              hover:bg-[var(--bg-secondary)]
+              transition
+            "
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="
+              px-5 py-2
+              rounded-xl
+              bg-[var(--primary)]
+              text-white text-sm font-medium
+              hover:bg-[var(--primary-hover)]
+              transition
+            "
+          >
+            Create
+          </button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+)}
 
       {showProModal && (
  <div
   onClick={() => setShowProModal(false)}
-  className="
-    fixed inset-0
-    z-[9999]
-    bg-black/40
-    backdrop-blur-md
-    flex items-center justify-center
-    p-4
-  "
+className="
+      fixed inset-0
+      
+      sm:ml-70
+      z-50
+      p-4
+    "
 >
 
 <div
   onClick={(e) => e.stopPropagation()}
-  className="
-    w-full max-w-md
-    rounded-3xl
-    p-5 sm:p-8
-    shadow-2xl
-    bg-[var(--bg-card)]
-    border border-[var(--border-color)]
-  "
+      className="
+        w-full max-w-lg mt-13 sm:mt-40
+        bg-[var(--bg-card)]
+        rounded-[32px]
+        shadow-2xl
+        border border-[var(--border-color)]
+        overflow-hidden p-4
+      "
 >
       <div className="text-center">
 
