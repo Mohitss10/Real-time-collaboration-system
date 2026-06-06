@@ -95,7 +95,7 @@ const response = await axios.post(
   return (
 <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm overflow-y-auto p-4 flex justify-center">
 
-  <div className="w-full sm:fixed max-w-4xl mx-auto my-4 sm:my-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
+  <div className="w-full sm:mt-20 mt-15 sm:fixed max-w-4xl mx-auto my-4 sm:my-8 bg-[var(--bg-card)] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
 
     {/* HEADER */}
     <div className="flex items-center justify-between gap-3 py-5 mx-8 border-b border-[var(--border-color)] flex-shrink-0">

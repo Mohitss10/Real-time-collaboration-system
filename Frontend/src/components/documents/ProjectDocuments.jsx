@@ -38,6 +38,8 @@ const ProjectDocuments = () => {
   // FETCH DOCUMENTS
   // =====================================
 
+  
+
   useEffect(() => {
     fetchDocuments();
   }, [projectId]);
@@ -491,14 +493,13 @@ await axios.post(
       fixed inset-0
       bg-black/40
       sm:ml-70
-      flex items-center justify-center
       z-50
       p-4
     "
   >
     <div
       className="
-        w-full max-w-lg
+        w-full max-w-lg mt-40
         bg-[var(--bg-card)]
         rounded-[32px]
         shadow-2xl

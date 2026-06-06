@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { showSuccess, showError, showLoading } from "../../utils/toast";
 import { showToast } from "../../utils/toast";
 import Loader from "../../ui/Loader"
+import { motion, AnimatePresence } from "framer-motion";
 
 const Meetings = () => {
   const [showModal, setShowModal] = useState(false);
@@ -62,6 +63,19 @@ const Meetings = () => {
     setLoading(false);
   }
 };
+
+
+useEffect(() => {
+  if (showModal || showProModal) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [showModal, showProModal]);
 
   // RUN ON PAGE LOAD
   useEffect(() => {
@@ -340,27 +354,34 @@ if (loading) {
         )}
       </div>
      {/* ================= MODAL ================= */}
+
+     
 {showModal && (
-  <div
-    className="
-      fixed inset-0
-      bg-black/40
-      flex items-center justify-center
-      z-50
-      p-4
-      sm:ml-70
-    "
-  >
-    <div
-      className="
-        w-full max-w-lg
-        bg-[var(--bg-card)]
-        rounded-[32px]
-        shadow-2xl
-        border border-[var(--border-color)]
-        overflow-hidden
-      "
-    >
+<div
+  className="
+    w-
+    fixed
+    inset-0
+    z-[99999]
+    bg-black/50
+    backdrop-blur-md
+    flex
+    items-center
+    justify-center
+  "
+>
+<div
+  onClick={(e) => e.stopPropagation()}
+  className="
+    w-full max-w-lg
+    bg-[var(--bg-card)]
+    rounded-[32px]
+    shadow-2xl
+    border border-[var(--border-color)]
+    overflow-hidden
+    my-auto
+  "
+>
       {/* HEADER */}
       <div
         className="
@@ -573,17 +594,29 @@ if (loading) {
       )}
 
       {showProModal && (
-  <div className="fixed sm:ml-60 inset-0 bg-black/40  flex items-center justify-center z-[100] p-4 ">
+ <div
+  onClick={() => setShowProModal(false)}
+  className="
+    fixed inset-0
+    z-[9999]
+    bg-black/40
+    backdrop-blur-md
+    flex items-center justify-center
+    p-4
+  "
+>
 
-    <div
-      className="
-        w-full max-w-md
-        rounded-3xl p-5 sm:p-8
-        shadow-2xl
-        bg-[var(--bg-card)]
-        border border-[var(--border-color)]
-      "
-    >
+<div
+  onClick={(e) => e.stopPropagation()}
+  className="
+    w-full max-w-md
+    rounded-3xl
+    p-5 sm:p-8
+    shadow-2xl
+    bg-[var(--bg-card)]
+    border border-[var(--border-color)]
+  "
+>
       <div className="text-center">
 
         {/* ICON */}
