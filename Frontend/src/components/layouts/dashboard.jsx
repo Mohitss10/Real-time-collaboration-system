@@ -40,7 +40,7 @@ const DashboardLayout = ({ sidebarOpen, setSidebarOpen }) => {
 
       {/* CONTENT */}
       <div className="flex-1 lg:ml-[300px]">
-        <div className="min-h-screen p-2 bg-[var(--bg-sidebar1)] overflow-y-auto">
+        <div className="min-h-screen bg-[var(--bg-sidebar1)] overflow-y-auto">
           <Outlet />
         </div>
       </div>

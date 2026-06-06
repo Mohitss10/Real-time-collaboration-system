@@ -123,7 +123,7 @@ const handleInvite = async () => {
     return <div className="p-10 text-red-500">Project not found</div>;
 
   return (
-    <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
+    <div className="p-5 pt-20 sm:pt-17 space-y-8 sm:fixed sm:w-[79vw] ">
 
   <div className="mb-10">
     {/* HEADER */}
@@ -308,20 +308,21 @@ const handleInvite = async () => {
      {showInviteModal && (
   <div
     className="
-      fixed inset-0 z-50
-      flex items-center justify-center
-      bg-black/40 sm:ml-70
+      fixed inset-0
+      bg-black/40
+      sm:ml-70
+      z-50
       p-4
     "
   >
     <div
       className="
-        w-full max-w-lg
+        w-full max-w-lg mt-40
         bg-[var(--bg-card)]
-        rounded-3xl
+        rounded-[32px]
         shadow-2xl
-        overflow-hidden
         border border-[var(--border-color)]
+        overflow-hidden
       "
     >
 
@@ -362,7 +363,7 @@ const handleInvite = async () => {
             Member Email
           </label>
 
-          <div className="relative">
+          <div className="relative gap-4">
 
             <Mail
               className="
@@ -378,17 +379,17 @@ const handleInvite = async () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email address"
-              className="
- w-full
-              px-4 py-4
-              rounded-2xl
-              bg-[var(--bg-secondary)]
-              border border-[var(--border-color)]
-              outline-none
-              text-[var(--text-primary)]
-              focus:ring-2 focus:ring-[var(--primary)]/30
-              transition
-              "
+className="
+  w-full
+  pl-12 pr-4 py-4
+  rounded-2xl
+  bg-[var(--bg-secondary)]
+  border border-[var(--border-color)]
+  outline-none
+  text-[var(--text-primary)]
+  focus:ring-2 focus:ring-[var(--primary)]/30
+  transition
+"
             />
 
           </div>

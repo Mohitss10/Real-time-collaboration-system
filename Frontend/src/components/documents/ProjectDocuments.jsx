@@ -214,7 +214,7 @@ await axios.post(
 }
 
   return (
-    <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw]">
+    <div className="p-5 pt-20 sm:pt-17 space-y-8 sm:fixed sm:w-[79vw] ">
       {/* =========================
           HEADER
       ========================= */}

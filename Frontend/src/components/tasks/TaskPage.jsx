@@ -221,7 +221,7 @@ const TaskPage = () => {
   }
 
   return (
-    <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
+    <div className="p-5 pt-20 sm:pt-17 space-y-8 sm:fixed sm:w-[79vw] ">
       {/* ================= HEADER ================= */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-4">
         <div>
@@ -485,24 +485,25 @@ const TaskPage = () => {
 
       {/* ================= MODAL ================= */}
       {showModal && (
-        <div
-          className="
-      fixed inset-0 z-50 sm:ml-70
-      flex items-center justify-center
-      bg-black/40 
+  <div
+    className="
+      fixed inset-0
+      bg-black/40
+      sm:ml-70
+      z-50
       p-4
     "
-        >
-          <div
-            className="
-        w-full max-w-lg
+  >
+    <div
+      className="
+        w-full max-w-lg mt-40
         bg-[var(--bg-card)]
-        rounded-3xl
+        rounded-[32px]
         shadow-2xl
-        overflow-hidden
         border border-[var(--border-color)]
+        overflow-hidden
       "
-          >
+    >
             {/* ================= HEADER ================= */}
             <div className="flex items-center justify-between p-6 border-b border-[var(--border-color)]">
               <div>

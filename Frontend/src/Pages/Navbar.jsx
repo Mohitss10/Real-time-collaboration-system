@@ -82,7 +82,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <nav
       className={`
-    fixed top-0 w-full py-3 z-50
+    fixed top-0 w-full py-2 z-50
     flex items-center justify-between
     bg-[var(--bg-card)]
     px-4 sm:px-10
@@ -91,7 +91,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   `}
     >
       {/* LEFT */}
-<div className="flex items-center gap-1 sm:gap-4 flex-shrink-0">
+<div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
   {!hideSidebarButton && (
    <button
   onClick={() => setSidebarOpen((prev) => !prev)}
@@ -111,7 +111,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     active:scale-95
   "
 >
-  <div className="relative w-8 h-7 mt-[3px]">
+  <div className="relative w-8 h-7">
     {/* Top */}
     <span
       className={`

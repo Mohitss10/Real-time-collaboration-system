@@ -209,7 +209,7 @@ if (chatLoading) {
 }
 
   return (
-    <div className="py-3 px-3 pt-15 sm:pt-15 space-y-4 fixed w-[96.5vw] sm:w-[79vw] h-screen flex flex-col">
+    <div className="py-3 px-3 pt-20 sm:pt-17 space-y-4 fixed w-[96.5vw] sm:w-[79vw] h-screen flex flex-col">
 
       {/* ================= HEADER ================= */}
       <div className="shrink-0 pb-4 border-b border-[var(--border-color)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">

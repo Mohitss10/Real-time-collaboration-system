@@ -178,7 +178,7 @@ if (loading) {
     );
 }
   return (
-    <div className="py-3 px-3 pt-15 sm:pt-15 space-y-8 sm:fixed sm:w-[79vw] ">
+    <div className="p-5 pt-20 sm:pt-17 space-y-8 sm:fixed sm:w-[79vw] ">
       {/* HEADER */}
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 border-b pb-3 border-[var(--border-color)]">
 
@@ -357,31 +357,25 @@ if (loading) {
 
      
 {showModal && (
-<div
-  className="
-    w-
-    fixed
-    inset-0
-    z-[99999]
-    bg-black/50
-    backdrop-blur-md
-    flex
-    items-center
-    justify-center
-  "
->
-<div
-  onClick={(e) => e.stopPropagation()}
-  className="
-    w-full max-w-lg
-    bg-[var(--bg-card)]
-    rounded-[32px]
-    shadow-2xl
-    border border-[var(--border-color)]
-    overflow-hidden
-    my-auto
-  "
->
+  <div
+    className="
+      fixed inset-0
+      bg-black/40
+      sm:ml-70
+      z-50
+      p-4
+    "
+  >
+    <div
+      className="
+        w-full max-w-lg mt-40
+        bg-[var(--bg-card)]
+        rounded-[32px]
+        shadow-2xl
+        border border-[var(--border-color)]
+        overflow-hidden
+      "
+    >
       {/* HEADER */}
       <div
         className="
