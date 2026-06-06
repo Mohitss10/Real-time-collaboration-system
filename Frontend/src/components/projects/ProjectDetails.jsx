@@ -116,7 +116,7 @@ await axios.post(
   }
 
   return (
-    <div className="min-h-screen p-2 pt-15 sm:pt-15 sm:fixed sm:w-[79vw]">
+    <div className="min-h-screen p-3 pt-17 sm:pt-17 sm:fixed sm:w-[79vw] ">
 
   {/* HEADER */}
   <div className="">
@@ -128,7 +128,7 @@ await axios.post(
 
         <div>
 
-          <h1 className="text-3xl  text-[var(--text-primary)]">
+          <h1 className="text-3xl font-semibold  text-[var(--text-primary)]">
             {project.title}
           </h1>
 
