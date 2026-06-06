@@ -121,24 +121,23 @@ const Hero = () => {
     text-transparent
     pb-2
   "
-        >
-          <motion.span
-            animate={{
-              backgroundPosition: ["0%", "100%", "0%"],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="
+        ></motion.h2>
+        <motion.span
+          animate={{
+            backgroundPosition: ["0%", "100%", "0%"],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          className="
       inline-block
       bg-[length:200%_200%]
     "
-          >
-            Chat, Write, and Work Together.
-          </motion.span>
-        </motion.h2>
+        >
+          Chat, Write, and Work Together.
+        </motion.span>
       </div>
 
       <p
