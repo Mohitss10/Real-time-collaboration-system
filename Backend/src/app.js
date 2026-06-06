@@ -32,7 +32,6 @@ connectDB();
 // MIDDLEWARES
 // ============================================
 
-// IMPORTANT: increase payload limit (for files later)
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
@@ -79,19 +78,20 @@ app.get("/", (req, res) => {
 
 
 // ============================================
-// ✅ FIX: REACT ROUTER REFRESH ISSUE (IMPORTANT)
+// ✅ PRODUCTION FIX (SAFE REACT ROUTING)
 // ============================================
 
 if (process.env.NODE_ENV === "production") {
 
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  const buildPath = path.join(__dirname, "../../frontend/dist");
 
-  app.get("*", (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, "../frontend/dist/index.html")
-    );
+  app.use(express.static(buildPath));
+
+  // ❌ DO NOT use "*" (breaks in Express 5)
+  // ✅ SAFE FIX USING REGEX
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.join(buildPath, "index.html"));
   });
 }
-
 
 module.exports = app;
