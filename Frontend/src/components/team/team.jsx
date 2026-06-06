@@ -143,11 +143,10 @@ const handleInvite = async () => {
 
       {/* INVITE BUTTON */}
      {isLeader && (
-  <button
-    
-    className="
+<button
+  onClick={() => setShowInviteModal(true)}
+  className="
     w-fit
-
     flex items-center justify-center gap-2
 
     bg-[var(--primary)]/10
@@ -170,11 +169,11 @@ const handleInvite = async () => {
     active:scale-95
 
     whitespace-nowrap
-    "
-  >
-    <UserPlus size={18} />
-    Invite Member
-  </button>
+  "
+>
+  <UserPlus size={18} />
+  Invite Member
+</button>
 )}
 
     </div>
