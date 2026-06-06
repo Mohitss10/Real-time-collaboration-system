@@ -173,17 +173,17 @@ const io = new Server(server, {
 });
 
 
-// const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === "production";
 
-// const io = new Server(server, {
-//   cors: {
-//     origin: isProduction
-//       ? "https://nexuss-real-time-collaboration-system.onrender.com"
-//       : "http://localhost:5173", // Vite dev server
-//     methods: ["GET", "POST"],
-//     credentials: true,
-//   },
-// });
+const io = new Server(server, {
+  cors: {
+    origin: isProduction
+      ? "https://nexuss-real-time-collaboration-system.onrender.com"
+      : "http://localhost:5173", // Vite dev server
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
 
 
