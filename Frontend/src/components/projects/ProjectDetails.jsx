@@ -116,7 +116,7 @@ await axios.post(
   }
 
   return (
-    <div className="min-h-screen p-3 pt-17 sm:pt-17 sm:fixed sm:w-[79vw] ">
+    <div className="min-h-screen p-3 pt-16 sm:pt-17 sm:fixed sm:w-[79vw] ">
 
   {/* HEADER */}
   <div className="">

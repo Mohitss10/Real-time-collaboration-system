@@ -44,7 +44,6 @@ const Hero = () => {
   className="
     inline-block
     px-4 py-1
-    
     rounded-full
     mx-auto
     mt-25
@@ -114,17 +113,17 @@ const Hero = () => {
     duration: 0.8,
   }}
   className="
-    text-4xl
+    text-3xl
     sm:text-4xl
     lg:text-5xl
     font-bold
-    p-2
     bg-gradient-to-r
     from-cyan-400
     via-sky-500
     to-indigo-500
     bg-clip-text
     text-transparent
+    pb-2
   "
 >
   <motion.span
@@ -170,27 +169,30 @@ const Hero = () => {
         className="flex flex-col sm:flex-row gap-4 justify-center mb-10 sm:mb-16 px-10 "
       >
 <motion.button
-  whileHover={{
-    scale: 1.05,
-    y: -2,
-  }}
-  whileTap={{
-    scale: 0.98,
-  }}
-  className="
-    bg-gradient-to-r
-    from-cyan-500
-    via-sky-500
-    to-blue-600
-    text-white
-    px-7 py-3.5
-    rounded-2xl
-    font-semibold
-    shadow-lg
-  "
->
-  Create Project
-</motion.button>
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.8,
+        ease: "easeOut",
+      }}
+    
+      className="
+        bg-gradient-to-r
+        from-cyan-500
+        via-sky-500
+        to-blue-600
+        text-white
+        px-6 py-3
+        rounded-xl
+        font-semibold
+        hover:shadow-lg
+        hover:scale-105
+        transition-all
+        duration-300
+      "
+    >
+      Create Project
+    </motion.button>
       </div>
 
       {/* HERO IMAGE / MOCK UI */}
@@ -236,17 +238,7 @@ const Hero = () => {
               <div className="flex flex-col lg:flex-row gap-4 flex-1">
                 <div className="hidden md:block flex-1 rounded-2xl min-h-[200px]" style={{ background: "var(--border-color)" }} />
 
-                <div
-  className="
-    w-full
-    lg:w-[45%]
-    xl:w-[50%]
-    rounded-3xl
-    overflow-hidden
-    shadow-xl
-    flex-shrink-0
-  "
->
+                <div className="w-full lg:w-[450px] xl:w-[550px] bg-white rounded-2xl overflow-hidden">
                   <img
                     src="collaboration.jpg"
                     alt="Team Collaboration"
@@ -261,15 +253,13 @@ const Hero = () => {
       </div>
 
       {/* ✅ GRADUAL BLUR OVERLAY */}
-<div className="absolute bottom-0 left-0 w-full pointer-events-none">
-  <GradualBlur
-    animated="scroll"
-    position="bottom"
-    strength={2}
-    divCount={8}
-    opacity={0.9}
-  />
-</div>
+      <GradualBlur
+  animated="scroll"
+  position="bottom"
+  strength={1}
+  divCount={7}
+  opacity={5}
+/>
     </section>
     </section>
   );
