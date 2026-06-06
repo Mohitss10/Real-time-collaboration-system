@@ -5,10 +5,6 @@ const passport = require("passport");
 require("./config/passport");
 const session = require("express-session");
 
-
-
-
-
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/auth.Routes");
@@ -17,8 +13,8 @@ const projectRoutes = require("./routes/project.Routes");
 const inviteRoutes = require("./routes/invite.Routes");
 const chatRoutes = require("./routes/chat.Routes");
 const documentRoutes = require("./routes/document.Routes");
-const taskRoutes = require("../src/routes/task.Routes")
-const MeetingRoutes = require("./routes/meeting.Routes")
+const taskRoutes = require("../src/routes/task.Routes");
+const MeetingRoutes = require("./routes/meeting.Routes");
 const aiRoutes = require("./routes/ai.Routes");
 
 const path = require("path");
@@ -42,30 +38,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 
-
-
+// ============================================
+// CORS
+// ============================================
 app.use(cors({
-  origin: "https://nexuss-real-time-collaboration-system.onrender.com", // frontend
+  origin: "https://nexuss-real-time-collaboration-system.onrender.com",
   credentials: true
 }));
-
-// const allowedOrigins = [
-//   process.env.CLIENT_URL_DEV,
-//   process.env.CLIENT_URL_PROD,
-// ];
-
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     credentials: true,
-//   })
-// );
 
 
 // ============================================
@@ -87,9 +66,8 @@ app.use("/api/invites", inviteRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/documents", documentRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/api/meeting", MeetingRoutes)
+app.use("/api/meeting", MeetingRoutes);
 app.use("/api/ai", aiRoutes);
-
 
 
 // ============================================
@@ -98,5 +76,22 @@ app.use("/api/ai", aiRoutes);
 app.get("/", (req, res) => {
   res.send("API Running Successfully 🚀");
 });
+
+
+// ============================================
+// ✅ FIX: REACT ROUTER REFRESH ISSUE (IMPORTANT)
+// ============================================
+
+if (process.env.NODE_ENV === "production") {
+
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "../frontend/dist/index.html")
+    );
+  });
+}
+
 
 module.exports = app;
