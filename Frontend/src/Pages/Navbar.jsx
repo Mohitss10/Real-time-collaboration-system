@@ -27,8 +27,23 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     navigate("/");
   };
 
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [sidebarOpen]);
+
   const hideSidebarButton =
-    location.pathname === "/" || location.pathname === "/projects" || location.pathname === "/signup" || location.pathname === "/login";
+    location.pathname === "/" ||
+    location.pathname === "/projects" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/login";
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,28 +60,28 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   }, []);
 
   useEffect(() => {
-  let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY;
 
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY && window.scrollY > 80) {
-      setShowNavbar(false); // hide when scrolling down
-    } else {
-      setShowNavbar(true); // show when scrolling up
-    }
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 80) {
+        setShowNavbar(false); // hide when scrolling down
+      } else {
+        setShowNavbar(true); // show when scrolling up
+      }
 
-    lastScrollY = window.scrollY;
-  };
+      lastScrollY = window.scrollY;
+    };
 
-  window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-<nav
-  className={`
+    <nav
+      className={`
     fixed top-0 w-full py-3 z-50
     flex items-center justify-between
     bg-[var(--bg-card)]
@@ -74,62 +89,92 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     transition-transform duration-300
     ${showNavbar ? "translate-y-0" : "-translate-y-full"}
   `}
->
+    >
       {/* LEFT */}
-      <div className="flex items-end-safe gap-3 sm:gap-4 flex-shrink-0">
-        {!hideSidebarButton && (
-          <button
-            onClick={() => setSidebarOpen((prev) => !prev)}
-            className="
+<div className="flex items-center gap-1 sm:gap-4 flex-shrink-0">
+  {!hideSidebarButton && (
+   <button
+  onClick={() => setSidebarOpen((prev) => !prev)}
+  className="
     lg:hidden
-  pt-1
-    rounded-xl
-    transition
-    hover:bg-[var(--bg-secondary)]
-  "
-          >
-            {sidebarOpen ? (
-              <X size={28} strokeWidth={3}  className=" text-[var(--text-primary)]" />
-            ) : (
-              <Menu size={28} strokeWidth={3} className="text-[var(--text-primary)]" />
-            )}
-          </button>
-        )}
-<div className="flex items-center gap-2">
-
-        <span
-          onClick={() => navigate("/")}
-          className="
-    font-bold
-    text-2xl sm:text-3xl
-    cursor-pointer
-
- bg-gradient-to-r
-    from-cyan-400
-    via-sky-500
-    to-indigo-500
-    bg-clip-text
-    text-transparent
-    font-bold
-
+    relative
+    w-11
+    h-11
+    flex
+    items-center
+    justify-center
+    rounded-2xl
     transition-all
     duration-300
-
+    hover:bg-[var(--bg-secondary)]
     hover:scale-105
+    active:scale-95
   "
-        >
-          Nexus
-        </span>
+>
+  <div className="relative w-8 h-7 mt-[3px]">
+    {/* Top */}
+    <span
+      className={`
+        absolute left-0 block 
+        h-[3px] w-7 rounded-full
+        bg-[var(--text-primary)]
+        transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        ${
+          sidebarOpen
+            ? "top-1/2 -translate-y-1/2 rotate-45"
+            : "top-1"
+        }
+      `}
+    />
+
+    {/* Bottom */}
+    <span
+      className={`
+        absolute left-0 block
+        h-[3px] w-5 rounded-full
+        bg-[var(--text-primary)]
+        transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        ${
+          sidebarOpen
+            ? "w-7 top-1/2 -translate-y-1/2 -rotate-45"
+            : "bottom-1 right-0"
+        }
+      `}
+    />
+  </div>
+</button>
+  )}
+
+  <span
+    onClick={() => navigate("/")}
+    className="
+      text-[30px]
+      font-bold
+      cursor-pointer
+      leading-none
+
+      bg-gradient-to-r
+      from-cyan-400
+      via-sky-500
+      to-indigo-500
+      bg-clip-text
+      text-transparent
+
+      transition-all
+      duration-300
+      hover:scale-105
+    "
+  >
+    Nexus
+  </span>
 </div>
-        
-      </div>
 
       {/* RIGHT */}
       <div className="flex items-center gap-3 sm:gap-4">
         <div className="flex items-center justify-center">
           <ThemeToggle />
         </div>
- 
+
         {token ? (
           <div className="relative" ref={dropdownRef}>
             {/* PROFILE */}
@@ -230,8 +275,6 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
 
                 {/* MENU */}
                 <div className="p-2">
-                  
-
                   <button
                     onClick={() => {
                       navigate("/about");

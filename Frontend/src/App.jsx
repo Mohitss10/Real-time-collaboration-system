@@ -29,6 +29,7 @@ import PublicRoute from "./Pages/PublicRoute";
 import Navbar from "./Pages/Navbar";
 import ToastProvider from "./ui/ToastProvider";
 import PageTransition from "./ui/PageTransition";
+import Pricing from "./components/Home/Pricing";
 
 /* =========================
    ANIMATED ROUTES WRAPPER
@@ -104,6 +105,15 @@ function AnimatedRoutes({ sidebarOpen, setSidebarOpen }) {
           element={
             <PageTransition>
               <UpdateProfile />
+            </PageTransition>
+          }
+        />
+
+                <Route
+          path="/pricing"
+          element={
+            <PageTransition>
+              <Pricing />
             </PageTransition>
           }
         />
