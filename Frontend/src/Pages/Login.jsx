@@ -112,7 +112,7 @@ const Login = () => {
   };
 
   return (
-    <div className="sm:fixed inset-0 overflow-hidden bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <div className="inset-0 overflow-hidden bg-[var(--bg-primary)] text-[var(--text-primary)]">
       <main className="min-h-screen flex flex-col lg:flex-row">
         {/* LEFT SIDE */}
         {/* LEFT SIDE */}

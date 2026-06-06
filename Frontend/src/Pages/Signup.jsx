@@ -126,7 +126,7 @@ const handleSubmit = async (e) => {
   );
 
   return (
-<div className="sm:fixed inset-0 bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-hidden ">
+<div className="inset-0 bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-hidden ">
       <main className="min-h-screen flex flex-col lg:flex-row">
         <section className="relative  hidden lg:flex w-1/2 overflow-hidden p-16">
           {/* Background Image */}

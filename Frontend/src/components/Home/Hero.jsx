@@ -13,19 +13,17 @@ import {
   MicOff,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import Blurtext from "../../ui/BlurText"
+import Blurtext from "../../ui/BlurText";
 import TextType from "../../ui/TextType";
 import GradualBlur from "../../ui/GradualBlur";
 import AnimatedContent from "../../ui/AnimatedContent";
 
-
 const Hero = () => {
-    const handleAnimationComplete = () => {
-  console.log('All letters have animated!');
-};
-    const navigate = useNavigate();
+  const handleAnimationComplete = () => {
+    console.log("All letters have animated!");
+  };
+  const navigate = useNavigate();
   return (
-    
     <section
       className="
     relative
@@ -39,9 +37,8 @@ const Hero = () => {
         color: "var(--text-primary)",
       }}
     >
-        
-<p
-  className="
+      <p
+        className="
     inline-block
     px-4 py-1
     rounded-full
@@ -53,22 +50,20 @@ const Hero = () => {
     overflow-hidden
     whitespace-nowrap
   "
-  style={{
-    background: "var(--bg-card)",
-    color: "var(--primary)",
-    borderColor: "var(--border-color)",
-  }}
->
-  <span className="">
-    ✨ Introducing Nexus 1.0
-  </span>
-</p>
+        style={{
+          background: "var(--bg-card)",
+          color: "var(--primary)",
+          borderColor: "var(--border-color)",
+        }}
+      >
+        <span className="">✨ Introducing Nexus 1.0</span>
+      </p>
 
       <div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          duration: 0.10,
+          duration: 0.1,
           ease: "easeOut",
         }}
         className="
@@ -82,20 +77,20 @@ const Hero = () => {
   "
       >
         <AnimatedContent
-  text="Collaborate in Real-Time"
-  className="text-2xl font-semibold text-center"
-  delay={50}
-  duration={1.25}
-  ease="power3.out"
-  splitType="chars"
-  from={{ opacity: 0, y: 40 }}
-  to={{ opacity: 1, y: 0 }}
-  threshold={0.1}
-  rootMargin="-100px"
-  textAlign="center"
-  onLetterAnimationComplete={handleAnimationComplete}
-  showCallback
-  className="
+          text="Collaborate in Real-Time"
+          className="text-2xl font-semibold text-center"
+          delay={50}
+          duration={1.25}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="center"
+          onLetterAnimationComplete={handleAnimationComplete}
+          showCallback
+          className="
     text-5xl pt-10
     sm:text-5xl
     md:text-5xl
@@ -103,16 +98,16 @@ const Hero = () => {
     font-bold
     px-4
   "
-/>
+        />
         <br />
-<motion.h4
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{
-    delay: 1,
-    duration: 0.8,
-  }}
-  className="
+        <motion.h4
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 1,
+            duration: 0.8,
+          }}
+          className="
     text-3xl
     sm:text-4xl
     lg:text-5xl
@@ -125,24 +120,24 @@ const Hero = () => {
     text-transparent
     pb-2
   "
->
-  <motion.span
-    animate={{
-      backgroundPosition: ["0%", "100%", "0%"],
-    }}
-    transition={{
-      duration: 6,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-    className="
+        >
+          <motion.span
+            animate={{
+              backgroundPosition: ["0%", "100%", "0%"],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            className="
       inline-block
       bg-[length:200%_200%]
     "
-  >
-    Chat, Write, and Work Together.
-  </motion.span>
-</motion.h4>
+          >
+            Chat, Write, and Work Together.
+          </motion.span>
+        </motion.h4>
       </div>
 
       <p
@@ -166,23 +161,22 @@ const Hero = () => {
       </p>
       <div
         onClick={() => navigate("/signup")}
-        className="flex flex-col sm:flex-row gap-4 justify-center mb-10 sm:mb-16 px-10 "
+        className="flex flex-col sm:flex-row gap-4 justify-center mb-10 sm:mb-10 px-10 "
       >
-<motion.button
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{
-        duration: 0.8,
-        ease: "easeOut",
-      }}
-    
-      className="
+        <motion.button
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
+          className="
         bg-gradient-to-r
         from-cyan-500
         via-sky-500
         to-blue-600
         text-white
-        px-6 py-3
+        px-10 py-3
         rounded-xl
         font-semibold
         hover:shadow-lg
@@ -190,79 +184,99 @@ const Hero = () => {
         transition-all
         duration-300
       "
-    >
-      Create Project
-    </motion.button>
+        >
+          Create Project
+        </motion.button>
       </div>
 
       {/* HERO IMAGE / MOCK UI */}
-<section
-      style={{
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* YOUR EXISTING UI */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className="backdrop-blur-lg rounded-4xl shadow-lg overflow-hidden border-t-[10px]"
-          style={{
-            background: "var(--bg-card)",
-            borderColor: "var(--primary)",
-          }}
-        >
-          <div className="flex flex-col md:flex-row min-h-[500px] lg:min-h-[750px]">
-            
-            {/* Sidebar mock */}
-            <div
-              className="w-full md:w-[250px] p-4 hidden md:flex flex-col gap-3 border-r"
-              style={{
-                background: "var(--bg-secondary)",
-                borderColor: "var(--border-color)",
-              }}
-            >
-              <div className="h-9 rounded w-3/5 mb-3" style={{ background: "var(--border-color)" }} />
-              <div className="h-8 rounded border-l-[5px] w-full" style={{ background: "color-mix(in srgb, var(--primary) 20%, transparent)", borderColor: "var(--primary)" }} />
-              <div className="h-8 rounded w-3/4" style={{ background: "var(--border-color)" }} />
-              <div className="h-8 rounded w-5/6" style={{ background: "var(--border-color)" }} />
-            </div>
+      <section
+        style={{
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* YOUR EXISTING UI */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className="backdrop-blur-lg rounded-4xl overflow-hidden border-t-[10px]"
+            style={{
+              background: "var(--bg-card)",
+              borderColor: "var(--primary)",
+            }}
+          >
+            <div className="flex flex-col md:flex-row min-h-[500px] lg:min-h-[750px]">
+              {/* Sidebar mock */}
+              <div
+                className="w-full md:w-[250px] p-4 hidden md:flex flex-col gap-3 border-r"
+                style={{
+                  background: "var(--bg-secondary)",
+                  borderColor: "var(--border-color)",
+                }}
+              >
+                <div
+                  className="h-9 rounded w-3/5 mb-3"
+                  style={{ background: "var(--border-color)" }}
+                />
+                <div
+                  className="h-8 rounded border-l-[5px] w-full"
+                  style={{
+                    background:
+                      "color-mix(in srgb, var(--primary) 20%, transparent)",
+                    borderColor: "var(--primary)",
+                  }}
+                />
+                <div
+                  className="h-8 rounded w-3/4"
+                  style={{ background: "var(--border-color)" }}
+                />
+                <div
+                  className="h-8 rounded w-5/6"
+                  style={{ background: "var(--border-color)" }}
+                />
+              </div>
 
-            {/* Main content */}
-            <div className="flex-1 p-4 sm:p-6 flex flex-col gap-4">
-              <div className="h-8 rounded w-1/2 md:w-1/3" style={{ background: "var(--border-color)" }} />
+              {/* Main content */}
+              <div className="flex-1 p-4 sm:p-6 flex flex-col gap-4">
+                <div
+                  className="h-8 rounded w-1/2 md:w-1/3"
+                  style={{ background: "var(--border-color)" }}
+                />
 
-              <button className="bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 text-white px-6 py-3 rounded-xl font-semibold">
-                Get Started for Free
-              </button>
+                <button className="bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 text-white px-6 py-3 rounded-xl font-semibold">
+                  Get Started for Free
+                </button>
 
-              <div className="flex flex-col lg:flex-row gap-4 flex-1">
-                <div className="hidden md:block flex-1 rounded-2xl min-h-[200px]" style={{ background: "var(--border-color)" }} />
-
-                <div className="w-full lg:w-[450px] xl:w-[550px] bg-white rounded-2xl overflow-hidden">
-                  <img
-                    src="collaboration.jpg"
-                    alt="Team Collaboration"
-                    className="w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-full object-cover rounded-2xl shadow-md"
+                <div className="flex flex-col lg:flex-row gap-4 flex-1">
+                  <div
+                    className="hidden md:block flex-1 rounded-2xl min-h-[200px]"
+                    style={{ background: "var(--border-color)" }}
                   />
+
+                  <div className="w-full lg:w-[450px] xl:w-[550px] bg-white rounded-2xl overflow-hidden">
+                    <img
+                      src="collaboration.jpg"
+                      alt="Team Collaboration"
+                      className="w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-full object-cover rounded-2xl shadow-md"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
 
-      {/* ✅ GRADUAL BLUR OVERLAY */}
-<div className="hidden sm:block">
-  <GradualBlur
-    animated="scroll"
-    position="bottom"
-    strength={1}
-    divCount={7}
-    opacity={5}
-  />
-</div>
-    </section>
+        {/* ✅ GRADUAL BLUR OVERLAY */}
+        <div className="hidden sm:block">
+          <GradualBlur
+            animated="scroll"
+            position="bottom"
+            strength={1}
+            divCount={7}
+            opacity={5}
+          />
+        </div>
+      </section>
     </section>
   );
 };

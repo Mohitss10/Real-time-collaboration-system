@@ -50,6 +50,7 @@ function AnimatedRoutes({ sidebarOpen, setSidebarOpen }) {
             </PageTransition>
           }
         />
+        
 
         <Route
           path="/login"
@@ -72,6 +73,8 @@ function AnimatedRoutes({ sidebarOpen, setSidebarOpen }) {
             </PublicRoute>
           }
         />
+
+
 
         <Route
           path="/login-success"

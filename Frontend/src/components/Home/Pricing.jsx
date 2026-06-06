@@ -75,31 +75,22 @@ const navigate = useNavigate();
       setLoading(false);
     }
   };
-  useEffect(() => {
-    const fetchPlan = async () => {
-      try {
-        const token = localStorage.getItem("token");
+useEffect(() => {
+  const fetchPlan = async () => {
+    const token = localStorage.getItem("token");
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data = await res.json();
-
-        if (data.subscription?.plan === "pro") {
-          setCurrentPlan("pro");
-        } else {
-          setCurrentPlan("free");
-        }
-      } catch (error) {
-        console.error(error);
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/auth/me`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    };
+    );
+  };
 
-    fetchPlan();
-  }, []);
+  fetchPlan();
+}, []);
 
   const handleDowngrade = async () => {
     const loadingId = showLoading("Switching to Free Plan...");
