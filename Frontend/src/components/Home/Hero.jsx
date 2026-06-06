@@ -17,38 +17,86 @@ import Blurtext from "../../ui/BlurText";
 import TextType from "../../ui/TextType";
 import GradualBlur from "../../ui/GradualBlur";
 import AnimatedContent from "../../ui/AnimatedContent";
+import { ArrowRight } from 'lucide-react'
+// Reusable fadeIn variant
+const fadeIn = (direction = 'up', delay = 0) => {
+  const from = {
+    up: { y: 40, opacity: 0 },
+    down: { y: -40, opacity: 0 },
+    left: { x: -40, opacity: 0 },
+    right: { x: 40, opacity: 0 },
+  };
+  return {
+    initial: from[direction],
+    animate: { x: 0, y: 0, opacity: 1 },
+    transition: { duration: 0.8, delay },
+  };
+};
+
+// Parent variant for staggered word animation
+const containerVariant = {
+  animate: {
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+// Each word animation
+const wordVariant = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const umbrellaLetters = "N E X U S".split(" ");
+
+const umbrellaScales = [
+  1.8, // 'A' bigger left edge
+  1.5, // 'I'
+  1.3, // 'M'
+  1.3,   // 'a' center normal scale
+  2,   // 't' center normal scale
+ // 'x' bigger right edge
+];
+
 
 const Hero = () => {
+   const headingLine1 = "Build Faster Together with AI-Driven Real-Time Collaboration".split(" ");
+  const highlight = ["ai-driven", "Ral-time", "collaboration"];
   const handleAnimationComplete = () => {
     console.log("All letters have animated!");
   };
   const navigate = useNavigate();
   return (
-    <section
-      className="
-    relative
-    
-    pb-12
-    text-center
-    overflow-hidden
-  "
-      style={{
+    <>
+     <section className="relative  min-h-screen flex flex-col justify-center items-center overflow-hidden px-4 sm:px-20 xl:px-32"
+           style={{
         background: "var(--hero-bg)",
         color: "var(--text-primary)",
-      }}
-    >
-      <p
+      }}>
+
+<div className="flex justify-center">
+            <p
         className="
     inline-block
     px-4 py-1
     rounded-full
     mx-auto
-    mt-25
+    mt-20
     font-semibold
     text-sm sm:text-base
     border
     overflow-hidden
-    whitespace-nowrap
+    whitespace-nowrap text-center
+    mb-10
   "
         style={{
           background: "var(--bg-card)",
@@ -58,226 +106,178 @@ const Hero = () => {
       >
         <span className="">✨ Introducing Nexus 1.0</span>
       </p>
-
-      <div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.1,
-          ease: "easeOut",
-        }}
-        className="
-    text-5xl 
-    sm:text-5xl
-    md:text-5xl
-    lg:text-6xl
-    font-bold
-    mb-6 sm:mb-10
-    px-4
-  "
-      >
-        <AnimatedContent
-          text="Collaborate in Real-Time"
-          className="text-2xl font-semibold text-center"
-          delay={50}
-          duration={1.25}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 40 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-100px"
-          textAlign="center"
-          onLetterAnimationComplete={handleAnimationComplete}
-          showCallback
-          className="
-    text-5xl pt-10
-    sm:text-5xl
-    md:text-5xl
-    lg:text-7xl
-    font-bold
-    px-4
-  "
-        />
-        <br />
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 1,
-            duration: 0.8,
-          }}
-          className="
-          px-5
-    text-4xl
-    sm:text-4xl
-    lg:text-5xl
-    font-bold
-    bg-gradient-to-r
-    from-cyan-400
-    via-sky-500
-    to-indigo-500
-    bg-clip-text
-    text-transparent
-    pb-2
-  "
-        ></motion.h2>
-        <motion.span
-          animate={{
-            backgroundPosition: ["0%", "100%", "0%"],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="
-      inline-block
-      bg-[length:200%_200%]
-    "
-        >
-          Chat, Write, and Work Together.
-        </motion.span>
+</div>
+      {/* 💫 Animated glow background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px]" />
       </div>
 
-      <p
-        className="
-    max-w-3xl
-    mx-auto
-    text-base
-    sm:text-lg
-    mb-8 sm:mb-10
-    px-4
-  "
-        style={{
-          color: "var(--text-secondary)",
-        }}
-      >
-        The premium platform for high-velocity teams. Bring your conversations,
-        documents,
-        <br className="hidden md:block" />
-        and meetings into one unified workspace engineered for clarity and
-        speed.
-      </p>
+      {/* 🔵 Blurry AIMatrix background text */}
+      {/* 🔵 Blurry AIMatrix background text */}
       <div
-        onClick={() => navigate("/signup")}
-        className="flex flex-col sm:flex-row gap-4 justify-center mb-10 sm:mb-10 px-10 "
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute inset-0 justify-center pt-[1vh] px-10 overflow-visible hidden xl:flex"
+        style={{ userSelect: "none" /* , outline: '1px solid red' */ }}
       >
-        <motion.button
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{
-            duration: 0.8,
-            ease: "easeOut",
-          }}
-          className="
-        bg-gradient-to-r
-        from-cyan-500
-        via-sky-500
-        to-blue-600
-        text-white
-        px-10 py-3
-        rounded-xl
-        font-semibold
-        hover:shadow-lg
-        hover:scale-105
-        transition-all
-        duration-300
-      "
+        <div
+          className="flex gap-[-0.15em]"
+          style={{ filter: "blur(4px)", opacity: 0.07, userSelect: "none" }}
         >
-          Create Project
-        </motion.button>
+          {umbrellaLetters.map((letter, idx) => (
+            <span
+              key={idx}
+              className="uppercase font-bold text-white "
+              style={{
+                fontSize: "350px",
+                transformOrigin: "bottom center",
+                transform: `scaleX(${umbrellaScales[idx]})`,
+                display: "inline-block",
+                whiteSpace: "pre",
+              }}
+            >
+              {letter}
+            </span>
+          ))}
+        </div>
       </div>
 
-      {/* HERO IMAGE / MOCK UI */}
-      <section
-        style={{
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* YOUR EXISTING UI */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="backdrop-blur-lg rounded-4xl overflow-hidden border-t-[10px]"
-            style={{
-              background: "var(--bg-card)",
-              borderColor: "var(--primary)",
-            }}
-          >
-            <div className="flex flex-col md:flex-row min-h-[500px] lg:min-h-[750px]">
-              {/* Sidebar mock */}
-              <div
-                className="w-full md:w-[250px] p-4 hidden md:flex flex-col gap-3 border-r"
-                style={{
-                  background: "var(--bg-secondary)",
-                  borderColor: "var(--border-color)",
-                }}
+
+
+
+
+
+      {/* 🧠 Headline animation */}
+      <div className="text-center mb-6 z-10">
+        <motion.h1
+          className="text-[34px] sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
+          variants={containerVariant}
+          initial="initial"
+          animate="animate"
+        >
+          {headingLine1.map((word, idx) => {
+            const cleaned = word.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+            const isHighlighted = highlight.includes(cleaned);
+
+            return (
+              <motion.span
+                key={idx}
+                variants={wordVariant}
+                className={
+                  isHighlighted
+                    ? "bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent"
+                }
               >
-                <div
-                  className="h-9 rounded w-3/5 mb-3"
-                  style={{ background: "var(--border-color)" }}
+                {word}
+              </motion.span>
+            );
+          })}
+        </motion.h1>
+      </div>
+
+      {/* 📄 Subtext with soft fade-in */}
+      <motion.p
+        className="mt-4 max-w-xs sm:max-w-lg 2xl:max-w-xl mx-auto  text-center z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
+      >
+        The premium platform for high-velocity teams. Bring your conversations, documents,and meetings into one unified workspace engineered for clarity and speed.
+      </motion.p>
+
+      {/* 🎯 Buttons */}
+      <motion.div
+        className="flex flex-wrap justify-center gap-4 text-sm max-sm:text-xl mt-8 z-10"
+        {...fadeIn("up", 2.2)}
+      >
+<div className="flex gap-4">
+  {/* Start for Free Button */}
+  <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 gap-3">
+  <div>
+<div
+  onClick={() => navigate("/signup")}
+  className="flex flex-col sm:flex-row gap-4 justify-center mb-10 px-10"
+>
+  <button
+    className="
+      flex items-center justify-center gap-2
+      bg-gradient-to-r
+      from-cyan-500
+      via-sky-500
+      to-blue-600
+      text-white
+      px-10 py-3
+      rounded-full
+      font-semibold
+      hover:shadow-lg
+      hover:scale-105
+      transition-all
+      duration-300
+      sm:text-[15px]
+      text-sm
+    "
+  >
+    Create Project
+    <ArrowRight size={20} />
+  </button>
+</div>
+  </div>
+</div>
+
+
+</div>
+
+</motion.div>
+
+      
+      {/* 👥 Trust indicator */}
+      <motion.div
+        className="flex items-center gap-4 mt-10 mx-auto  z-10"
+        {...fadeIn("up", 2.6)}
+      >
+        <div className="flex justify-center animate-out zoom-in duration-200 delay-200">
+          <div>
+            <div className="font-semibold text-center md:text-left">Trusted by</div>
+            <div className="flex space-x-2 items-center flex-col md:flex-row">
+              <div className="flex -space-x-2 overflow-hidden p-2">
+                <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                  src="https://randomuser.me/api/portraits/men/51.jpg"
+                  alt=""
                 />
-                <div
-                  className="h-8 rounded border-l-[5px] w-full"
-                  style={{
-                    background:
-                      "color-mix(in srgb, var(--primary) 20%, transparent)",
-                    borderColor: "var(--primary)",
-                  }}
+                <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                  src="https://randomuser.me/api/portraits/women/4.jpg"
+                  alt=""
                 />
-                <div
-                  className="h-8 rounded w-3/4"
-                  style={{ background: "var(--border-color)" }}
+                <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                  src="https://randomuser.me/api/portraits/men/34.jpg"
+                  alt=""
                 />
-                <div
-                  className="h-8 rounded w-5/6"
-                  style={{ background: "var(--border-color)" }}
+                <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                  src="https://randomuser.me/api/portraits/women/6.jpg"
+                  alt=""
                 />
+                {/* <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                  src="https://randomuser.me/api/portraits/men/9.jpg"
+                  alt=""
+                /> */}
+                {/* <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-gray-200 hover:scale-105 tranform duration-100"
+                  src="https://randomuser.me/api/portraits/women/9.jpg"
+                  alt=""
+                /> */}
               </div>
-
-              {/* Main content */}
-              <div className="flex-1 p-4 sm:p-6 flex flex-col gap-4">
-                <div
-                  className="h-8 rounded w-1/2 md:w-1/3"
-                  style={{ background: "var(--border-color)" }}
-                />
-
-                <button className="bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 text-white px-6 py-3 rounded-xl font-semibold">
-                  Get Started for Free
-                </button>
-
-                <div className="flex flex-col lg:flex-row gap-4 flex-1">
-                  <div
-                    className="hidden md:block flex-1 rounded-2xl min-h-[200px]"
-                    style={{ background: "var(--border-color)" }}
-                  />
-
-                  <div className="w-full lg:w-[450px] xl:w-[550px] bg-white rounded-2xl overflow-hidden">
-                    <img
-                      src="collaboration.jpg"
-                      alt="Team Collaboration"
-                      className="w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-full object-cover rounded-2xl shadow-md"
-                    />
-                  </div>
-                </div>
-              </div>
+              <div>Join 100+ other members</div>
             </div>
           </div>
         </div>
-
-        {/* ✅ GRADUAL BLUR OVERLAY */}
-        <div className="hidden sm:block">
-          <GradualBlur
-            animated="scroll"
-            position="bottom"
-            strength={1}
-            divCount={7}
-            opacity={5}
-          />
-        </div>
-      </section>
+      </motion.div>
     </section>
+    </>
   );
 };
 

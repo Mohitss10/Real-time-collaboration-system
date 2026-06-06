@@ -175,6 +175,28 @@ useEffect(() => {
               {/* PRICING */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
                 {/* FREE PLAN */}
+                 <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: 80,
+                        scale: 0.95,
+                        filter: "blur(10px)",
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        filter: "blur(0px)",
+                      }}
+                      viewport={{
+                        once: true,      // animate only once
+                        amount: 0.3,     // triggers when 30% is visible
+                      }}
+                      transition={{
+                        duration: 0.7,
+                        ease: "easeOut",
+                      }}
+                      >
                 <div
                   className={`rounded-[32px] p-5 sm:p-6 lg:p-8 bg-[var(--bg-card)] transition-all duration-300 flex flex-col justify-between ${
                     currentPlan === "free"
@@ -251,8 +273,31 @@ useEffect(() => {
                     {currentPlan === "free" ? "Current Plan" : "Switch to Free"}
                   </button>
                 </div>
-
+</motion.div>
                 {/* PRO PLAN */}
+                                 <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: 80,
+                        scale: 0.95,
+                        filter: "blur(10px)",
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        filter: "blur(0px)",
+                      }}
+                      viewport={{
+                        once: true,      // animate only once
+                        amount: 0.3,     // triggers when 30% is visible
+                      }}
+                      transition={{
+                        duration: 0.7,
+                        ease: "easeOut",
+                      }}
+                      
+                      >
                 <div
                   className={`rounded-[32px] p-5 sm:p-6 lg:p-8 bg-[var(--bg-card)] transition-all duration-300 flex flex-col justify-between ${
                     currentPlan === "free"
@@ -327,6 +372,7 @@ useEffect(() => {
                     </button>
                   </div>
                 </div>
+                </motion.div>
               </div>
             </div>
           </div>

@@ -1,16 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import "./App"
-
-const savedTheme =
-  localStorage.getItem("theme") || "light";
-
-document.documentElement.classList.add(savedTheme);
+import App from "./App";
+import Loader from "../src/ui/Loader";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <App />
+    <Suspense fallback={<Loader />}>
+      <App />
+    </Suspense>
   </BrowserRouter>
 );
