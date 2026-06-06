@@ -155,7 +155,7 @@ const handleLogout = () => {
         w-full flex items-center gap-3 px-2 mt-2 pt-4 p-2
         text-red-500
         transition-all duration-200 font-medium
-        border-t border-[var(--border-color)]
+        border-t border-[var(--border-color)] hover:bg-[var(--primary)]/10 rounded-4xl
       "
     >
           <LogOut size={20} />
