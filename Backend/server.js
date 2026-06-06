@@ -12,25 +12,25 @@ const server = http.createServer(app);
 
 
 //SOCKET SERVER
-// const io = new Server(server, {
-//   cors: {
-//     origin: "https://nexuss-real-time-collaboration-system.onrender.com",
-//     methods: ["GET", "POST"],
-//   },
-// });
-
-
-const isProduction = process.env.NODE_ENV === "production";
-
 const io = new Server(server, {
   cors: {
-    origin: isProduction
-      ? "https://nexuss-real-time-collaboration-system.onrender.com"
-      : "http://localhost:5173", // Vite dev server
+    origin: "https://nexuss-real-time-collaboration-system.onrender.com",
     methods: ["GET", "POST"],
-    credentials: true,
   },
 });
+
+
+// const isProduction = process.env.NODE_ENV === "production";
+
+// const io = new Server(server, {
+//   cors: {
+//     origin: isProduction
+//       ? "https://nexuss-real-time-collaboration-system.onrender.com"
+//       : "http://localhost:5173", // Vite dev server
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   },
+// });
 
 
 
