@@ -261,10 +261,10 @@ const Hero = () => {
       
       {/* 👥 Trust indicator */}
       <motion.div
-        className="flex items-center gap-4 mt-10 mx-auto  z-10"
+        className="flex items-center gap-4 my-10 mx-auto  z-10"
         {...fadeIn("up", 2.6)}
       >
-        <div className="flex justify-center animate-out zoom-in duration-200 delay-200">
+        <div className="flex justify-center animate-out zoom-in duration-200 delay-200 ">
           <div>
             <div className="font-semibold text-center md:text-left">Trusted by</div>
             <div className="flex space-x-2 items-center flex-col md:flex-row">
