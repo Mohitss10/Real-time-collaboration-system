@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loader from "../../ui/Loader";
+import PixelBlast from "../../ui/PixelBlast";
 
 import {
   Rocket,
@@ -198,35 +199,6 @@ await axios.post(
             className="w-full h-120 object-cover rounded-2xl shadow-md"
           />
         </div>
-
-        {/* ================= PROGRESS ================= */}
-<div className="mt-8">
-
-  <div className="flex justify-between mb-2">
-
-    <p className="text-[var(--text-secondary)] font-medium flex items-center gap-2">
-      <BarChart3 size={18} /> Progress
-    </p>
-
-    <p className="font-bold text-[var(--text-primary)]">
-      {project.progress || 0}%
-    </p>
-
-  </div>
-
-  <div className="w-full h-3 bg-[var(--border-color)] rounded-full overflow-hidden">
-
-    <div
-      className="h-full rounded-full transition-all duration-500"
-      style={{
-        width: `${project.progress || 0}%`,
-        backgroundColor: project.color,
-      }}
-    />
-
-  </div>
-
-</div>
       
       </div>
       </div>

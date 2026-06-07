@@ -2,9 +2,12 @@ const Document = require("../models/document.Model");
 const Project = require("../models/projectCard");
 const path = require("path");
 const fs = require("fs");
+const cloudinary = require("../config/cloudinary");
 // ======================================
 // UPLOAD DOCUMENT
 // ======================================
+
+
 exports.uploadDocument = async (req, res) => {
   try {
     const { projectId, title } = req.body;
@@ -18,16 +21,36 @@ exports.uploadDocument = async (req, res) => {
 
     const project = await Project.findById(projectId);
 
+    if (!project) {
+      return res.status(404).json({
+        success: false,
+        message: "Project not found",
+      });
+    }
+
+    // Upload to Cloudinary
+    const result = await cloudinary.uploader.upload(
+      req.file.path,
+      {
+        folder: "nexus-documents",
+        resource_type: "raw",
+      }
+    );
+
+    // Delete local temp file
+    fs.unlinkSync(req.file.path);
+
     const document = await Document.create({
       projectId,
-
       title,
-
       originalName: req.file.originalname,
-
       fileName: req.file.filename,
 
-      fileUrl: `http://localhost:5000/uploads/${req.file.filename}`,
+      // Cloudinary URL
+      fileUrl: result.secure_url,
+
+      // Cloudinary public id
+      publicId: result.public_id,
 
       uploadedBy: req.user.id,
     });
@@ -38,6 +61,8 @@ exports.uploadDocument = async (req, res) => {
     });
 
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: error.message,

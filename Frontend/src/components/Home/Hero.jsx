@@ -18,6 +18,10 @@ import TextType from "../../ui/TextType";
 import GradualBlur from "../../ui/GradualBlur";
 import AnimatedContent from "../../ui/AnimatedContent";
 import { ArrowRight } from 'lucide-react'
+import Lightfall from "../../ui/Lightfall";
+import LightPillar from "../../ui/LightPillar";
+import SoftAurora from "../../ui/SoftAurora";
+import Orb from "../../ui/Orb";
 // Reusable fadeIn variant
 const fadeIn = (direction = 'up', delay = 0) => {
   const from = {
@@ -77,11 +81,35 @@ const Hero = () => {
   const navigate = useNavigate();
   return (
     <>
-     <section className="relative  min-h-screen flex flex-col justify-center items-center overflow-hidden px-4 sm:px-20 xl:px-32"
-           style={{
-        background: "var(--hero-bg)",
-        color: "var(--text-primary)",
-      }}>
+<section
+  className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-4 sm:px-20 xl:px-32"
+  style={{
+    color: "var(--text-primary)",
+    background: ""
+  }}
+>
+  {/* 🌌 LIGHTFALL BACKGROUND (ONLY HERO) */}
+<div
+  className="absolute inset-0 -z-10 overflow-hidden"
+  style={{
+    background: "var(--bg-primary)",
+  }}
+>
+  <LightPillar
+    topColor="#5227FF"
+    bottomColor="#FF9FFC"
+    intensity={1}
+    rotationSpeed={0.3}
+    glowAmount={0.002}
+    pillarWidth={3}
+    pillarHeight={0.4}
+    noiseIntensity={0.5}
+    pillarRotation={25}
+    interactive={false}
+    mixBlendMode="screen"
+    quality="high"
+/>
+</div>
 
 <div className="flex justify-center">
             <p
@@ -99,7 +127,6 @@ const Hero = () => {
     mb-10
   "
         style={{
-          background: "var(--bg-card)",
           color: "var(--primary)",
           borderColor: "var(--border-color)",
         }}
@@ -149,7 +176,7 @@ const Hero = () => {
       {/* 🧠 Headline animation */}
       <div className="text-center mb-6 z-10">
         <motion.h1
-          className="text-[34px] sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-medium mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
+          className="text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
           variants={containerVariant}
           initial="initial"
           animate="animate"
@@ -181,8 +208,11 @@ const Hero = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
+                          style={{
+          color: "var(--text-secondary)",
+        }}
       >
-        The premium platform for high-velocity teams. Bring your conversations, documents,and meetings into one unified workspace engineered for clarity and speed.
+        The premium platform for high-velocity teams. Bring your conversations, documents,and meetings into one unified workspace.
       </motion.p>
 
       {/* 🎯 Buttons */}

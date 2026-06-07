@@ -30,6 +30,8 @@ import Navbar from "./Pages/Navbar";
 import ToastProvider from "./ui/ToastProvider";
 import PageTransition from "./ui/PageTransition";
 import Pricing from "./components/Home/Pricing";
+import PageLoader from "./Pages/PageLoader";
+import NotFound from "./Pages/NotFound";
 
 /* =========================
    ANIMATED ROUTES WRAPPER
@@ -99,6 +101,15 @@ function AnimatedRoutes({ sidebarOpen, setSidebarOpen }) {
           element={
             <PageTransition>
               <Projects />
+            </PageTransition>
+          }
+        />
+
+            <Route
+          path="/loading-doc"
+          element={
+            <PageTransition>
+              <PageLoader />
             </PageTransition>
           }
         />
@@ -185,8 +196,9 @@ function AnimatedRoutes({ sidebarOpen, setSidebarOpen }) {
               </PageTransition>
             }
           />
-        </Route>
 
+        </Route>
+<Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );

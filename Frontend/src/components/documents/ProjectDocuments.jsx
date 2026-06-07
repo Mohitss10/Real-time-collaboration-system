@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Search,
   Upload,
@@ -14,14 +15,17 @@ import {
 import { showSuccess, showError, showLoading } from "../../utils/toast";
 import { showToast } from "../../utils/toast";
 import Loader from "../../ui/Loader";
+import PageLoader from "../../Pages/PageLoader";
 
 const ProjectDocuments = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
 
   const [fetching, setFetching] = useState(true);
 
   const [title, setTitle] = useState("");
   const [documents, setDocuments] = useState([]);
+  const [downloadingId, setDownloadingId] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -113,6 +117,33 @@ const fetchDocuments = async () => {
       </div>
     );
   };
+
+
+  const handleDownload = (doc) => {
+  try {
+    setDownloadingId(doc._id);
+
+    const link = document.createElement("a");
+    link.href = doc.fileUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    // optional force download
+    link.download = doc.originalName || "file";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+  } catch (error) {
+    console.log(error);
+    showError("Failed to download file");
+  } finally {
+    setTimeout(() => {
+      setDownloadingId(null);
+    }, 1000);
+  }
+};
 
   // =====================================
   // UPLOAD FILE
@@ -377,7 +408,7 @@ await axios.post(
             return (
               <div
                 className="
-    min-w-[320px]
+    min-w-[250px]
     bg-[var(--bg-card)]
     border border-[var(--border-color)]
     border-l-4 border-l-[var(--primary)]
@@ -438,10 +469,16 @@ await axios.post(
                   </div>
 
                   {/* DOWNLOAD BUTTON */}
-<a
-  href={`${import.meta.VITE_API_URL}/api/documents/download/${encodeURIComponent(
-    doc.fileName
-  )}`}
+<button
+  onClick={() => {
+    navigate("/loading-doc", {
+      state: {
+        fileUrl: `${import.meta.env.VITE_API_URL}/api/documents/download/${encodeURIComponent(
+          doc.fileName
+        )}`,
+      },
+    });
+  }}
   className="
     w-11 h-11 rounded-2xl
     bg-[var(--primary)]/10
@@ -452,8 +489,8 @@ await axios.post(
     transition
   "
 >
-                    <Download size={18} />
-                  </a>
+  <Download size={18} />
+</button>
                 </div>
               </div>
             );

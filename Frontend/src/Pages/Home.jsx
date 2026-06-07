@@ -9,7 +9,6 @@ const Home = () => {
     <div
       className="overflow-x-hidden"
       style={{
-        background: "var(--bg-primary)",
         color: "var(--text-primary)",
       }}
     >
