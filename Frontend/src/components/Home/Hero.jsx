@@ -137,7 +137,7 @@ const Hero = () => {
       {/* 💫 Animated glow background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px]" />
-      </div>
+      
 
       {/* 🔵 Blurry AIMatrix background text */}
       {/* 🔵 Blurry AIMatrix background text */}
@@ -146,28 +146,41 @@ const Hero = () => {
         className="pointer-events-none select-none absolute inset-0 justify-center pt-[1vh] px-10 overflow-visible hidden xl:flex"
         style={{ userSelect: "none" /* , outline: '1px solid red' */ }}
       >
-        <div
-          className="flex gap-[-0.15em]"
-          style={{ filter: "blur(4px)", opacity: 0.07, userSelect: "none" }}
-        >
-          {umbrellaLetters.map((letter, idx) => (
-            <span
-              key={idx}
-              className="uppercase font-bold text-white "
-              style={{
-                fontSize: "350px",
-                transformOrigin: "bottom center",
-                transform: `scaleX(${umbrellaScales[idx]})`,
-                display: "inline-block",
-                whiteSpace: "pre",
-              }}
-            >
-              {letter}
-            </span>
-          ))}
-        </div>
+       <div
+  className="flex gap-[-0.15em]"
+  style={{
+    filter: "blur(4px)",
+    opacity: 0.12,
+    userSelect: "none",
+  }}
+>
+  {umbrellaLetters.map((letter, idx) => (
+    <span
+      key={idx}
+      className="
+        uppercase
+        font-bold
+        bg-gradient-to-r
+        from-cyan-400
+        via-blue-500
+        to-violet-500
+        bg-clip-text
+        text-transparent
+      "
+      style={{
+        fontSize: "350px",
+        transformOrigin: "bottom center",
+        transform: `scaleX(${umbrellaScales[idx]})`,
+        display: "inline-block",
+        whiteSpace: "pre",
+      }}
+    >
+      {letter}
+    </span>
+  ))}
+</div>
       </div>
-
+</div>
 
 
 
@@ -186,17 +199,22 @@ const Hero = () => {
             const isHighlighted = highlight.includes(cleaned);
 
             return (
-              <motion.span
-                key={idx}
-                variants={wordVariant}
-                className={
-                  isHighlighted
-                    ? "bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent"
-                    : "bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent"
-                }
-              >
-                {word}
-              </motion.span>
+<motion.span
+  key={idx}
+  variants={wordVariant}
+  className={
+  isHighlighted
+    ? "bg-gradient-to-r from-fuchsia-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
+    : "bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent"
+}
+  style={{
+    textShadow: isHighlighted
+      ? "0 0 25px rgba(59,130,246,0.4)"
+      : "0 0 15px rgba(255,255,255,0.15)",
+  }}
+>
+  {word}
+</motion.span>
             );
           })}
         </motion.h1>
@@ -226,7 +244,7 @@ const Hero = () => {
   <div>
 <div
   onClick={() => navigate("/signup")}
-  className="flex flex-col sm:flex-row gap-4 justify-center mb-10 px-10"
+  className="flex flex-col sm:flex-row gap-4 justify-center px-10"
 >
   <button
     className="
