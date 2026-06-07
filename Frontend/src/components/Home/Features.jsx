@@ -9,6 +9,7 @@ import {
   TrendingUp,
   User,
   Users,
+  Bot,
   MicOff,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -287,18 +288,37 @@ const Features = () => {
     >
       {/* Top Section */}
       <div>
-        <div className="w-12 h-12 rounded-xl bg-indigo-200 flex items-center justify-center text-white">
-          <BarChart3 size={22} />
-        </div>
+<div
+  className="
+    w-12 h-12 rounded-xl
+    bg-gradient-to-r
+    from-cyan-500
+    to-blue-600
+    flex items-center justify-center
+    text-white
+  "
+>
+  <Bot size={22} />
+</div>
 
-        <h3 className="text-xl lg:text-2xl font-bold mt-6">
-          Analytics & Insights
-        </h3>
+<h3 className="text-xl lg:text-2xl font-bold mt-6">
+  AI Workspace Assistant
+</h3>
 
-        <p className="text-gray-500 mt-3 max-w-xl leading-relaxed text-sm sm:text-base">
-          Organize conversations logically. Move past noisy channels and focus
-          on structured, topic-based discussions.
-        </p>
+<p
+  className="
+    text-[var(--text-secondary)]
+    mt-3
+    max-w-xl
+    leading-relaxed
+    text-sm
+    sm:text-base
+  "
+>
+  Get instant AI assistance across your workspace. Summarize meetings,
+  generate tasks, answer project questions, create documents, and
+  automate repetitive work with intelligent recommendations.
+</p>
       </div>
 
       {/* Bottom Bar Chart UI */}

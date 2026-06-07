@@ -11,13 +11,13 @@ import {
   User,
   Users,
   MicOff,
+  ArrowRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Blurtext from "../../ui/BlurText";
 import TextType from "../../ui/TextType";
 import GradualBlur from "../../ui/GradualBlur";
 import AnimatedContent from "../../ui/AnimatedContent";
-import { ArrowRight } from 'lucide-react'
 import Lightfall from "../../ui/Lightfall";
 import LightPillar from "../../ui/LightPillar";
 import SoftAurora from "../../ui/SoftAurora";
@@ -64,10 +64,10 @@ const umbrellaLetters = "N E X U S".split(" ");
 
 const umbrellaScales = [
   1.8, // 'A' bigger left edge
-  1.5, // 'I'
+  1.8, // 'I'
   1.3, // 'M'
-  1.3,   // 'a' center normal scale
-  2,   // 't' center normal scale
+  1.4,   // 'a' center normal scale
+  1.8,   // 't' center normal scale
  // 'x' bigger right edge
 ];
 
@@ -85,30 +85,16 @@ const Hero = () => {
   className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-4 sm:px-20 xl:px-32"
   style={{
     color: "var(--text-primary)",
-    background: ""
   }}
 >
   {/* 🌌 LIGHTFALL BACKGROUND (ONLY HERO) */}
 <div
   className="absolute inset-0 -z-10 overflow-hidden"
   style={{
-    background: "var(--bg-primary)",
+    background: "var(--hero-bg)",
   }}
 >
-  <LightPillar
-    topColor="#5227FF"
-    bottomColor="#FF9FFC"
-    intensity={1}
-    rotationSpeed={0.3}
-    glowAmount={0.002}
-    pillarWidth={3}
-    pillarHeight={0.4}
-    noiseIntensity={0.5}
-    pillarRotation={25}
-    interactive={false}
-    mixBlendMode="screen"
-    quality="high"
-/>
+
 </div>
 
 <div className="flex justify-center">
@@ -189,7 +175,7 @@ const Hero = () => {
       {/* 🧠 Headline animation */}
       <div className="text-center mb-6 z-10">
         <motion.h1
-          className="text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
+          className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
           variants={containerVariant}
           initial="initial"
           animate="animate"

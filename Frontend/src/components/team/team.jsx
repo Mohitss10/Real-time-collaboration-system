@@ -231,8 +231,10 @@ const handleInvite = async () => {
                   border border-[var(--border-color)]
                   border-l-4 border-l-[var(--primary)]
                   p-7
-                  hover:shadow-md
-                  transition-all duration-300
+                    shadow-sm
+    hover:shadow-xl
+    transition-all
+    duration-300
                 "
               >
 

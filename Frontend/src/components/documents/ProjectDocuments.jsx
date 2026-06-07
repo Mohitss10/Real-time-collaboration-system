@@ -471,7 +471,7 @@ await axios.post(
                   {/* DOWNLOAD BUTTON */}
 <button
   onClick={() => {
-    navigate("/loading-doc", {
+    navigate("/not-found", {
       state: {
         fileUrl: `${import.meta.env.VITE_API_URL}/api/documents/download/${encodeURIComponent(
           doc.fileName

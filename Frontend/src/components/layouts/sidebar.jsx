@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   GamepadDirectional,
   LogOut,
+  ArrowLeft,
 } from "lucide-react";
 
 const Sidebar = ({ setSidebarOpen = () => {} }) => {
@@ -87,7 +88,7 @@ const handleLogout = () => {
   return (
 <div className="w-screen z-40 sm:w-[300px] h-screen bg-[var(--bg-sidebar1)] p-2 flex flex-col sm:pt-16 overflow-y-auto">
       {/* HEADER */}
-      <div className="mb-6 mt-1 p-4 rounded-3xl bg-[var(--bg-card)] shadow-sm border border-[var(--border-color)]">
+      <div className=" mt-1 p-4 rounded-3xl bg-[var(--bg-card)] shadow-sm border border-[var(--border-color)]">
         <div className="flex items-center gap-3">
   <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center">
         <GamepadDirectional size={22} className="text-[var(--primary)]" />
@@ -103,6 +104,33 @@ const handleLogout = () => {
           </div>
         </div>
       </div>
+<div className="py-4 px-1 pb-6">
+ <button
+  onClick={() => navigate("/projects")}
+  className="
+    w-fit
+    flex items-center justify-center gap-2
+    bg-[var(--primary)]/10
+    text-[var(--primary)]
+    hover:bg-[var(--primary)]
+    hover:text-white
+    px-5 py-3
+    rounded-xl
+    shadow-md
+    hover:shadow-xl
+    transition-all
+    duration-300
+    ease-out
+    hover:scale-105
+    active:scale-95
+    whitespace-nowrap
+  "
+>
+  <ArrowLeft size={18} />
+  Create New Project
+</button>
+</div>
+      
 
       {/* MENU */}
       <div className="flex flex-col px-2 gap-2">
