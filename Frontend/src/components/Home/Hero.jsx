@@ -175,7 +175,7 @@ const Hero = () => {
       {/* 🧠 Headline animation */}
       <div className="text-center mb-6 z-10">
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
+          className="text-5xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold mx-auto leading-tight sm:p-4 tracking-tight flex flex-wrap justify-center gap-x-3"
           variants={containerVariant}
           initial="initial"
           animate="animate"
