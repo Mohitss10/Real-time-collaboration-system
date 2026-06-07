@@ -199,22 +199,17 @@ const Hero = () => {
             const isHighlighted = highlight.includes(cleaned);
 
             return (
-<motion.span
-  key={idx}
-  variants={wordVariant}
-  className={
-  isHighlighted
-    ? "bg-gradient-to-r from-fuchsia-400 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
-    : "bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent"
-}
-  style={{
-    textShadow: isHighlighted
-      ? "0 0 25px rgba(59,130,246,0.4)"
-      : "0 0 15px rgba(255,255,255,0.15)",
-  }}
->
-  {word}
-</motion.span>
+              <motion.span
+                key={idx}
+                variants={wordVariant}
+                className={
+                  isHighlighted
+                    ? "bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent"
+                    : "bg-gradient-to-r from-gray-400 to-gray-600 bg-clip-text text-transparent"
+                }
+              >
+                {word}
+              </motion.span>
             );
           })}
         </motion.h1>
