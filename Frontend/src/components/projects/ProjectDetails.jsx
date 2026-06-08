@@ -34,6 +34,9 @@ const ProjectDetails = () => {
 
   const images = [
     "https://r4.wallpaperflare.com/wallpaper/346/806/481/geometry-abstract-blue-digital-art-wallpaper-132f1757fea2177446ca6a94746d5f1a.jpg",
+   "https://r4.wallpaperflare.com/wallpaper/317/630/437/artwork-simple-background-blue-stars-wallpaper-ebf69cfd13211fe92594cb491dfc1c80.jpg",
+   "https://r4.wallpaperflare.com/wallpaper/956/988/935/fantasy-art-digital-art-pixelated-artwork-wallpaper-18f68d48b0001c98e08c41be3882546a.jpg",
+   "https://r4.wallpaperflare.com/wallpaper/455/205/165/fantasy-art-digital-art-artwork-science-fiction-wallpaper-e8760df8a0b04c0880fc81de98c2546a.jpg"
   ];
 
   const getProjectImage = (id) => {

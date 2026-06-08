@@ -42,37 +42,86 @@ const ProjectDocuments = () => {
   // FETCH DOCUMENTS
   // =====================================
 
-  
+  // =====================================
+// FRIENDLY ERROR MESSAGE
+// =====================================
+const getShortErrorMessage = (error, action = "process") => {
+  const status = error?.response?.status;
+  const message = error?.response?.data?.message?.toLowerCase() || "";
+
+  if (status === 413) {
+    return "File is too large";
+  }
+
+  if (status === 401) {
+    return "Session expired. Please login again";
+  }
+
+  if (status === 403) {
+    return "You don't have permission";
+  }
+
+  if (status === 404) {
+    return "File not found";
+  }
+
+  if (status === 429) {
+    return "Too many requests. Try later";
+  }
+
+  if (
+    message.includes("network") ||
+    error.code === "ERR_NETWORK"
+  ) {
+    return "Network error. Check your internet";
+  }
+
+  if (message.includes("timeout")) {
+    return "Request timed out";
+  }
+
+  if (message.includes("file type")) {
+    return "Unsupported file type";
+  }
+
+  if (message.includes("size")) {
+    return "File size exceeded";
+  }
+
+  return `Too many requests. Try later`;
+};
 
   useEffect(() => {
     fetchDocuments();
   }, [projectId]);
 
-const fetchDocuments = async () => {
-  try {
-    setFetching(true);
+  const fetchDocuments = async () => {
+    try {
+      setFetching(true);
 
-    const res = await axios.get(
-  `${import.meta.env.VITE_API_URL}/api/documents/project/${projectId}`,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/documents/project/${projectId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-    setDocuments(res.data.documents);
-  } catch (error) {
-    console.log(error.response?.data || error.message);
+      setDocuments(res.data.documents);
+    } catch (error) {
+      console.log(error.response?.data || error.message);
 
-    showError(
-      error.response?.data?.message ||
-      "Failed to load documents"
-    );
-  } finally {
-    setFetching(false);
-  }
-};
+      showError(error.response?.data?.message || "Failed to load documents");
+    } finally {
+      setFetching(false);
+    }
+  };
+
+
+
+
+
   // =====================================
   // FILE ICON
   // =====================================
@@ -118,95 +167,89 @@ const fetchDocuments = async () => {
     );
   };
 
-
   const handleDownload = (doc) => {
-  try {
-    setDownloadingId(doc._id);
+    try {
+      setDownloadingId(doc._id);
 
-    const link = document.createElement("a");
-    link.href = doc.fileUrl;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
+      const link = document.createElement("a");
+      link.href = doc.fileUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
 
-    // optional force download
-    link.download = doc.originalName || "file";
+      // optional force download
+      link.download = doc.originalName || "file";
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-  } catch (error) {
-    console.log(error);
-    showError("Failed to download file");
-  } finally {
-    setTimeout(() => {
-      setDownloadingId(null);
-    }, 1000);
-  }
-};
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.log(error);
+      showError("Failed to download file");
+    } finally {
+      setTimeout(() => {
+        setDownloadingId(null);
+      }, 1000);
+    }
+  };
 
   // =====================================
   // UPLOAD FILE
   // =====================================
-const uploadFile = async () => {
-  if (!selectedFile) {
-    showError("Please select a file");
-    return;
-  }
+  const uploadFile = async () => {
+    if (!selectedFile) {
+      showError("Please select a file");
+      return;
+    }
 
-  if (!title.trim()) {
-    showError("Please enter a document title");
-    return;
-  }
+    if (!title.trim()) {
+      showError("Please enter a document title");
+      return;
+    }
 
-  const loadingId = showLoading("Uploading document...");
+    const loadingId = showLoading("Uploading document...");
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    formData.append("file", selectedFile);
-    formData.append("projectId", projectId);
-    formData.append("title", title);
+      formData.append("file", selectedFile);
+      formData.append("projectId", projectId);
+      formData.append("title", title);
 
-await axios.post(
-  `${import.meta.env.VITE_API_URL}/api/documents/upload`,
-  formData,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    },
-  }
-);
-    showSuccess("Document uploaded successfully 📄", {
-      id: loadingId,
-    });
-
-    // Reset
-    setSelectedFile(null);
-    setTitle("");
-
-    // Close Modal
-    setOpenUploadModal(false);
-
-    // Refresh Documents
-    fetchDocuments();
-  } catch (error) {
-    console.log(error.response?.data || error.message);
-
-    showError(
-      error.response?.data?.message ||
-        "Failed to upload document",
-      {
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/documents/upload`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+      showSuccess("Document uploaded successfully 📄", {
         id: loadingId,
-      }
-    );
-  } finally {
-    setLoading(false);
-  }
-};
+      });
+
+      // Reset
+      setSelectedFile(null);
+      setTitle("");
+
+      // Close Modal
+      setOpenUploadModal(false);
+
+      // Refresh Documents
+      fetchDocuments();
+    } catch (error) {
+      console.log(error.response?.data || error.message);
+
+showError(getShortErrorMessage(error, "upload document"), {
+  id: loadingId,
+});
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // =====================================
   // FILTER DOCUMENTS
@@ -226,7 +269,7 @@ await axios.post(
   const currentDocs = filteredDocuments.slice(indexOfFirstDoc, indexOfLastDoc);
 
   if (fetching) {
-   return (
+    return (
       <div
         className="
         min-h-screen
@@ -239,10 +282,13 @@ await axios.post(
       >
         <Loader />
 
-        <p className="text-[var(--text-secondary)] text-sm">Loading Documents...</p>
+        <p className="text-[var(--text-secondary)] text-sm">
+          Loading Documents...
+        </p>
       </div>
     );
-}
+  }
+
 
   return (
     <div className="p-5 pt-20 sm:pt-17 space-y-8 sm:fixed sm:w-[79vw] ">
@@ -292,11 +338,11 @@ await axios.post(
           </div>
 
           {/* BUTTON */}
-<button
-  onClick={() => {
-    setOpenUploadModal(true);
-  }}
-  className="
+          <button
+            onClick={() => {
+              setOpenUploadModal(true);
+            }}
+            className="
     w-full sm:w-auto
 
     flex items-center justify-center gap-2
@@ -322,10 +368,10 @@ await axios.post(
 
     whitespace-nowrap
   "
->
-  <Upload size={18} />
-  New Document
-</button>
+          >
+            <Upload size={18} />
+            New Document
+          </button>
         </div>
       </div>
 
@@ -469,17 +515,17 @@ await axios.post(
                   </div>
 
                   {/* DOWNLOAD BUTTON */}
-<button
-  onClick={() => {
-    navigate("/not-found", {
-      state: {
-        fileUrl: `${import.meta.env.VITE_API_URL}/api/documents/download/${encodeURIComponent(
-          doc.fileName
-        )}`,
-      },
-    });
-  }}
-  className="
+                  <button
+                    onClick={() => {
+                      navigate("/not-found", {
+                        state: {
+                          fileUrl: `${import.meta.env.VITE_API_URL}/api/documents/download/${encodeURIComponent(
+                            doc.fileName,
+                          )}`,
+                        },
+                      });
+                    }}
+                    className="
     w-11 h-11 rounded-2xl
     bg-[var(--primary)]/10
     hover:bg-[var(--primary)]
@@ -488,17 +534,15 @@ await axios.post(
     flex items-center justify-center
     transition
   "
->
-  <Download size={18} />
-</button>
+                  >
+                    <Download size={18} />
+                  </button>
                 </div>
               </div>
             );
           })}
         </div>
       )}
-
-
 
       <div className="flex justify-center gap-3 mt-6">
         {Array.from({ length: totalPages }).map((_, index) => (
@@ -523,9 +567,9 @@ await axios.post(
       {/* =========================
           UPLOAD MODAL
       ========================= */}
-    {openUploadModal && (
-  <div
-    className="
+      {openUploadModal && (
+        <div
+          className="
       fixed inset-0
       bg-black/40
       sm:ml-70
@@ -533,9 +577,9 @@ await axios.post(
       p-4
       
     "
-  >
-    <div
-      className="
+        >
+          <div
+            className="
         w-full max-w-lg  mt-13 sm:mt-40
         bg-[var(--bg-card)]
         rounded-[32px]
@@ -543,60 +587,54 @@ await axios.post(
         border border-[var(--border-color)]
         overflow-hidden
       "
-    >
-      {/* HEADER */}
-      <div
-        className="
+          >
+            {/* HEADER */}
+            <div
+              className="
           px-7 py-5
           border-b border-[var(--border-color)]
           flex items-center justify-between
         "
-      >
-        <div>
-          <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
-            Upload Document
-          </h2>
+            >
+              <div>
+                <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
+                  Upload Document
+                </h2>
 
-          <p className="text-sm text-[var(--text-secondary)] mt-1">
-            Upload and rename your project file
-          </p>
-        </div>
+                <p className="text-sm text-[var(--text-secondary)] mt-1">
+                  Upload and rename your project file
+                </p>
+              </div>
 
-        <button
-          onClick={() => {
-            setOpenUploadModal(false);
-            setSelectedFile(null);
-            setTitle("");
-          }}
-          className="
+              <button
+                onClick={() => {
+                  setOpenUploadModal(false);
+                  setSelectedFile(null);
+                  setTitle("");
+                }}
+                className="
             w-10 h-10
             rounded-xl
             hover:bg-[var(--bg-secondary)]
             flex items-center justify-center
             transition
           "
-        >
-          <X
-            size={20}
-            className="text-[var(--text-secondary)]"
-          />
-        </button>
-      </div>
+              >
+                <X size={20} className="text-[var(--text-secondary)]" />
+              </button>
+            </div>
+            {/* BODY */}
+            <div className="p-7 space-y-6">
+              {/* FILE INPUT */}
+              <div>
+                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-3">
+                  Choose File
+                </label>
 
-      {/* BODY */}
-      <div className="p-7 space-y-6">
-        {/* FILE INPUT */}
-        <div>
-          <label className="block text-sm font-semibold text-[var(--text-primary)] mb-3">
-            Choose File
-          </label>
-
-          <input
-            type="file"
-            onChange={(e) =>
-              setSelectedFile(e.target.files[0])
-            }
-            className="
+                <input
+                  type="file"
+                  onChange={(e) => setSelectedFile(e.target.files[0])}
+                  className="
               w-full
               border border-[var(--border-color)]
               rounded-2xl
@@ -613,21 +651,21 @@ await axios.post(
               hover:file:bg-[var(--primary)]/20
               transition
             "
-          />
-        </div>
+                />
+              </div>
 
-        {/* DOCUMENT TITLE */}
-        <div>
-          <label className="block text-sm font-semibold text-[var(--text-primary)] mb-3">
-            Rename Document
-          </label>
+              {/* DOCUMENT TITLE */}
+              <div>
+                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-3">
+                  Rename Document
+                </label>
 
-          <input
-            type="text"
-            placeholder="Enter document name"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="
+                <input
+                  type="text"
+                  placeholder="Enter document name"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="
  w-full
               px-4 py-4
               rounded-2xl
@@ -638,45 +676,44 @@ await axios.post(
               focus:ring-2 focus:ring-[var(--primary)]/30
               transition
             "
-          />
-        </div>
+                />
+              </div>
 
-        {/* SELECTED FILE */}
-        {selectedFile && (
-          <div
-            className="
+              {/* SELECTED FILE */}
+              {selectedFile && (
+                <div
+                  className="
               bg-[var(--bg-secondary)]
               border border-[var(--border-color)]
               rounded-2xl
               p-4
             "
-          >
-            <p className="text-sm font-medium text-[var(--primary)]">
-              Selected File
-            </p>
+                >
+                  <p className="text-sm font-medium text-[var(--primary)]">
+                    Selected File
+                  </p>
 
-            <p className="text-sm text-[var(--text-secondary)] mt-1 break-all">
-              {selectedFile.name}
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* FOOTER */}F
-      <div
-        className="
+                  <p className="text-sm text-[var(--text-secondary)] mt-1 break-all">
+                    {selectedFile.name}
+                  </p>
+                </div>
+              )}
+            </div>
+            {/* FOOTER */}F
+            <div
+              className="
           px-7 py-5
           border-t border-[var(--border-color)]
           flex items-center justify-end gap-4
         "
-      >
-        <button
-          onClick={() => {
-            setOpenUploadModal(false);
-            setSelectedFile(null);
-            setTitle("");
-          }}
-          className="
+            >
+              <button
+                onClick={() => {
+                  setOpenUploadModal(false);
+                  setSelectedFile(null);
+                  setTitle("");
+                }}
+                className="
             px-6 py-3
             rounded-2xl
             border border-[var(--border-color)]
@@ -685,14 +722,14 @@ await axios.post(
             transition
             font-medium
           "
-        >
-          Cancel
-        </button>
+              >
+                Cancel
+              </button>
 
-        <button
-          onClick={uploadFile}
-          disabled={loading}
-          className="
+              <button
+                onClick={uploadFile}
+                disabled={loading}
+                className="
             px-7 py-3
             rounded-2xl
             bg-[var(--primary)]
@@ -703,13 +740,13 @@ await axios.post(
             disabled:cursor-not-allowed
             transition
           "
-        >
-          {loading ? "Uploading..." : "Upload"}
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+              >
+                {loading ? "Uploading..." : "Upload"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
