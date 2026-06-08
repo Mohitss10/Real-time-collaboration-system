@@ -11,6 +11,7 @@ const {
 
 const protect = require("../middleware/auth.Middleware");
 const User = require("../models/User");
+const sendEmail = require("../utils/sendEmail")
 
 // ========================
 // AUTH ROUTES

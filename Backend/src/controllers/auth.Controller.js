@@ -5,8 +5,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const sendEmail = require("../utils/sendEmail");
-
-
+const {
+  welcomeEmailTemplate,
+  loginEmailTemplate,
+} = require("../utils/emailTemplate");
 
 // REGISTER
 const registerUser = async (req, res) => {
@@ -59,11 +61,15 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+    await sendEmail(
+      user.email,
+      "Welcome to Nexus 🚀",
+      welcomeEmailTemplate(user.name),
     );
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
     res.status(201).json({
       success: true,
@@ -71,7 +77,6 @@ const registerUser = async (req, res) => {
       token,
       user,
     });
-
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -90,23 +95,19 @@ const googleLogin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
     return res.status(200).json({
       success: true,
       token,
       user,
     });
-
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
 
 // LOGIN
 const loginUser = async (req, res) => {
@@ -130,10 +131,7 @@ const loginUser = async (req, res) => {
     }
 
     // PASSWORD CHECK
-    const isMatch = await bcrypt.compare(
-      password,
-      user.password
-    );
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({
@@ -148,7 +146,13 @@ const loginUser = async (req, res) => {
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
-      }
+      },
+    );
+
+    await sendEmail(
+      user.email,
+      "New Login Detected 🔐",
+      loginEmailTemplate(user.name),
     );
 
     res.status(200).json({
@@ -156,7 +160,6 @@ const loginUser = async (req, res) => {
       token,
       user,
     });
-
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -181,5 +184,5 @@ module.exports = {
   registerUser,
   loginUser,
   googleLogin,
-  deactivatePro
+  deactivatePro,
 };
