@@ -16,11 +16,9 @@ import {
 import { motion } from "framer-motion";
 import Blurtext from "../../ui/BlurText";
 import TextType from "../../ui/TextType";
-import GradualBlur from "../../ui/GradualBlur";
+
 import AnimatedContent from "../../ui/AnimatedContent";
-import Lightfall from "../../ui/Lightfall";
-import LightPillar from "../../ui/LightPillar";
-import SoftAurora from "../../ui/SoftAurora";
+
 import Orb from "../../ui/Orb";
 // Reusable fadeIn variant
 const fadeIn = (direction = 'up', delay = 0) => {

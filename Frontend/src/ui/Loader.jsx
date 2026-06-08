@@ -19,7 +19,7 @@ export default function Loader() {
             absolute
             inset-0
             rounded-full
-            border-[3px]
+            border-[4px]
             border-transparent
             border-t-[var(--primary)]
             border-r-[var(--primary)]
@@ -28,21 +28,7 @@ export default function Loader() {
         />
 
         {/* Center Dot */}
-        <div
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            h-2.5
-            w-2.5
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-          "
-          style={{
-            background: "var(--primary)",
-          }}
-        />
+
       </div>
     </div>
   );

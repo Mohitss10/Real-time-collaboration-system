@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Loader from "../../ui/Loader";
-import PixelBlast from "../../ui/PixelBlast";
+
 
 import {
   Rocket,
@@ -151,7 +151,7 @@ await axios.post(
             {/* STATUS */}
             <span className="px-3 py-1 rounded-full text-sm  bg-[var(--primary)]/10
     text-[var(--primary)]">
-              {project.status}
+              started
             </span>
 
             {/* VISIBILITY */}

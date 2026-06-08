@@ -244,7 +244,56 @@ if (chatLoading) {
       <div className="flex-1 min-h-0 flex flex-col">
 
         {/* ================= MESSAGES ================= */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 sm:px-6 space-y-4 rounded-3xl sm:space-y-6 bg-[var(--primary)]/10"    >
+<div
+  className="
+    flex-1
+    overflow-y-auto
+    px-3
+    py-4
+    sm:px-6
+    space-y-4
+    sm:space-y-6
+    rounded-3xl
+    bg-[var(--primary)]/10
+    relative
+  "
+>
+
+  {messages.length === 0 && (
+  <div
+    className="
+      absolute inset-0
+      flex flex-col
+      items-center
+      justify-center
+      pointer-events-none
+      select-none
+    "
+  >
+    <h2
+      className="
+        text-3xl sm:text-5xl
+        font-bold
+        text-[var(--text-primary)]
+        opacity-10
+        tracking-wide
+      "
+    >
+      Start Chat Now
+    </h2>
+
+    <p
+      className="
+        mt-3
+        text-sm sm:text-base
+        text-[var(--text-secondary)]
+        opacity-30
+      "
+    >
+      Send your first message to begin the conversation
+    </p>
+  </div>
+)}
 
           {messages.map((msg, index) => {
             const currentDate = new Date(msg.createdAt).toDateString();
