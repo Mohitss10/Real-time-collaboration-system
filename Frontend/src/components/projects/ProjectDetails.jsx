@@ -125,7 +125,7 @@ await axios.post(
   {/* HEADER */}
   <div className="">
 
-    <div className="sm:p-4 sm:bg-[var(--bg-card)] sm:shadow-sm sm:border sm:border-[var(--border-color)] rounded-4xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+    <div className="sm:p-4 sm:bg-[var(--bg-card)] sm:shadow-sm sm:border sm:border-[var(--border-color)] rounded-4xl flex flex-col  justify-between gap-6">
 
       {/* LEFT */}
       <div className="flex items-start gap-5">
@@ -136,7 +136,7 @@ await axios.post(
             {project.title}
           </h1>
 
-          <p className="text-[var(--text-secondary)] mt-2 max-w-2xl leading-relaxed">
+          <p className="text-[var(--text-secondary)] mt-2  leading-relaxed">
             {project.description}
           </p>
 

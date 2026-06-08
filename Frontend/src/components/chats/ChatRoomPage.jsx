@@ -232,10 +232,6 @@ if (chatLoading) {
             <span className="text-sm font-medium">Team</span>
           </button>
 
-          <button className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--primary)]/10 text-[var(--text-secondary)] hover:opacity-90 transition shadow-lg">
-            <Video size={18} />
-            <span className="text-sm font-medium">Call</span>
-          </button>
 
         </div>
       </div>
