@@ -270,56 +270,9 @@ focus:border-[var(--primary)]
     active:scale-95
 "
               >
-                {loading ? "Signing In..." : "Sign In"}
+               {loading ? "Authenticating..." : "Log In"}
               </button>
 
-              {/* DIVIDER */}
-              {/* <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-[var(--border-color)]" />
-                </div>
-
-                <div className="relative flex justify-center text-sm">
-                  <span className="bg-[var(--bg-primary)] px-4 text-[var(--text-secondary)]">
-                    Or continue with
-                  </span>
-                </div>
-              </div> */}
-
-              {/* SOCIAL BUTTONS */}
-              {/* <div className="grid grid-cols-1 gap-4">
-                <button
-                  type="button"
-                  onClick={handleGoogleLogin}
-                  className="    flex items-center justify-center gap-2
-
-    bg-[var(--primary)]/10
-    text-[var(--primary)]
-
-    hover:bg-[var(--primary)]
-    hover:text-white
-
-    px-5 py-3
-    rounded-xl
-
-    shadow-md
-    hover:shadow-xl
-
-    transition-all
-    duration-300
-    ease-out
-
-    hover:scale-105
-    active:scale-95"
-                >
-                  <img
-                    src="https://www.svgrepo.com/show/475656/google-color.svg"
-                    alt="google"
-                    className="w-5 h-5"
-                  />
-                  <span className="font-medium">Continue with Google</span>
-                </button>
-              </div> */}
             </form>
 
             {/* FOOTER */}

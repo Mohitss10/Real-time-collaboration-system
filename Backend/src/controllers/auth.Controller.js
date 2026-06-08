@@ -61,11 +61,13 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    await sendEmail(
-      user.email,
-      "Welcome to Nexus 🚀",
-      welcomeEmailTemplate(user.name),
-    );
+sendEmail(
+  user.email,
+  "Welcome to Nexus 🚀",
+  welcomeEmailTemplate(user.name)
+).catch((err) =>
+  console.log("Welcome email failed:", err.message)
+);
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
@@ -149,11 +151,13 @@ const loginUser = async (req, res) => {
       },
     );
 
-    await sendEmail(
-      user.email,
-      "New Login Detected 🔐",
-      loginEmailTemplate(user.name),
-    );
+sendEmail(
+  user.email,
+  "New Login Detected 🔐",
+  loginEmailTemplate(user.name)
+).catch((err) =>
+  console.log("Login email failed:", err.message)
+);
 
     res.status(200).json({
       success: true,

@@ -40,16 +40,16 @@ app.use(passport.initialize());
 // ============================================
 // CORS
 // ============================================
-app.use(cors({
-  origin: "https://nexusrealtimeteamcollaboration.vercel.app",
-  credentials: true
-}));
-
-
 // app.use(cors({
-//   origin: "http://localhost:5173",
+//   origin: "https://nexusrealtimeteamcollaboration.vercel.app",
 //   credentials: true
 // }));
+
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 
 // ============================================
 // STATIC FILES (UPLOADS)
